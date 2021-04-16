@@ -18,3 +18,20 @@ app.get("/quiz/:item/questions", (req, res) => {
     }
   });
 });
+
+app.post("/quiz/:item/answer/:id", (req, res) => {
+  fs.readFile("./src/public/rules.json", "utf8", (err, data) => {
+    if (err) {
+      res.status(402).send(err);
+    } else {
+      const answer = JSON.parse(data)["items"].filter(
+        (item) => item.name == req.params.item
+      )[0].quiz[req.params.id].answer;
+      const userInput = req.body.answer;
+      console.log(req.body, req.params, req.query);
+      const isCorrect = answer == userInput ? true : false;
+      console.log(isCorrect);
+      res.status(200).send({ isCorrect });
+    }
+  });
+});
