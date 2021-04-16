@@ -1,3 +1,4 @@
+const express = require("express");
 const cors = require("cors");
 const fs = require("fs");
 
@@ -35,3 +36,5 @@ app.post("/quiz/:item/answer/:id", (req, res) => {
     }
   });
 });
+
+app.listen(8000, () => console.log("app running on port 8000"));
