@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import IQuestions from "../models/Questions.model";
+import gsap from "gsap";
 
-export default function Questions({ gameObj }) {
-  const [questions, setQuestions] = useState([]);
-  const [currentQuestion, setCurrentQuestion] = useState(0);
+export default function Questions({ gameObj, setStage }) {
+  const [questions, setQuestions] = useState<IQuestions>({
+    questions: [],
+  });
+  const [currentQuestion, setCurrentQuestion] = useState({
+    index: 0,
+    isCorrect: null,
+  });
   useEffect(() => {
     axios
       .get(`http://localhost:8000/quiz/${gameObj}/questions`, {
@@ -12,11 +19,12 @@ export default function Questions({ gameObj }) {
         },
       })
       .then((res) => {
+        console.log(res.data);
         setQuestions(res.data);
       });
   }, []);
 
-  const answer = async (answer: boolean) => {
+  const answer = (answer: boolean) => {
     axios
       .post(`http://localhost:8000/quiz/${gameObj}/answer/${currentQuestion}`, {
         body: {
@@ -28,19 +36,40 @@ export default function Questions({ gameObj }) {
       })
       .then((res) => {
         if (res.data.correct == true) {
+          setCurrentQuestion({
+            ...currentQuestion,
+            isCorrect: true,
+          });
         } else {
+          setCurrentQuestion({
+            ...currentQuestion,
+            isCorrect: false,
+          });
         }
 
         setTimeout(() => {
-          setCurrentQuestion(currentQuestion + 1);
+          setCurrentQuestion({
+            ...currentQuestion,
+            index: currentQuestion.index + 1,
+          });
+          console.log(currentQuestion, questions["questions"].length);
+          if (currentQuestion.index >= questions["questions"].length - 1) {
+            transition();
+          }
         }, 2000);
       });
   };
 
+  const transition = () =>
+    setTimeout(() => {
+      setStage(3);
+    }, 2000);
+
+  const displayCorrect = () => {};
   return (
     <div className="questions">
       <h1>Patiesība vai meli</h1>
-      <h2>{questions[currentQuestion]}</h2>
+      <h2>{questions && questions.questions[currentQuestion.index]}</h2>
       <div className="buttons">
         <button onClick={() => answer(true)} className="btn btn-green">
           Patiesība
