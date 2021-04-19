@@ -43,7 +43,7 @@ export default function Wheel({ setStage, setGameObj }) {
     getIndex = () => Math.floor(tot - (ang / TAU) * tot) % tot;
 
     sectors.forEach(drawSector);
-    sectors.forEach(drawImage);
+    drawImage(0);
     rotate(); // Initial rotation
     engine(); // Start engine
     spinEl.addEventListener("click", () => {
@@ -51,12 +51,14 @@ export default function Wheel({ setStage, setGameObj }) {
     });
   }, []);
 
-  function drawImage(sector) {
+  function drawImage(i) {
     const img = new Image();
-    img.src = `/img/${sector.image}`;
+    img.src = `/img/${sectors[i].image}`;
     img.onload = () => {
       ctx.drawImage(img, rad - 10, 10, 50, 50);
       ctx.rotate(ang + arc / 2);
+      console.log(i);
+      if (i < sectors.length - 1) drawImage(i + 1);
     };
   }
 
