@@ -1,6 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import "../styles/wheel.module.scss";
 import { gsap } from "gsap";
+import {
+  foodPath,
+  powerPath,
+  tourismPath,
+  transportPath,
+  wastePath,
+} from "../public/icons/paths";
 
 export default function Wheel({ setStage, setGameObj }) {
   const spinRef = useRef(null);
@@ -23,11 +30,37 @@ export default function Wheel({ setStage, setGameObj }) {
     angVel = null;
 
   const sectors = [
-    { color: "#3C3C58", image: "bananas.png", name: "Bananas" },
-    { color: "#EBE1D1", image: "hamburger.png", name: "Hamburger" },
-    { color: "#2C85A4", image: "headphones.png", name: "Headphones" },
-    { color: "#C3E5ED", image: "longboard.png", name: "Longboard" },
-    { color: "#FD6579", image: "tshirt.png", name: "T-shirt" },
+    {
+      color: "#FFA52F",
+      image: foodPath,
+      name: "Bananas",
+      displayName: "Banāni",
+    },
+    {
+      color: "#EBE1D1",
+      image: powerPath,
+      name: "Hamburger",
+      displayName: "Hamburgers",
+    },
+    {
+      color: "#2C85A4",
+      image: tourismPath,
+      name: "Headphones",
+      displayName: "Austiņas",
+    },
+    {
+      color: "#C3E5ED",
+      image: transportPath,
+      name: "Longboard",
+      displayName: "Longbords",
+    },
+    {
+      color: "#FD6579",
+      image: wastePath,
+      imageColor: "",
+      name: "T-shirt",
+      displayName: "T-krekls",
+    },
   ];
   useEffect(() => {
     tot = sectors.length;
@@ -43,24 +76,12 @@ export default function Wheel({ setStage, setGameObj }) {
     getIndex = () => Math.floor(tot - (ang / TAU) * tot) % tot;
 
     sectors.forEach(drawSector);
-    drawImage(0);
     rotate(); // Initial rotation
     engine(); // Start engine
     spinEl.addEventListener("click", () => {
       if (!angVel) angVel = rand(0.25, 0.35);
     });
   }, []);
-
-  function drawImage(i) {
-    const img = new Image();
-    img.src = `/img/${sectors[i].image}`;
-    img.onload = () => {
-      ctx.drawImage(img, rad - 10, 10, 50, 50);
-      ctx.rotate(ang + arc / 2);
-      console.log(i);
-      if (i < sectors.length - 1) drawImage(i + 1);
-    };
-  }
 
   function drawSector(sector, i) {
     const ang = arc * i;
@@ -72,13 +93,14 @@ export default function Wheel({ setStage, setGameObj }) {
     ctx.arc(rad, rad, rad, ang, ang + arc);
     ctx.lineTo(rad, rad);
     ctx.fill();
-    // TEXT
+    const path = new Path2D(sector.image);
+    ctx.fillStyle = "black";
     ctx.translate(rad, rad);
     ctx.rotate(ang + arc / 2);
-    ctx.textAlign = "right";
-    ctx.fillStyle = "#fff";
-    ctx.font = "bold 30px sans-serif";
-
+    ctx.translate(75, -20);
+    ctx.scale(0.1, 0.1);
+    ctx.fill(path);
+    // TEXT
     //
     ctx.restore();
   }
@@ -86,7 +108,7 @@ export default function Wheel({ setStage, setGameObj }) {
   function rotate() {
     const sector = sectors[getIndex()];
     ctx.canvas.style.transform = `rotate(${ang - PI / 2}rad)`;
-    result.textContent = sector.name;
+    result.textContent = sector.displayName;
     result.style.color = sector.color;
 
     if (angVel == 0) {
