@@ -44,7 +44,11 @@ app.get("/map/:item/questions", (req, res) => {
     } else {
       const questions = JSON.parse(data)
         ["items"].filter((item) => item.name)[0]
-        ["map"].map((item) => ({ icon: item.icon, questions: item.questions }));
+        ["map"].map((item) => ({
+          icon: item.icon,
+          questions: item.questions.map((item) => item.question),
+          answers: item.questions.map((item) => item.answers),
+        }));
       res.status(200).json({ questions });
     }
   });
