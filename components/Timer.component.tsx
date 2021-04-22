@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "../styles/timer.module.scss";
+import styles from "../styles/timer.module.scss";
 
 export default function Timer({ isActive, setIsActive, setGameEnded }) {
   const [seconds, setSeconds] = useState(900);
@@ -29,8 +29,8 @@ export default function Timer({ isActive, setIsActive, setGameEnded }) {
   }, [isActive, seconds]);
 
   return (
-    <div>
-      <svg className="timer" id="animated" viewBox="0 0 100 100" width="100">
+    <div className={styles.timer}>
+      <svg id="animated" viewBox="0 0 100 100" width="100">
         <circle cx="50" cy="50" r="45" fill="#FDB900" />
         <path
           strokeDasharray={strokeOffset}
