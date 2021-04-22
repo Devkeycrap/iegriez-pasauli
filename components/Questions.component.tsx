@@ -26,14 +26,17 @@ export default function Questions({ gameObj, setStage }) {
 
   const answer = (answer: boolean) => {
     axios
-      .post(`http://localhost:8000/quiz/${gameObj}/answer/${currentQuestion}`, {
-        body: {
-          answer,
-        },
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      .post(
+        `http://localhost:8000/quiz/${gameObj}/answer/${currentQuestion.index}`,
+        {
+          body: {
+            answer,
+          },
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((res) => {
         if (res.data.correct == true) {
           setCurrentQuestion({
@@ -52,7 +55,6 @@ export default function Questions({ gameObj, setStage }) {
             ...currentQuestion,
             index: currentQuestion.index + 1,
           });
-          console.log(currentQuestion, questions["questions"].length);
           if (currentQuestion.index >= questions["questions"].length - 1) {
             transition();
           }
@@ -65,6 +67,7 @@ export default function Questions({ gameObj, setStage }) {
       setStage(3);
     }, 2000);
 
+  // TODO: display message about the answer and then transition
   const displayCorrect = () => {};
   return (
     <div className="questions">
