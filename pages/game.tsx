@@ -4,6 +4,7 @@ import Questions from "../components/Questions.component";
 import Timer from "../components/Timer.component";
 import Wheel from "../components/Wheel.component";
 import dynamic from "next/dynamic";
+import styles from "../styles/game.module.scss";
 
 export default function Game() {
   useEffect(() => {
@@ -27,10 +28,9 @@ export default function Game() {
   });
 
   return (
-    <div>
+    <div className={styles.main}>
       {gameEnded && (
-        <div className="endscreen">
-          Time's up!
+        <div className={styles.endscreen}>
           <Link href="/">
             <button className="btn btn-neutral">Home</button>
           </Link>
@@ -42,7 +42,7 @@ export default function Game() {
         </div>
       )}
       {!gameEnded && (
-        <div className="game">
+        <div className={styles.game}>
           <Timer
             isActive={isActive}
             setIsActive={setIsActive}
