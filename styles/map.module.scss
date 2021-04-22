@@ -1,0 +1,68 @@
+@import "https://unpkg.com/leaflet@1.7.1/dist/leaflet.css";
+@import "./variables.scss";
+
+.map {
+  height: 100%;
+  position: relative;
+}
+.map > div {
+  height: 100%;
+}
+.btn-orange {
+  margin-top: 12px;
+  padding: 10px 15px;
+  font-size: 12px;
+  width: 100%;
+}
+
+.popup > div:first-child {
+  background: white;
+
+  padding: 20px 10px;
+  box-shadow: 0px 8px 30px 0 rgba(0, 0, 0, 0.13);
+}
+
+.popup.correct > div:first-child {
+  background: #9aca3c;
+
+  color: white;
+}
+.popup.incorrect > div:first-child {
+  background: #fd6579;
+
+  color: white;
+}
+
+.popup > div:first-child > div {
+  width: auto;
+}
+.popup a {
+  top: 10px !important;
+  right: 10px !important;
+}
+
+.popup h2 {
+  margin-bottom: 8px;
+}
+.popup p {
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.radio-container {
+  display: flex;
+  height: 30px;
+  align-items: center;
+}
+
+.radio-container label {
+  width: auto;
+  font-weight: 700;
+  display: block;
+  margin-left: 4px;
+}
+
+.radio {
+  width: 14px;
+  height: 14px;
+}
