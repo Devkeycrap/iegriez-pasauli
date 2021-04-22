@@ -11,10 +11,12 @@ export default function Game() {
     setIsActive(true);
     console.log("called");
   }, []);
+
   const [isActive, setIsActive] = useState(false);
-  const [stage, setStage] = useState(1);
+  const [stage, setStage] = useState(3);
   const [gameObj, setGameObj] = useState(null);
   const [gameEnded, setGameEnded] = useState(false);
+  const [points, setPoints] = useState(0);
 
   const restartGame = () => {
     setStage(1);
@@ -31,6 +33,7 @@ export default function Game() {
     <div className={styles.main}>
       {gameEnded && (
         <div className={styles.endscreen}>
+          Laiks beidzies!
           <Link href="/">
             <button className="btn btn-neutral">Home</button>
           </Link>
