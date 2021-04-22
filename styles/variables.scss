@@ -1,0 +1,26 @@
+$orange: #faa430;
+$green: #9aca3c;
+
+.btn-orange {
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  background: $orange;
+  outline: none;
+  box-shadow: 0 12px 30px 0 rgba(250, 162, 48, 0.5);
+  color: white;
+  padding: 15px 20px;
+  font-family: "Open Sans", sans-serif;
+  cursor: pointer;
+  transition: 0.3s ease-out;
+
+  &:hover {
+    background: #faac46;
+  }
+}
+
+.btn-centered {
+  display: block;
+  margin: auto;
+}
