@@ -54,4 +54,33 @@ app.get("/map/:item/questions", (req, res) => {
   });
 });
 
+app.post(`/map/:item/answer/:icon/:question`, (req, res) => {
+  fs.readFile("./src/public/rules.json", "utf8", (err, data) => {
+    if (err) {
+      res.status(402).send(err);
+    } else {
+      const userAnswer = req.body.answer;
+      const correctAnswer = JSON.parse(data)
+        ["items"].filter((item) => item.name)[0]
+        ["map"].filter((item) => item.icon == req.params.icon)[0].questions[
+        req.params.question
+      ].correct;
+
+      const message = JSON.parse(data)
+        ["items"].filter((item) => item.name)[0]
+        ["map"].filter((item) => item.icon == req.params.icon)[0].questions[
+        req.params.question
+      ].correctMessage;
+
+      console.log(correctAnswer, userAnswer);
+      res
+        .status(200)
+        .json({
+          isCorrect: userAnswer == correctAnswer ? true : false,
+          message,
+        });
+    }
+  });
+});
+
 app.listen(8000, () => console.log("app running on port 8000"));
