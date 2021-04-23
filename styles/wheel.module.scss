@@ -1,11 +1,32 @@
-#wheelOfFortune {
+@import "./variables.scss";
+.wheel-container {
   display: inline-block;
   position: relative;
-  overflow: hidden;
+  text-align: center;
+  height: 50vh;
 }
 
-#wheel {
+.wheel-container h2 {
+  font-size: 68px;
+  font-style: italic;
+  margin: 30px 0;
+}
+
+.wheel {
   display: block;
+  width: 500px;
+  position: relative;
+}
+
+.arrow {
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  transform: translate(-50%, -10%);
+  z-index: 5;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-top: 50px solid rgb(0, 0, 0);
 }
 
 #spin {
