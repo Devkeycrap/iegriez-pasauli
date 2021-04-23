@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import "../styles/wheel.module.scss";
+import styles from "../styles/wheel.module.scss";
 import { gsap } from "gsap";
 import {
-  foodPath,
-  powerPath,
-  tourismPath,
-  transportPath,
-  wastePath,
+  bananasPath,
+  tshirtPath,
+  burgerPath,
+  headphonesPath,
+  longboardPath,
 } from "../public/icons/paths";
 
 export default function Wheel({ setStage, setGameObj }) {
@@ -32,31 +32,31 @@ export default function Wheel({ setStage, setGameObj }) {
   const sectors = [
     {
       color: "#FFA52F",
-      image: foodPath,
+      image: bananasPath,
       name: "Bananas",
       displayName: "Banāni",
     },
     {
       color: "#EBE1D1",
-      image: powerPath,
+      image: burgerPath,
       name: "Hamburger",
       displayName: "Hamburgers",
     },
     {
       color: "#2C85A4",
-      image: tourismPath,
+      image: headphonesPath,
       name: "Headphones",
       displayName: "Austiņas",
     },
     {
       color: "#C3E5ED",
-      image: transportPath,
+      image: longboardPath,
       name: "Longboard",
       displayName: "Longbords",
     },
     {
       color: "#FD6579",
-      image: wastePath,
+      image: tshirtPath,
       imageColor: "",
       name: "T-shirt",
       displayName: "T-krekls",
@@ -97,8 +97,12 @@ export default function Wheel({ setStage, setGameObj }) {
     ctx.fillStyle = "black";
     ctx.translate(rad, rad);
     ctx.rotate(ang + arc / 2);
-    ctx.translate(75, -20);
-    ctx.scale(0.1, 0.1);
+    ctx.translate(250, -60);
+    if (sector.name == "Bananas") ctx.scale(0.13, 0.13);
+    else if (sector.name == "Longboard") ctx.scale(0.3, 0.3);
+    else {
+      ctx.scale(0.4, 0.4);
+    }
     ctx.fill(path);
     // TEXT
     //
@@ -138,10 +142,16 @@ export default function Wheel({ setStage, setGameObj }) {
   }
 
   return (
-    <div id="wheelOfFortune">
-      <canvas ref={canvasRef} id="wheel" width="300" height="300"></canvas>
+    <div className={styles["wheel-container"]}>
       <h2 className="result" ref={resultRef}></h2>
-      <button ref={spinRef} className="btn btn-orange">
+      <div className={styles.arrow}></div>
+      <canvas
+        ref={canvasRef}
+        className={styles.wheel}
+        width="1000"
+        height="1000"
+      ></canvas>
+      <button ref={spinRef} className={`${styles.btn} ${styles["btn-orange"]}`}>
         Iegriezt
       </button>
     </div>
