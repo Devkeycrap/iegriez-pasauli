@@ -1,0 +1,57 @@
+$orange: #faa430;
+$green: #9aca3c;
+
+.btn-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  margin: auto;
+  gap: 20px;
+  button {
+    width: 100%;
+  }
+}
+
+.btn-orange {
+  background: $orange;
+  box-shadow: 0 12px 30px 0 rgba(250, 162, 48, 0.5);
+  color: white;
+
+  &:hover {
+    background: #faac46;
+  }
+}
+
+.btn-neutral {
+  color: black;
+  background: white;
+  box-shadow: 0 12px 30px 0 rgba(255, 255, 255, 0.267);
+
+  &:hover {
+    background: rgb(230, 230, 230);
+  }
+}
+
+.btn {
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: "Open Sans", sans-serif;
+  cursor: pointer;
+  transition: 0.3s ease-out;
+  padding: 15px 0;
+  z-index: 5;
+  position: relative;
+
+  &:disabled {
+    background: rgb(179, 179, 179);
+    cursor: auto;
+    box-shadow: none;
+  }
+}
+
+.btn-centered {
+  display: block;
+  margin: auto;
+}

@@ -1,0 +1,16 @@
+.main {
+  height: 100%;
+}
+
+.stage-container {
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.game {
+  display: grid;
+  grid-template-rows: 20vh 1fr;
+  height: 100vh;
+  background: #435d43;
+}

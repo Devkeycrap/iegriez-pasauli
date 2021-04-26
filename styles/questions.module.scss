@@ -1,0 +1,22 @@
+@import "./variables.scss";
+
+.questions .btn-container {
+  margin-top: 40px;
+  width: 50%;
+}
+
+.questions {
+  min-height: 400px;
+  text-align: center;
+}
+
+.questions h1 {
+  font-size: 72px;
+  color: white;
+  font-family: "Poppins";
+}
+.questions h2 {
+  font-size: 24px;
+  color: white;
+  font-weight: normal;
+}

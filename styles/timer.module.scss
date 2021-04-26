@@ -1,0 +1,25 @@
+.timer {
+  width: 100%;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.timer svg {
+  width: 150px;
+}
+
+.time {
+  fill: white;
+}
+
+@media only screen and (max-width: 720px) {
+  .timer {
+    top: 100px;
+    left: 50%;
+    transform: translate(-50%);
+    width: 60px;
+  }
+}
