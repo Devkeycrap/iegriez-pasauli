@@ -8,6 +8,21 @@
     "build": "next build",
     "start": "next start"
   },
+  "engines": {
+    "node": "10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Devkeycrap/iegriez-pasauli-entry"
+  },
+  "keywords": [
+    "react",
+    "ssr",
+    "server-side-rendering"
+  ],
+  "author": "Ronalds Palacis",
+  "license": "MIT",
+  "homepage": "https://github.com/Devkeycrap/iegriez-pasauli-entry",
   "dependencies": {
     "axios": "^0.21.1",
     "gsap": "^3.6.1",
