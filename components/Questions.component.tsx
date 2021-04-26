@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import IQuestions from "../models/Questions.model";
 import gsap from "gsap";
+import styles from "../styles/questions.module.scss";
 
 export default function Questions({ gameObj, setStage }) {
   const [questions, setQuestions] = useState<IQuestions>({
@@ -19,7 +20,6 @@ export default function Questions({ gameObj, setStage }) {
         },
       })
       .then((res) => {
-        console.log(res.data);
         setQuestions(res.data);
       });
   }, []);
@@ -70,14 +70,20 @@ export default function Questions({ gameObj, setStage }) {
   // TODO: display message about the answer and then transition
   const displayCorrect = () => {};
   return (
-    <div className="questions">
+    <div className={styles.questions}>
       <h1>Patiesība vai meli</h1>
       <h2>{questions && questions.questions[currentQuestion.index]}</h2>
-      <div className="buttons">
-        <button onClick={() => answer(true)} className="btn btn-green">
+      <div className={styles["btn-container"]}>
+        <button
+          onClick={() => answer(true)}
+          className={`${styles.btn} ${styles["btn-orange"]}`}
+        >
           Patiesība
         </button>
-        <button onClick={() => answer(false)} className="btn btn-red">
+        <button
+          onClick={() => answer(false)}
+          className={`${styles.btn} ${styles["btn-neutral"]}`}
+        >
           Meli
         </button>
       </div>
