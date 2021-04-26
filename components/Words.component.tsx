@@ -12,7 +12,7 @@ export default function Words() {
     useEffect(() => {
         const interval = setInterval(() => {
             newFrame()
-        }, 5000);
+        }, 100);
         return () => clearInterval(interval)
     }, [])
 
@@ -29,7 +29,7 @@ export default function Words() {
     }
 
     const Delitem = (i) => {
-        
+        words.splice(i, 1);
     }
 
     const Renderer = () => {
@@ -45,27 +45,20 @@ export default function Words() {
                     if (Number(style.fontSize.replace(/px$/, '')) > 45 || word[3]) {
                         
                         //setWords(words.splice(i, 1));
-                        //words.splice(i, 1)
+                        words.splice(i, 1)
                         return
                     }
                     return (
-                        <label style={style} className={styles.word} onClick={() => setWords(words.slice(i))}>rickroll</label>
+                        <label style={style} className={styles.word} onClick={() => window.open("https://youtu.be/HPk-VhRjNI8")}>rickroll</label>
                     )
                 })}
             </div>
         )
     }
 
-    const Drawer = () => {
-        <div>
-            
-        </div>
-    }
-
     return (
         <div className={styles.backdrop}>
-            <Drawer/>
-            
+            <Renderer/> 
         </div>
     )
 }

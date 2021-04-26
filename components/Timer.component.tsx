@@ -30,14 +30,14 @@ export default function Timer({ isActive, setIsActive, setGameEnded }) {
 
   return (
     <div className={styles.timer}>
-      <svg id="animated" viewBox="0 0 100 100" width="100">
-        <circle cx="50" cy="50" r="45" fill="#FDB900" />
+      <svg id="animated" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="45" fill="#435d43" />
         <path
           strokeDasharray={strokeOffset}
           id="progress"
           strokeLinecap="round"
           strokeWidth="5"
-          stroke="#fff"
+          stroke="white"
           fill="none"
           d="M50 10
            a 40 40 0 0 1 0 80

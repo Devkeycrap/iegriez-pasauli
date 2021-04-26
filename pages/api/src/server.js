@@ -29,7 +29,7 @@ app.post("/quiz/:item/answer/:id", (req, res) => {
     } else {
       const answer = JSON.parse(data)["items"].filter(
         (item) => item.name == req.params.item
-      )[0]["quiz"][req.params.id].answer;
+      )[0]["quiz"][req.params.id]?.answer;
       const userInput = req.body.answer;
       const isCorrect = answer == userInput ? true : false;
       res.status(200).json({ isCorrect });
@@ -37,17 +37,21 @@ app.post("/quiz/:item/answer/:id", (req, res) => {
   });
 });
 
-app.get("/map/:item/questions", (req, res) => {
+app.get("/map/:item/questions/:question", (req, res) => {
   fs.readFile("./src/public/rules.json", "utf8", (err, data) => {
     if (err) {
       res.status(402).send(err);
     } else {
       const questions = JSON.parse(data)
-        ["items"].filter((item) => item.name)[0]
+        ["items"].filter((item) => item.name == req.params.item)[0]
         ["map"].map((item) => ({
           icon: item.icon,
-          questions: item.questions.map((item) => item.question),
-          answers: item.questions.map((item) => item.answers),
+          question: item.questions.map((item) => item.question)[
+            req.params.question
+          ],
+          answers: item.questions.map((item) => item.answers)[
+            req.params.question
+          ],
         }));
       res.status(200).json({ questions });
     }
@@ -72,13 +76,10 @@ app.post(`/map/:item/answer/:icon/:question`, (req, res) => {
         req.params.question
       ].correctMessage;
 
-      console.log(correctAnswer, userAnswer);
-      res
-        .status(200)
-        .json({
-          isCorrect: userAnswer == correctAnswer ? true : false,
-          message,
-        });
+      res.status(200).json({
+        isCorrect: userAnswer == correctAnswer ? true : false,
+        message,
+      });
     }
   });
 });

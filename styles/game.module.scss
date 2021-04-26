@@ -1,12 +1,16 @@
 .main {
   height: 100%;
-  position: relative;
+}
+
+.stage-container {
+  height: 100%;
+  display: grid;
+  place-items: center;
 }
 
 .game {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-rows: 20vh 1fr;
+  height: 100vh;
   background: #435d43;
 }

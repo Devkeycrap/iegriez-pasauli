@@ -13,7 +13,9 @@ export default function Home() {
         </h1>
         <p>Pārbaudi savas zināšanas, spēlējot spēli “Iegriez pasauli”!</p>
         <Link href="game">
-          <button className={styles["btn-orange"]}>Sākt spēli</button>
+          <button className={`${styles.btn}  ${styles["btn-orange"]}`}>
+            Sākt spēli
+          </button>
         </Link>
       </div>
     </div>
