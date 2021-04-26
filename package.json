@@ -4,12 +4,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev && node pages/api/src/server.js",
     "build": "next build",
     "start": "next start"
   },
   "engines": {
-    "node": "10"
+    "node": "14.9.0"
   },
   "repository": {
     "type": "git",
