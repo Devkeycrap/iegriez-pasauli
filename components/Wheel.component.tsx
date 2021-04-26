@@ -1,72 +1,33 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "../styles/wheel.module.scss";
 import { gsap } from "gsap";
-import {
-  bananasPath,
-  tshirtPath,
-  burgerPath,
-  headphonesPath,
-  longboardPath,
-} from "../public/icons/paths";
 
-export default function Wheel({ setStage, setGameObj }) {
+export default function Wheel({ setStage, setGameObj, sectors, setSectors }) {
   const spinRef = useRef(null);
-  const resultRef = useRef(null);
   const canvasRef = useRef(null);
   const PI = Math.PI;
   const TAU = 2 * PI;
   const friction = 0.991; // 0.995=soft, 0.99=mid, 0.98=hard
   let ang = 0; // Angle in radians
   const rand = (m, M) => Math.random() * (M - m) + m;
-  let tot,
-    canvas,
-    spinEl,
-    result,
-    ctx,
-    dia,
-    rad,
-    arc,
-    getIndex,
-    angVel = null;
+  let tot, canvas, spinEl, result, ctx, dia, rad, arc, getIndex, angVel;
+  let currentSectorParams = {
+    text: "",
+    color: "",
+    object: null,
+  };
 
-  const sectors = [
-    {
-      color: "#FFA52F",
-      image: bananasPath,
-      name: "Bananas",
-      displayName: "Banāni",
-    },
-    {
-      color: "#EBE1D1",
-      image: burgerPath,
-      name: "Hamburger",
-      displayName: "Hamburgers",
-    },
-    {
-      color: "#2C85A4",
-      image: headphonesPath,
-      name: "Headphones",
-      displayName: "Austiņas",
-    },
-    {
-      color: "#C3E5ED",
-      image: longboardPath,
-      name: "Longboard",
-      displayName: "Longbords",
-    },
-    {
-      color: "#FD6579",
-      image: tshirtPath,
-      imageColor: "",
-      name: "T-shirt",
-      displayName: "T-krekls",
-    },
-  ];
+  const [sectorParams, setSectorParams] = useState({
+    text: "",
+    color: "",
+    object: null,
+  });
+  const [isWheelSpinning, setIsWheelSpinning] = useState(false);
+
   useEffect(() => {
     tot = sectors.length;
     canvas = canvasRef.current;
     spinEl = spinRef.current;
-    result = resultRef.current;
     ctx = canvas.getContext("2d");
     dia = ctx.canvas.width;
     rad = dia / 2;
@@ -79,9 +40,10 @@ export default function Wheel({ setStage, setGameObj }) {
     rotate(); // Initial rotation
     engine(); // Start engine
     spinEl.addEventListener("click", () => {
+      setIsWheelSpinning(true);
       if (!angVel) angVel = rand(0.25, 0.35);
     });
-  }, []);
+  }, [sectors]);
 
   function drawSector(sector, i) {
     const ang = arc * i;
@@ -100,6 +62,7 @@ export default function Wheel({ setStage, setGameObj }) {
     ctx.translate(250, -60);
     if (sector.name == "Bananas") ctx.scale(0.13, 0.13);
     else if (sector.name == "Longboard") ctx.scale(0.3, 0.3);
+    else if (sector.name == "Hamburger") ctx.scale(0.3, 0.3);
     else {
       ctx.scale(0.4, 0.4);
     }
@@ -112,12 +75,25 @@ export default function Wheel({ setStage, setGameObj }) {
   function rotate() {
     const sector = sectors[getIndex()];
     ctx.canvas.style.transform = `rotate(${ang - PI / 2}rad)`;
-    result.textContent = sector.displayName;
-    result.style.color = sector.color;
+    const newSectorParams = {
+      text: sector.displayName,
+      color: sector.color,
+      object: sector.name,
+    };
+
+    if (newSectorParams.object !== currentSectorParams.object) {
+      new Audio("/sfx/tick.wav").play();
+      currentSectorParams = newSectorParams;
+      setSectorParams({
+        text: newSectorParams.text,
+        color: newSectorParams.color,
+        object: newSectorParams.object,
+      });
+    }
 
     if (angVel == 0) {
-      setGameObj(sector.name);
-      transition();
+      setIsWheelSpinning(false);
+      saveAndTransition();
     }
   }
 
@@ -135,15 +111,22 @@ export default function Wheel({ setStage, setGameObj }) {
     requestAnimationFrame(engine);
   }
 
-  function transition() {
+  function saveAndTransition() {
     setTimeout(() => {
+      setGameObj(currentSectorParams.object);
+      removeSector(currentSectorParams.object);
       setStage(2);
     }, 3000);
   }
 
+  const removeSector = (object) =>
+    setSectors((sectors) => sectors.filter((sector) => sector.name !== object));
+
   return (
     <div className={styles["wheel-container"]}>
-      <h2 className="result" ref={resultRef}></h2>
+      <h2 className="result" style={{ color: sectorParams.color }}>
+        {sectorParams.text}
+      </h2>
       <div className={styles.arrow}></div>
       <canvas
         ref={canvasRef}
@@ -151,7 +134,11 @@ export default function Wheel({ setStage, setGameObj }) {
         width="1000"
         height="1000"
       ></canvas>
-      <button ref={spinRef} className={`${styles.btn} ${styles["btn-orange"]}`}>
+      <button
+        ref={spinRef}
+        disabled={isWheelSpinning}
+        className={`${styles.btn} ${styles["btn-orange"]}`}
+      >
         Iegriezt
       </button>
     </div>
