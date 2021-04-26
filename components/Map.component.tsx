@@ -1,4 +1,4 @@
-import { useEffect, useState, memo, useRef } from "react";
+import { Component } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import axios from "axios";
 import styles from "../styles/map.module.scss";
@@ -9,30 +9,44 @@ import {
   iconTransport,
   iconWaste,
 } from "../models/Markers.model";
-// import QuestionPopup from "./QuestionPopup.component";
-// import IPopup from "../models/Popup.model";
 
-export default function Map({ gameObj }) {
-  const [inBrowser, setInBrowser] = useState(false);
-  const [questions, setQuestions] = useState(null);
-  const [questionIndex, setQuestionIndex] = useState(0);
-  const [answers, setAnswers] = useState({});
-  // const [popup, setPopup] = useState<IPopup>({
-  //   isOpen: false,
-  //   title: "",
-  //   question: "",
-  //   answers: [],
-  //   icon: "",
-  // });
+interface MapProps {
+  gameObj: string;
+  setStage: (stage: number) => void;
+}
 
-  useEffect(() => {
-    setInBrowser(true);
-    axios.get(`http://localhost:8000/map/${gameObj}/questions`).then((res) => {
-      setQuestions(res.data);
-    });
-  }, []);
+export default class Map extends Component<MapProps> {
+  state = {
+    inBrowser: false,
+    questions: null,
+    answers: {},
+    questionIndex: 0,
+    helpOpened: false,
+    errors: {},
+    isCurrentQuestionCorrect: null,
+  };
 
-  const getIcon = (object: string) => {
+  componentDidMount() {
+    // CSR
+    this.setState({ inBrowser: true });
+
+    // Get questions for current object
+    axios
+      .get(
+        `http://localhost:8000/map/Hamburger/questions/${this.state.questionIndex}`
+      )
+      .then((res) => {
+        this.setState({ questions: res.data.questions });
+      });
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    // TODO: reject component updates when it's unnecessary
+    return true;
+  }
+
+  // Returns icon based on object name
+  getIcon = (object: string) => {
     switch (object) {
       case "transport":
         return iconTransport;
@@ -47,7 +61,8 @@ export default function Map({ gameObj }) {
     }
   };
 
-  const getPopupName = (object: string) => {
+  // Returns object translation to display in UI
+  getPopupName = (object: string) => {
     switch (object) {
       case "transport":
         return "Transports";
@@ -62,144 +77,182 @@ export default function Map({ gameObj }) {
     }
   };
 
-  const handleRadio = (e: any) => {
-    setAnswers({
-      ...answers,
-      [e.target.name]: { answer: e.target.value },
+  handleRadio = (e: any) => {
+    this.setState({
+      answers: {
+        ...this.state.answers,
+        [e.target.name]: { answer: e.target.value },
+      },
     });
   };
 
-  const submit = (e: any, item) => {
+  submit = (e: any, item) => {
     e.preventDefault();
 
+    // Check answered question count
     let answerCount = 0;
-    Object.keys(answers).forEach((key) => {
-      if (answers[key].message) {
+    Object.keys(this.state.answers).forEach((key) => {
+      if (this.state.answers[key] && this.state.answers[key].message) {
         answerCount++;
       }
     });
-    console.log(questions["questions"].length);
-    if (answerCount >= questions["questions"].length - 1) {
-      console.log("reset");
-      setQuestionIndex(questionIndex + 1);
-      setAnswers({});
+
+    // If all questions are answered, then start next level, else return to start or end game
+    if (answerCount >= this.state.questions.length - 1) {
+      console.log(this.state.questionIndex);
+      setTimeout(() => {
+        this.setState({
+          questionIndex: this.state.questionIndex + 1,
+          answers: {},
+        });
+        if (this.state.questionIndex >= 2) {
+          this.props.setStage(1);
+        }
+      }, 2000);
+
+      // TODO: add case to end game
+
+      return;
     }
 
+    // Make a post request to validate answer
+    if (!this.state.answers[item.icon]) {
+      this.setState({
+        errors: {
+          ...this.state.errors,
+          [item.icon]: {
+            noInputError: true,
+          },
+        },
+      });
+      return;
+    }
     axios
       .post(
-        `http://localhost:8000/map/${gameObj}/answer/${e.target.name}/${questionIndex}`,
+        `http://localhost:8000/map/${this.props.gameObj}/answer/${e.target.name}/${this.state.questionIndex}`,
         {
-          answer: answers[item.icon].answer,
+          answer: this.state.answers[item.icon].answer,
         },
         {
           headers: { "Content-Type": "application/json" },
         }
       )
       .then((res) => {
-        setAnswers({
-          ...answers,
-          [item.icon]: {
-            ...answers[item.icon],
-            isCorrect: res.data.isCorrect,
-            message: res.data.message,
+        // Update answers state with isCorrect and message to show if user has answered
+        this.setState({
+          answers: {
+            ...this.state.answers,
+            [item.icon]: {
+              ...this.state.answers[item.icon],
+              isCorrect: res.data.isCorrect,
+              message: res.data.message,
+            },
           },
         });
       });
   };
 
-  // const openPopup = (item: any) => {
-  //   setPopup({
-  //     ...popup,
-  //     isOpen: true,
-  //     title: getPopupName(item.icon),
-  //     question: item.questions[questionIndex],
-  //     answers: item.answers[questionIndex],
-  //     icon: item.icon,
-  //   });
-  // };
-
-  if (!inBrowser) {
-    return null;
-  }
-
-  return (
-    <div className={styles.map}>
-      {/* {popup.isOpen && (
-        <QuestionPopup
-          title={popup.title}
-          question={popup.question}
-          answers={popup.answers}
-          icon={popup.icon}
-          setPopup={setPopup}
-        />
-      )} */}
-      <MapContainer
-        maxZoom={4}
-        className="map"
-        center={[51.505, -0.09]}
-        zoom={4}
-        scrollWheelZoom={false}
-        zoomControl={false}
-        style={{ height: "100vh", width: "100%" }}
-      >
-        <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        {questions &&
-          questions["questions"].map((item, i) => (
-            <Marker
-              icon={getIcon(item.icon)}
-              position={[Math.random() * 20 + 40, Math.random() * 30 - 5]}
-              key={i}
+  render() {
+    // Make sure the map loads with ssr set to false
+    if (!this.state.inBrowser) {
+      return null;
+    }
+    return (
+      <div className={styles.map}>
+        {/* Help box */}
+        {this.state.helpOpened && (
+          <div className={styles.help}>
+            <div
+              className={styles.close}
+              onClick={() => this.setState({ helpOpened: false })}
             >
-              <Popup
-                className={`${styles.popup} ${
-                  answers[item.icon] && answers[item.icon].isCorrect
-                    ? styles.correct
-                    : styles.incorrect
-                }`}
+              ×
+            </div>
+            Atbildi uz visiem ikonu jautājumiem, lai piekļūtu nākamā etapa
+            jautājumiem
+          </div>
+        )}
+        <div
+          className={styles["help-btn"]}
+          onClick={() => this.setState({ helpOpened: !this.state.helpOpened })}
+        >
+          Info
+        </div>
+
+        {/* leaflet.js map component */}
+        <MapContainer
+          className={styles["map-container"]}
+          maxZoom={4}
+          center={[51.505, -0.09]}
+          zoom={4}
+          scrollWheelZoom={false}
+          zoomControl={false}
+        >
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          {/* Load icons with questions to map */}
+          {this.state.questions &&
+            this.state.questions.map((item, i) => (
+              <Marker
+                icon={this.getIcon(item.icon)}
+                // Set icon positions to random place in Europe
+                position={[Math.random() * 20 + 40, Math.random() * 30 - 5]}
+                key={i}
               >
-                {!answers[item.icon]?.message ? (
-                  <div>
-                    <h2>{getPopupName(item.icon)}</h2>
-                    <p>{item.questions[questionIndex]}</p>
-                    {item.answers[questionIndex].map((text, i) => (
-                      <div key={i} className={styles["radio-container"]}>
-                        <input
-                          id={item.icon}
-                          type="radio"
-                          className={styles.radio}
-                          name={item.icon}
-                          value={i}
-                          onChange={handleRadio}
-                        />
-                        <label htmlFor={item.icon}>{text}</label>
-                      </div>
-                    ))}
-                    {answers[item.icon] && <p>{answers[item.icon].message}</p>}
+                <Popup className={`${styles.popup}`}>
+                  {/* If user has answered, display information without inputs */}
+                  {this.state.answers &&
+                  !this.state.answers[item.icon]?.message ? (
+                    <div>
+                      <h2>{this.getPopupName(item.icon)}</h2>
+                      <p>{item.question}</p>
+                      {item.answers.map((text, i) => (
+                        <div key={i} className={styles["radio-container"]}>
+                          <input
+                            id={item.icon}
+                            type="radio"
+                            className={styles.radio}
+                            name={item.icon}
+                            value={i}
+                            onChange={this.handleRadio}
+                          />
+                          <label htmlFor={item.icon}>{text}</label>
+                        </div>
+                      ))}
+                      {this.state.errors[item.icon]?.noInputError && (
+                        <p className={styles.error}>Lūdzu izvēlies atbildi!</p>
+                      )}
 
-                    <button
-                      className={styles["btn-orange"]}
-                      type="button"
-                      name={item.icon}
-                      onClick={(e) => submit(e, item)}
-                    >
-                      Atbildēt
-                    </button>
-                  </div>
-                ) : (
-                  <div>
-                    <h2>{getPopupName(item.icon)}</h2>
-                    <p>{item.questions[questionIndex]}</p>
+                      {this.state.answers && this.state.answers[item.icon] && (
+                        <p>{this.state.answers[item.icon].message}</p>
+                      )}
 
-                    {answers[item.icon] && <p>{answers[item.icon].message}</p>}
-                  </div>
-                )}
-              </Popup>
-            </Marker>
-          ))}
-      </MapContainer>
-    </div>
-  );
+                      <button
+                        className={`${styles.btn} ${styles["btn-orange"]}`}
+                        type="button"
+                        name={item.icon}
+                        onClick={(e) => this.submit(e, item)}
+                      >
+                        Atbildēt
+                      </button>
+                    </div>
+                  ) : (
+                    <div>
+                      <h2>{this.getPopupName(item.icon)}</h2>
+                      <p>{item.question}</p>
+
+                      {this.state.answers && this.state.answers[item.icon] && (
+                        <p>{this.state.answers[item.icon].message}</p>
+                      )}
+                    </div>
+                  )}
+                </Popup>
+              </Marker>
+            ))}
+        </MapContainer>
+      </div>
+    );
+  }
 }
