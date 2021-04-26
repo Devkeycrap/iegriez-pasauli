@@ -1,13 +1,19 @@
 @import "https://unpkg.com/leaflet@1.7.1/dist/leaflet.css";
 @import "./variables.scss";
 
+.map-container {
+  height: 100%;
+  width: 100vw;
+  position: relative;
+  z-index: 0;
+}
+
 .map {
   height: 100%;
+  width: 100vw;
   position: relative;
 }
-.map > div {
-  height: 100%;
-}
+
 .btn-orange {
   margin-top: 12px;
   padding: 10px 15px;
@@ -65,4 +71,44 @@
 .radio {
   width: 14px;
   height: 14px;
+}
+
+.help-btn {
+  display: grid;
+  width: 40px;
+  font-style: italic;
+  height: 40px;
+  place-items: center;
+  background: white;
+  top: 20px;
+  right: 20px;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 2;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.help {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 50%;
+  padding: 30px;
+  padding-right: 100px;
+  z-index: 2;
+  background: rgba(67, 93, 67, 0.671);
+  color: white;
+  border-radius: 20px;
+}
+.help .close {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 20px;
+  transform: translate(-125%, -80%);
+}
+
+.map .error {
+  margin: 6px 0;
+  color: #fd6579;
 }
