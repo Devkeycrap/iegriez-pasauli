@@ -99,7 +99,13 @@ export default function Game({ isActive, setIsActive }) {
                 setGameObj={setGameObj}
               />
             )}
-            {stage === 2 && <Questions gameObj={gameObj} setStage={setStage} />}
+            {stage === 2 && (
+              <Questions
+                setPoints={setPoints}
+                gameObj={gameObj}
+                setStage={setStage}
+              />
+            )}
             {stage === 3 && <Map setStage={setStage} gameObj={gameObj} />}
           </div>
         </div>

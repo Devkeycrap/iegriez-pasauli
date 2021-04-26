@@ -4,7 +4,7 @@ import IQuestions from "../models/Questions.model";
 import gsap from "gsap";
 import styles from "../styles/questions.module.scss";
 
-export default function Questions({ gameObj, setStage }) {
+export default function Questions({ gameObj, setStage, setPoints }) {
   const [questions, setQuestions] = useState<IQuestions>({
     questions: [],
   });
