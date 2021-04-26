@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Questions from "../components/Questions.component";
 import Timer from "../components/Timer.component";
 import Wheel from "../components/Wheel.component";
+import Words from "../components/Words.component";
 import dynamic from "next/dynamic";
 import styles from "../styles/game.module.scss";
 
@@ -53,7 +54,8 @@ export default function Game() {
           />
           {stage === 1 && <Wheel setStage={setStage} setGameObj={setGameObj} />}
           {stage === 2 && <Questions gameObj={gameObj} setStage={setStage} />}
-          {stage === 3 && <Map gameObj={gameObj} />}
+          {stage === 3 && <Words/>}
+          {stage === 4 && <Map gameObj={gameObj} />}
         </div>
       )}
     </div>
