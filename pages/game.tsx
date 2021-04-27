@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import Questions from "../components/Questions.component";
 import Timer from "../components/Timer.component";
 import Wheel from "../components/Wheel.component";
-import Words from "../components/Words.component";
 import dynamic from "next/dynamic";
 import styles from "../styles/game.module.scss";
 import {
@@ -20,7 +19,7 @@ export default function Game({ isActive, setIsActive }) {
     console.log("called");
   }, []);
 
-  const [stage, setStage] = useState(1);
+  const [stage, setStage] = useState(4);
   const [gameObj, setGameObj] = useState(null);
   const [gameEnded, setGameEnded] = useState(false);
   const [points, setPoints] = useState(0);
@@ -69,6 +68,10 @@ export default function Game({ isActive, setIsActive }) {
     ssr: false,
   });
 
+  const Words = dynamic(() => import("../components/Words.component"), {
+    ssr: false,
+  })
+
   return (
     <div className={styles.main}>
       {gameEnded && (
@@ -102,7 +105,7 @@ export default function Game({ isActive, setIsActive }) {
             )}
             {stage === 2 && <Questions gameObj={gameObj} setStage={setStage} />}
             {stage === 3 && <Map setStage={setStage} gameObj={gameObj} />}
-            {stage === 4 && <Words/>}
+            {stage === 4 && <Words setStage={setStage}/>}
           </div>
         </div>
       )}

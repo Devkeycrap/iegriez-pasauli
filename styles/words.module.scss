@@ -1,22 +1,15 @@
-.container {
-
-}
-
 .backdrop {
     position: relative;
     overflow: hidden;
     background-color: black;
-    border: 2px solid white;
-    height: 25vw;
-    width: 40vw;
+    border: 5px solid white;
+    height: 30vw;
+    width: 65vw;
 }
 
-.word {
-    font-family: Arial, Helvetica, sans-serif;
-    -webkit-user-select: none;
-    cursor: pointer;
 
-    word-wrap: break-word;
+.textObj {
     position: absolute;
-    color: white;
+    word-wrap: no-wrap;
+    -webkit-user-select: none;
 }

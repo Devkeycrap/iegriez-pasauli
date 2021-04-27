@@ -1,64 +1,92 @@
 import styles from "../styles/words.module.scss";
-import {useEffect, useState} from 'react';
-import { map } from "leaflet";
+import {useEffect, useState, Component} from 'react';
+import { point } from "leaflet";
 
-export default function Words() {
+interface MapProps {
+    setStage: (stage: number) => void;
+  }
 
-    const [words, setWords] = useState([])
-    const [speed, setSpeed] = useState(0.01);
-    const [spawnrate, setSpawnrate] = useState(0.1);
-    const [points, setPoints] = useState(0);
+// THIS CLASS IS CURSED, NO TOUCHING ALLOWED!   
+export default class Words extends Component {
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            newFrame()
-        }, 100);
-        return () => clearInterval(interval)
-    }, [])
-
-    const newFrame = () => {
-        
-        const textModel = [
-            Math.floor(Math.random() * 100),
-            Math.floor(Math.random() * 100),
-            Date.now(),
-            false
-        ]
-        setWords(words => [...words, textModel])
-        return Math.random()
+    state = {
+        inBrowser: false,
+        points: 0,
+        speed: 1, // 1-10
+        wordList: {correct:["remontē", "salabo", "sašuj", "salāpi", "šķiro", "atdod", "aizņemies", "iestādi", "audzē", "pārstrādā", "ēd vietējo", "samal"], 
+                    dictionary:["remontē", "salabo", "sašuj", "nešķiro atkritumus", "salāpi", "šķiro", "atdod", "aizņemies", "tērē ūdeni", "iestādi", "audzē", "pērc jaunu", "izmanto ķīmiju", "pārstrādā", "ēd vietējo", "samal"]}
     }
 
-    const Delitem = (i) => {
-        words.splice(i, 1);
+    componentDidMount() {
+        this.setState({ inBrowser: true })
     }
 
-    const Renderer = () => {
+    newObj(parent) {
+        if (true) {
+            const obj = document.createElement("label");
+
+            obj.innerHTML = this.state.wordList.dictionary[Math.floor(Math.random()*this.state.wordList.dictionary.length)];
+            obj.style.webkitUserSelect = "none";
+
+            obj.style.left = (Math.random()*100)+"%";
+            obj.style.top = (Math.random()*100)+"%";
+            obj.style.position ="absolute";
+            obj.style.fontSize = "16px"
+
+            obj.style.wordWrap = "no-wrap";
+            obj.style.cursor = "pointer";
+            obj.style.color = "white";
+            obj.classList.add("wordObj");
+
+            parent.appendChild(obj);
+        }
+        return
+    }
+
+    newTick(elements) {
+        for (let i = 0; i < elements.length; i++) {
+            let element = elements[i];
+            let wordSize = parseInt(window.getComputedStyle(element).getPropertyValue("font-size"));
+            if (wordSize > 50) {
+                element.style.color = "darkgrey";
+            }
+            if (wordSize > 60) element.remove();
+            element.style.zIndex = wordSize + 1;
+            element.style.fontSize = wordSize + 1 + "px";
+        }
+    }   
+
+    clickEvent(e) {
+        let correct = false;
+        this.state.wordList.correct.map((word, i) => {
+            if (e.target.innerHTML == word) return correct = true
+        })
+        if (correct) {
+            this.setState({points: this.state.points+1})
+            e.target.remove()
+            console.log(this.state.points);
+        }
+    }
+
+    render() {
+        // Make sure the map loads with ssr set to false
+        if (!this.state.inBrowser) {
+            return null;
+        }
+        let seconds = 0;
+        const mainThread = setInterval(() => {
+            this.newObj(document.getElementById("board"))
+            this.newTick(document.getElementsByClassName("wordObj"))
+    
+            //seconds = seconds + (1000/this.state.speed);
+        }, 1000/this.state.speed)
+
+
         return (
             <div>
-                {words.map((word, i) => {
-                    
-                    const style = {
-                        left: word[0]+"%",
-                        top: word[1]+"%",
-                        fontSize: `${Math.floor((Date.now()- word[2]) * speed)}`+"px"
-                    }
-                    if (Number(style.fontSize.replace(/px$/, '')) > 45 || word[3]) {
-                        
-                        //setWords(words.splice(i, 1));
-                        words.splice(i, 1)
-                        return
-                    }
-                    return (
-                        <label style={style} className={styles.word} onClick={() => window.open("https://youtu.be/HPk-VhRjNI8")}>rickroll</label>
-                    )
-                })}
+                <h1>{this.state.points}</h1>
+                <div className={styles.backdrop} id="board" onClick={(e) => this.clickEvent(e)}/>
             </div>
         )
     }
-
-    return (
-        <div className={styles.backdrop}>
-            <Renderer/> 
-        </div>
-    )
 }

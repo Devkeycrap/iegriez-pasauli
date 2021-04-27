@@ -35,7 +35,7 @@ export default function Words() {
             Date.now(),
             false
         ]
-        setWords(words => [...words, textModel])
+        setWords(words => [...words, textModel])    
     }
 
     const Renderer = () => {
