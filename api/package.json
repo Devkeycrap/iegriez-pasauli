@@ -9,7 +9,7 @@
     "heroku-postbuild": "npm install && node src/server.js"
   },
   "engines": {
-    "node": "14.x|10.x"
+    "node": "14.x"
   },
   "keywords": [],
   "author": "",
