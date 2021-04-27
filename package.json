@@ -4,12 +4,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev && node pages/api/src/server.js",
+    "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start -p $PORT && cd ./api && npm install && npm start",
+    "heroku-postbuild": "cd ./api && npm install && npm start"
   },
   "engines": {
-    "node": "14.9.0"
+    "node": "14.x|10.x"
   },
   "repository": {
     "type": "git",

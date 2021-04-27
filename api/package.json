@@ -5,7 +5,11 @@
   "main": "hello.js",
   "scripts": {
     "start": "node src/server.js",
-    "heroku-postbuild": "cd ../../ && npm install && npm run build"
+    "build": "npm install && node src/server.js",
+    "heroku-postbuild": "npm install && node src/server.js"
+  },
+  "engines": {
+    "node": "14.x|10.x"
   },
   "keywords": [],
   "author": "",
