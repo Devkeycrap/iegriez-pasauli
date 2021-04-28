@@ -4,6 +4,7 @@ import Questions from "../components/Questions.component";
 import Timer from "../components/Timer.component";
 import Wheel from "../components/Wheel.component";
 import dynamic from "next/dynamic";
+import Endscreen from '../components/Endscreen.component';
 import styles from "../styles/game.module.scss";
 import {
   bananasPath,
@@ -15,7 +16,7 @@ import {
 
 export default function Game({ isActive, setIsActive }) {
 
-  const [stage, setStage] = useState(1);
+  const [stage, setStage] = useState(5);
   const [gameObj, setGameObj] = useState(null);
   const [gameEnded, setGameEnded] = useState(false);
   const [points, setPoints] = useState(0);
@@ -127,6 +128,13 @@ export default function Game({ isActive, setIsActive }) {
             )}
             {stage === 4 && (
               <Words
+                setStage={setStage}
+              />
+            )}
+            {stage === 5 && (
+              <Endscreen
+                points={points}
+                setPoints={setPoints}
                 setStage={setStage}
               />
             )}

@@ -9,6 +9,7 @@ import {
   iconTransport,
   iconWaste,
 } from "../models/Markers.model";
+import Questions from "./Questions.component";
 
 interface MapProps {
   gameObj: string;
@@ -36,7 +37,12 @@ export default class Map extends Component<MapProps> {
         `http://localhost:8000/map/Hamburger/questions/${this.state.questionIndex}`
       )
       .then((res) => {
-        this.setState({ questions: res.data.questions });
+        let foo = [];
+        res.data.questions.map((obj, i) => {
+          obj["position"] = [Math.random() * 20 + 40, Math.random() * 30 - 5];
+          foo.push(obj);
+        })
+        this.setState({ questions: foo });
       });
   }
 
@@ -99,7 +105,6 @@ export default class Map extends Component<MapProps> {
 
     // If all questions are answered, then start next level, else return to start or end game
     if (answerCount >= this.state.questions.length - 1) {
-      console.log(this.state.questionIndex);
       setTimeout(() => {
         this.setState({
           questionIndex: this.state.questionIndex + 1,
@@ -198,7 +203,7 @@ export default class Map extends Component<MapProps> {
               <Marker
                 icon={this.getIcon(item.icon)}
                 // Set icon positions to random place in Europe
-                position={[Math.random() * 20 + 40, Math.random() * 30 - 5]}
+                position={item.position}
                 key={i}
               >
                 <Popup className={`${styles.popup}`}>
