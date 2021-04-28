@@ -1,15 +1,9 @@
 .backdrop {
     position: relative;
     overflow: hidden;
-    background-color: black;
-    border: 5px solid white;
-    height: 30vw;
-    width: 65vw;
-}
-
-
-.textObj {
-    position: absolute;
-    word-wrap: no-wrap;
-    -webkit-user-select: none;
+    background-color: #EBE1D1;
+    border: 15px solid #495F41;
+    border-radius: 40px;
+    height: 100%;
+    width: 100%;
 }
