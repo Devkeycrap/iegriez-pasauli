@@ -82,7 +82,6 @@ export default class Words extends Component<MapProps> {
     }
 
     render() {
-        // Make sure the map loads with ssr set to false
         if (!this.state.inBrowser) {                                                        // Make sure if component loads in NoSSR mode
             return null;                                                                    // if doesnt, return null
         }
@@ -96,8 +95,10 @@ export default class Words extends Component<MapProps> {
             setInterval(() => setInterval(() => this.props.setStage(5), 6000), 5000);                       // 5s + 5s timer + 1s(for discreptencies), after goes to endscreen
         }, 5000);                                                                                           // final timer sum: 15s + 1s(for discreptencies)
         
-        return (
-            <div className={styles.backdrop} id="board" onClick={(e) => this.clickEvent(e)}/>                   // Return/Render our game canvas
-        )
+        return (                                                                            // Return html objects to be rendered
+            <div className={styles.backdrop} onClick={(e) => this.clickEvent(e)}>
+                <div className={styles.canvas} id="board"/>
+            </div>                   
+        )                                                                                   // /Return html objects to be rendered
     }
 }
