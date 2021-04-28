@@ -4,10 +4,25 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start -p $PORT && cd ./api && npm install && npm start"
   },
+  "engines": {
+    "node": "14.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Devkeycrap/iegriez-pasauli-entry"
+  },
+  "keywords": [
+    "react",
+    "ssr",
+    "server-side-rendering"
+  ],
+  "author": "Ronalds Palacis",
+  "license": "MIT",
+  "homepage": "https://github.com/Devkeycrap/iegriez-pasauli-entry",
   "dependencies": {
     "axios": "^0.21.1",
     "dynamic": "^4.2.2",

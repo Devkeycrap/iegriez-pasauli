@@ -14,15 +14,12 @@ import {
 } from "../public/icons/paths";
 
 export default function Game({ isActive, setIsActive }) {
-  useEffect(() => {
-    setIsActive(true);
-    console.log("called");
-  }, []);
 
-  const [stage, setStage] = useState(4);
+  const [stage, setStage] = useState(1);
   const [gameObj, setGameObj] = useState(null);
   const [gameEnded, setGameEnded] = useState(false);
   const [points, setPoints] = useState(0);
+
   const [sectors, setSectors] = useState([
     {
       color: "#FFA52F",
@@ -57,6 +54,10 @@ export default function Game({ isActive, setIsActive }) {
     },
   ]);
 
+  useEffect(() => {
+    setIsActive(true);
+  }, []);
+
   const restartGame = () => {
     setStage(1);
     setGameEnded(false);
@@ -89,11 +90,16 @@ export default function Game({ isActive, setIsActive }) {
       )}
       {!gameEnded && (
         <div className={styles.game}>
-          <Timer
-            isActive={isActive}
-            setIsActive={setIsActive}
-            setGameEnded={setGameEnded}
-          />
+          <div className={styles["game-info"]}>
+            <Timer
+              isActive={isActive}
+              setIsActive={setIsActive}
+              setGameEnded={setGameEnded}
+            />
+            <h2>
+              Iegūtie punkti: <span>{points || 0}</span>
+            </h2>
+          </div>
           <div className={styles["stage-container"]}>
             {stage === 1 && (
               <Wheel
@@ -103,9 +109,27 @@ export default function Game({ isActive, setIsActive }) {
                 setGameObj={setGameObj}
               />
             )}
-            {stage === 2 && <Questions gameObj={gameObj} setStage={setStage} />}
-            {stage === 3 && <Map setStage={setStage} gameObj={gameObj} />}
-            {stage === 4 && <Words setStage={setStage}/>}
+            {stage === 2 && (
+              <Questions
+                points={points}
+                setPoints={setPoints}
+                gameObj={gameObj}
+                setStage={setStage}
+              />
+            )}
+            {stage === 3 && (
+              <Map
+                points={points}
+                setPoints={setPoints}
+                setStage={setStage}
+                gameObj={gameObj}
+              />
+            )}
+            {stage === 4 && (
+              <Words
+                setStage={setStage}
+              />
+            )}
           </div>
         </div>
       )}
