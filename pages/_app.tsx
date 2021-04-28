@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <title>Iegriez pasauli</title>
       </Head>
-      {!isActive ? <Navbar /> : <div></div>}
+      {!isActive && <Navbar />}
       <Component {...pageProps} setIsActive={setIsActive} isActive={isActive} />
     </div>
   );
