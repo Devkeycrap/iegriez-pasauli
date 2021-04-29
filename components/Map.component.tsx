@@ -12,7 +12,10 @@ import {
 
 interface MapProps {
   gameObj: string;
+  points: number;
   setStage: (stage: number) => void;
+  setPoints: (points: number) => void;
+  addPoints: () => void;
 }
 
 export default class Map extends Component<MapProps> {
@@ -31,18 +34,24 @@ export default class Map extends Component<MapProps> {
     this.setState({ inBrowser: true });
 
     // Get questions for current object
-    axios
-      .get(
-        `http://localhost:8000/map/Hamburger/questions/${this.state.questionIndex}`
-      )
-      .then((res) => {
-        this.setState({ questions: res.data.questions });
-      });
+    console.log(this.state.questions);
+    if (!this.state.questions) {
+      axios
+        .get(
+          `http://localhost:8000/map/Hamburger/questions/${this.state.questionIndex}`
+        )
+        .then((res) => {
+          this.setState({ questions: res.data.questions });
+        });
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    // TODO: reject component updates when it's unnecessary
+    // if (nextProps.points !== this.props.points) {
+    //   return false;
+    // } else return true;
     return true;
+    // TODO: reject component updates when it's unnecessary
   }
 
   // Returns icon based on object name
@@ -97,24 +106,6 @@ export default class Map extends Component<MapProps> {
       }
     });
 
-    // If all questions are answered, then start next level, else return to start or end game
-    if (answerCount >= this.state.questions.length - 1) {
-      console.log(this.state.questionIndex);
-      setTimeout(() => {
-        this.setState({
-          questionIndex: this.state.questionIndex + 1,
-          answers: {},
-        });
-        if (this.state.questionIndex >= 2) {
-          this.props.setStage(1);
-        }
-      }, 2000);
-
-      // TODO: add case to end game
-
-      return;
-    }
-
     // Make a post request to validate answer
     if (!this.state.answers[item.icon]) {
       this.setState({
@@ -149,6 +140,21 @@ export default class Map extends Component<MapProps> {
             },
           },
         });
+
+        // If all questions are answered, then start next level, else return to start or end game
+        if (answerCount >= this.state.questions.length - 1) {
+          console.log(this.state.questionIndex);
+          setTimeout(() => {
+            this.setState({
+              questionIndex: this.state.questionIndex + 1,
+              answers: {},
+            });
+            if (this.state.questionIndex >= 3) {
+              this.props.setStage(1);
+            }
+          }, 2000);
+        }
+        if (res.data.isCorrect) this.props.addPoints();
       });
   };
 
@@ -226,7 +232,7 @@ export default class Map extends Component<MapProps> {
                       )}
 
                       {this.state.answers && this.state.answers[item.icon] && (
-                        <p>{this.state.answers[item.icon].message}</p>
+                        <h4>{this.state.answers[item.icon].message}</h4>
                       )}
 
                       <button
@@ -239,13 +245,24 @@ export default class Map extends Component<MapProps> {
                       </button>
                     </div>
                   ) : (
-                    <div>
-                      <h2>{this.getPopupName(item.icon)}</h2>
+                    <div
+                      className={
+                        this.state.answers[item.icon].isCorrect
+                          ? styles.correct
+                          : styles.incorrect
+                      }
+                    >
+                      <h2>
+                        {this.state.answers[item.icon].isCorrect
+                          ? "Pareizi"
+                          : "Nepareizi"}
+                      </h2>
                       <p>{item.question}</p>
 
                       {this.state.answers && this.state.answers[item.icon] && (
-                        <p>{this.state.answers[item.icon].message}</p>
+                        <h4>{this.state.answers[item.icon].message}</h4>
                       )}
+                      {this.state.answers[item.icon].isCorrect && <h3>+5</h3>}
                     </div>
                   )}
                 </Popup>
