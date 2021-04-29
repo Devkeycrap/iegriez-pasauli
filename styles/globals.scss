@@ -21,5 +21,6 @@ a {
   height: 100vh;
   width: 100%;
   display: grid;
+  overflow: auto;
   grid-template-rows: auto 1fr;
 }

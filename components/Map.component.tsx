@@ -12,11 +12,18 @@ import {
 
 interface MapProps {
   gameObj: string;
+  points: number;
   setStage: (stage: number) => void;
+  setPoints: (points: any) => void;
 }
 
 export default class Map extends Component<MapProps> {
+  constructor(props) {
+    super(props);
+  }
+
   state = {
+    localPoints: 0,
     inBrowser: false,
     questions: null,
     answers: {},
@@ -31,18 +38,21 @@ export default class Map extends Component<MapProps> {
     this.setState({ inBrowser: true });
 
     // Get questions for current object
-    axios
-      .get(
-        `http://localhost:8000/map/Hamburger/questions/${this.state.questionIndex}`
-      )
-      .then((res) => {
-        this.setState({ questions: res.data.questions });
-      });
+    if (!this.state.questions) {
+      axios
+        .get(
+          `http://localhost:8000/map/Hamburger/questions/${this.state.questionIndex}`
+        )
+        .then((res) => {
+          this.setState({ questions: res.data.questions });
+        });
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    // TODO: reject component updates when it's unnecessary
+    console.log(nextProps.points, this.props.points);
     return true;
+    // TODO: reject component updates when it's unnecessary
   }
 
   // Returns icon based on object name
@@ -97,24 +107,6 @@ export default class Map extends Component<MapProps> {
       }
     });
 
-    // If all questions are answered, then start next level, else return to start or end game
-    if (answerCount >= this.state.questions.length - 1) {
-      console.log(this.state.questionIndex);
-      setTimeout(() => {
-        this.setState({
-          questionIndex: this.state.questionIndex + 1,
-          answers: {},
-        });
-        if (this.state.questionIndex >= 2) {
-          this.props.setStage(1);
-        }
-      }, 2000);
-
-      // TODO: add case to end game
-
-      return;
-    }
-
     // Make a post request to validate answer
     if (!this.state.answers[item.icon]) {
       this.setState({
@@ -149,6 +141,23 @@ export default class Map extends Component<MapProps> {
             },
           },
         });
+        if (res.data.isCorrect)
+          this.setState({ localPoints: this.state.localPoints + 5 });
+
+        // If all questions are answered, then start next level, else return to start or end game
+        if (answerCount >= this.state.questions.length - 1) {
+          console.log(this.state.questionIndex);
+          setTimeout(() => {
+            this.setState({
+              questionIndex: this.state.questionIndex + 1,
+              answers: {},
+            });
+            if (this.state.questionIndex >= 3) {
+              this.props.setPoints((points) => points + this.state.localPoints);
+              this.props.setStage(1);
+            }
+          }, 2000);
+        }
       });
   };
 
@@ -160,6 +169,9 @@ export default class Map extends Component<MapProps> {
     return (
       <div className={styles.map}>
         {/* Help box */}
+        <h2 className={styles.counter}>
+          Uzkrātais punktu skaits: <span>{this.state.localPoints}</span>
+        </h2>
         {this.state.helpOpened && (
           <div className={styles.help}>
             <div
@@ -211,14 +223,14 @@ export default class Map extends Component<MapProps> {
                       {item.answers.map((text, i) => (
                         <div key={i} className={styles["radio-container"]}>
                           <input
-                            id={item.icon}
+                            id={i}
                             type="radio"
                             className={styles.radio}
                             name={item.icon}
                             value={i}
                             onChange={this.handleRadio}
                           />
-                          <label htmlFor={item.icon}>{text}</label>
+                          <label htmlFor={i}>{text}</label>
                         </div>
                       ))}
                       {this.state.errors[item.icon]?.noInputError && (
@@ -226,7 +238,7 @@ export default class Map extends Component<MapProps> {
                       )}
 
                       {this.state.answers && this.state.answers[item.icon] && (
-                        <p>{this.state.answers[item.icon].message}</p>
+                        <h4>{this.state.answers[item.icon].message}</h4>
                       )}
 
                       <button
@@ -239,13 +251,24 @@ export default class Map extends Component<MapProps> {
                       </button>
                     </div>
                   ) : (
-                    <div>
-                      <h2>{this.getPopupName(item.icon)}</h2>
+                    <div
+                      className={
+                        this.state.answers[item.icon].isCorrect
+                          ? styles.correct
+                          : styles.incorrect
+                      }
+                    >
+                      <h2>
+                        {this.state.answers[item.icon].isCorrect
+                          ? "Pareizi"
+                          : "Nepareizi"}
+                      </h2>
                       <p>{item.question}</p>
 
                       {this.state.answers && this.state.answers[item.icon] && (
-                        <p>{this.state.answers[item.icon].message}</p>
+                        <h4>{this.state.answers[item.icon].message}</h4>
                       )}
+                      {this.state.answers[item.icon].isCorrect && <h3>+5</h3>}
                     </div>
                   )}
                 </Popup>
