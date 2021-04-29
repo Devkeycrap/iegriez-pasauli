@@ -16,7 +16,7 @@ import {
 
 export default function Game({ isActive, setIsActive }) {
 
-  const [stage, setStage] = useState(5);
+  const [stage, setStage] = useState(3);
   const [gameObj, setGameObj] = useState(null);
   const [gameEnded, setGameEnded] = useState(false);
   const [points, setPoints] = useState(0);
