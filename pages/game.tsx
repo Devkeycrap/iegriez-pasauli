@@ -14,11 +14,10 @@ import {
 } from "../public/icons/paths";
 
 export default function Game({ isActive, setIsActive }) {
-  const [stage, setStage] = useState(3);
+  const [stage, setStage] = useState(1);
   const [gameObj, setGameObj] = useState(null);
   const [gameEnded, setGameEnded] = useState(false);
   const [points, setPoints] = useState(0);
-
   const [sectors, setSectors] = useState([
     {
       color: "#FFA52F",
@@ -62,10 +61,6 @@ export default function Game({ isActive, setIsActive }) {
     setGameEnded(false);
     setIsActive(true);
     setGameObj(null);
-  };
-
-  const addPoints = () => {
-    setPoints(points + 5);
   };
 
   const Map = dynamic(() => import("../components/Map.component"), {
