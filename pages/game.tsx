@@ -64,6 +64,10 @@ export default function Game({ isActive, setIsActive }) {
     setGameObj(null);
   };
 
+  const addPoints = () => {
+    setPoints(points + 5);
+  };
+
   const Map = dynamic(() => import("../components/Map.component"), {
     ssr: false,
   });
