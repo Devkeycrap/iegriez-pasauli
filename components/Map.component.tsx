@@ -14,12 +14,16 @@ interface MapProps {
   gameObj: string;
   points: number;
   setStage: (stage: number) => void;
-  setPoints: (points: number) => void;
-  addPoints: () => void;
+  setPoints: (points: any) => void;
 }
 
 export default class Map extends Component<MapProps> {
+  constructor(props) {
+    super(props);
+  }
+
   state = {
+    localPoints: 0,
     inBrowser: false,
     questions: null,
     answers: {},
@@ -34,7 +38,6 @@ export default class Map extends Component<MapProps> {
     this.setState({ inBrowser: true });
 
     // Get questions for current object
-    console.log(this.state.questions);
     if (!this.state.questions) {
       axios
         .get(
@@ -47,9 +50,7 @@ export default class Map extends Component<MapProps> {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    // if (nextProps.points !== this.props.points) {
-    //   return false;
-    // } else return true;
+    console.log(nextProps.points, this.props.points);
     return true;
     // TODO: reject component updates when it's unnecessary
   }
@@ -140,6 +141,8 @@ export default class Map extends Component<MapProps> {
             },
           },
         });
+        if (res.data.isCorrect)
+          this.setState({ localPoints: this.state.localPoints + 5 });
 
         // If all questions are answered, then start next level, else return to start or end game
         if (answerCount >= this.state.questions.length - 1) {
@@ -150,11 +153,11 @@ export default class Map extends Component<MapProps> {
               answers: {},
             });
             if (this.state.questionIndex >= 3) {
+              this.props.setPoints((points) => points + this.state.localPoints);
               this.props.setStage(1);
             }
           }, 2000);
         }
-        if (res.data.isCorrect) this.props.addPoints();
       });
   };
 
@@ -166,6 +169,9 @@ export default class Map extends Component<MapProps> {
     return (
       <div className={styles.map}>
         {/* Help box */}
+        <h2 className={styles.counter}>
+          Uzkrātais punktu skaits: <span>{this.state.localPoints}</span>
+        </h2>
         {this.state.helpOpened && (
           <div className={styles.help}>
             <div
@@ -217,14 +223,14 @@ export default class Map extends Component<MapProps> {
                       {item.answers.map((text, i) => (
                         <div key={i} className={styles["radio-container"]}>
                           <input
-                            id={item.icon}
+                            id={i}
                             type="radio"
                             className={styles.radio}
                             name={item.icon}
                             value={i}
                             onChange={this.handleRadio}
                           />
-                          <label htmlFor={item.icon}>{text}</label>
+                          <label htmlFor={i}>{text}</label>
                         </div>
                       ))}
                       {this.state.errors[item.icon]?.noInputError && (

@@ -137,3 +137,25 @@
     font-size: 14px;
   }
 }
+
+.counter {
+  position: absolute;
+  font-family: "Montserrat", sans-serif;
+  top: 20px;
+  left: 50%;
+  font-size: 16px;
+  text-transform: uppercase;
+  transform: translate(-50%);
+  z-index: 4;
+  color: white;
+  padding: 20px;
+  border-radius: 100px;
+  text-shadow: 0px 0px 25px rgba(0, 0, 0, 0.678);
+
+  // text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+
+  span {
+    font-size: 32px;
+    color: #495f41;
+  }
+}
