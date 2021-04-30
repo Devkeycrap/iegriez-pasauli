@@ -122,13 +122,11 @@ export default class Words extends Component<WordProps> {
   }
 
   render() {
-    console.log("rendered");
     if (!this.state.inBrowser) {
       // Make sure if component loads in NoSSR mode
       return null; // if doesnt, return null
     }
     const mainThread = setInterval(() => {
-      console.log(this.props.stage);
       // Main interval for
       this.newObj(document.getElementById("board")); // Spawning new <label/> objects
       this.newTick(document.getElementsByClassName("wordObj")); // Update existing <label/> object age/size
@@ -136,7 +134,6 @@ export default class Words extends Component<WordProps> {
 
     setTimeout(() => {
       // Each 5s,
-      console.log("timeout");
       this.setState({ speed: this.state.speed + 10 }); // set's game-speed (this.state.speed) higher
       setTimeout(
         () =>

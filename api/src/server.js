@@ -7,7 +7,6 @@ const app = express();
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.enable("trust proxy"); //to detect if req.secure is true/false
 
 app.get("/quiz/:item/questions", (req, res) => {
   // Get data from JSON and return questions

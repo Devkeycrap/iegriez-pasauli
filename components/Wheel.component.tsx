@@ -127,7 +127,6 @@ export default function Wheel({
   }
 
   function saveAndTransition() {
-    console.log(currentSectorParams);
     removeSector(currentSectorParams.object);
     setStage(2);
   }

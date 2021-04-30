@@ -1,8 +1,18 @@
-```mermaid
-graph TD;
-    NextJS-->Quiz_game_mechanics;
-    Quiz_game_mechanics-->Required_quiz_pages;
-    Required_quiz_pages-->Port_to_phones;
-    Port_to_phones-->Visual_work;
-    Visual_work-->Complete_website;
-```
+# Iegriez pasauli
+
+## Website:
+
+Didn't have enough time to deploy :(
+
+## To run locally:
+
+- Install Node.js
+- Run 'npm run dev'
+- Go to api folder & run 'npm start'
+
+## Copyrights
+
+All the images and icons used are royalty free to use and are from either of these resources:
+
+- pexels.com
+- fontawesome.com
