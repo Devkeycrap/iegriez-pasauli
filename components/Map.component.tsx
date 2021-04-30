@@ -9,19 +9,19 @@ import {
   iconTransport,
   iconWaste,
 } from "../models/Markers.model";
+import IPoints from "../models/Points.model";
 
 interface MapProps {
-  gameObj: string;
-  points: number;
+  gameObj: {
+    object: string;
+    name: string;
+  };
+  points: IPoints;
   setStage: (stage: number) => void;
   setPoints: (points: any) => void;
 }
 
 export default class Map extends Component<MapProps> {
-  constructor(props) {
-    super(props);
-  }
-
   state = {
     localPoints: 0,
     inBrowser: false,
@@ -36,21 +36,10 @@ export default class Map extends Component<MapProps> {
   componentDidMount() {
     // CSR
     this.setState({ inBrowser: true });
-
-    // Get questions for current object
-    if (!this.state.questions) {
-      axios
-        .get(
-          `http://localhost:8000/map/Hamburger/questions/${this.state.questionIndex}`
-        )
-        .then((res) => {
-          this.setState({ questions: res.data.questions });
-        });
-    }
+    this.getQuestions();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log(nextProps.points, this.props.points);
     return true;
     // TODO: reject component updates when it's unnecessary
   }
@@ -96,7 +85,26 @@ export default class Map extends Component<MapProps> {
     });
   };
 
-  submit = (e: any, item) => {
+  getQuestions = () => {
+    // Get questions for current object
+    axios
+      //${this.props.gameObj.object}
+      .get(
+        `http://localhost:8000/map/Hamburger/questions/${this.state.questionIndex}`
+      )
+      .then((res) => {
+        res.data.questions.map(
+          (item) =>
+            (item["position"] = [
+              Math.random() * 20 + 40,
+              Math.random() * 30 - 5,
+            ])
+        );
+        this.setState({ questions: res.data.questions });
+      });
+  };
+
+  submitQuestion = (e: any, item) => {
     e.preventDefault();
 
     // Check answered question count
@@ -130,35 +138,41 @@ export default class Map extends Component<MapProps> {
         }
       )
       .then((res) => {
-        // Update answers state with isCorrect and message to show if user has answered
-        this.setState({
-          answers: {
-            ...this.state.answers,
-            [item.icon]: {
-              ...this.state.answers[item.icon],
-              isCorrect: res.data.isCorrect,
-              message: res.data.message,
-            },
-          },
-        });
-        if (res.data.isCorrect)
-          this.setState({ localPoints: this.state.localPoints + 5 });
-
-        // If all questions are answered, then start next level, else return to start or end game
-        if (answerCount >= this.state.questions.length - 1) {
-          console.log(this.state.questionIndex);
-          setTimeout(() => {
-            this.setState({
-              questionIndex: this.state.questionIndex + 1,
-              answers: {},
-            });
-            if (this.state.questionIndex >= 3) {
-              this.props.setPoints((points) => points + this.state.localPoints);
-              this.props.setStage(1);
-            }
-          }, 2000);
-        }
+        this.validateAnswer(res, item, answerCount);
       });
+  };
+
+  validateAnswer = (res, item, answerCount) => {
+    // Update answers state with isCorrect and message to show if user has answered
+    this.setState({
+      answers: {
+        ...this.state.answers,
+        [item.icon]: {
+          ...this.state.answers[item.icon],
+          isCorrect: res.data.isCorrect,
+          message: res.data.message,
+        },
+      },
+    });
+    if (res.data.isCorrect)
+      this.setState({ localPoints: this.state.localPoints + 5 });
+
+    // If all questions are answered, then start next level, else return to start or end game
+    if (answerCount >= this.state.questions.length - 1) {
+      setTimeout(() => {
+        this.setState({
+          questionIndex: this.state.questionIndex + 1,
+          answers: {},
+        });
+        this.getQuestions();
+        if (this.state.questionIndex >= 3) {
+          this.props.setPoints((points) => ({
+            map: points.map + this.state.localPoints,
+          }));
+          this.props.setStage(1);
+        }
+      }, 2000);
+    }
   };
 
   render() {
@@ -210,7 +224,7 @@ export default class Map extends Component<MapProps> {
               <Marker
                 icon={this.getIcon(item.icon)}
                 // Set icon positions to random place in Europe
-                position={[Math.random() * 20 + 40, Math.random() * 30 - 5]}
+                position={item.position}
                 key={i}
               >
                 <Popup className={`${styles.popup}`}>
@@ -245,7 +259,7 @@ export default class Map extends Component<MapProps> {
                         className={`${styles.btn} ${styles["btn-orange"]}`}
                         type="button"
                         name={item.icon}
-                        onClick={(e) => this.submit(e, item)}
+                        onClick={(e) => this.submitQuestion(e, item)}
                       >
                         Atbildēt
                       </button>
