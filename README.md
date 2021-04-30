@@ -2,7 +2,7 @@
 
 ## Website:
 
-Didn't have enough time to deploy 😢
+https://iegriez-pasauli.herokuapp.com
 
 ## To run locally:
 
