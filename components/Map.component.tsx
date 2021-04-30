@@ -16,6 +16,7 @@ interface MapProps {
     object: string;
     name: string;
   };
+  setGameObj: (object: any) => void;
   points: IPoints;
   setStage: (stage: number) => void;
   setPoints: (points: any) => void;
@@ -169,6 +170,7 @@ export default class Map extends Component<MapProps> {
           this.props.setPoints((points) => ({
             map: points.map + this.state.localPoints,
           }));
+          this.props.setGameObj(null);
           this.props.setStage(1);
         }
       }, 2000);
