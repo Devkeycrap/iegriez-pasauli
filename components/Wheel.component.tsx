@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "../styles/wheel.module.scss";
 
 export default function Wheel({
@@ -127,6 +127,7 @@ export default function Wheel({
   }
 
   function saveAndTransition() {
+    console.log(currentSectorParams);
     removeSector(currentSectorParams.object);
     setStage(2);
   }
