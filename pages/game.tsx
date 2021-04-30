@@ -145,6 +145,7 @@ export default function Game({ isActive, setIsActive }) {
                 setPoints={setPoints}
                 setStage={setStage}
                 gameObj={gameObj}
+                setGameObj={setGameObj}
               />
             )}
           </div>
