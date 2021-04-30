@@ -151,7 +151,7 @@ export default class Words extends Component<WordProps> {
         this.props.setGameEnded(true);
       } else {
         this.props.setPoints((points) => ({
-          words: points.words + this.state.points,
+          map: points.words + this.state.points,
         }));
         this.props.setStage(1);
       }
