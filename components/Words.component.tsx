@@ -15,7 +15,7 @@ export default class Words extends Component<WordProps> {
     // Declare class variables
     inBrowser: false, // variable - this.state.inBrowser
     points: 0, // variable - this.state.points
-    speed: 0, // variable - this.state.speed
+    speed: 1000, // variable - this.state.speed
     wordList: {
       // Word dictionary, with predefined correct awnsers
 
@@ -55,11 +55,6 @@ export default class Words extends Component<WordProps> {
     },
   };
 
-  componentDidMount() {
-    // Function *only* runs on first render
-    this.setState({ inBrowser: true }); // Set inBrowser: true, for later validation NoSSR
-  }
-
   newObj(parent) {
     // Function for creating new componenet(word)
     if (true) {
@@ -81,6 +76,8 @@ export default class Words extends Component<WordProps> {
       obj.style.overflow = "hidden"; // Set <label/> - overflow
       obj.style.cursor = "pointer"; // Set <label/> - onHover cursor
       obj.style.color = "#495F41"; // Set <label/> - text color
+
+      obj.style.width = "min-content"
 
       obj.classList.add("wordObj"); // /Style <label/> element
       try {
@@ -116,51 +113,68 @@ export default class Words extends Component<WordProps> {
       // If compare loop returns, true,
       this.setState({ points: this.state.points + 1 }); // Add 1 point to game counter
       e.target.remove(); // Delete correctly clicked <label/>
-    } else {
+    } else if (e.target.tagName == "LABEL") {
       e.target.style.color = "#FD6579"; // else if clicked word is incorrect, we set the color to red
+      e.target.style.fontWeight = "bold";
     }
   }
 
+  componentDidMount() {
+     // Set inBrowser: true, for later validation NoSSR
+    this.setState({ inBrowser: true });
+
+    this.mainthread = setInterval(() => {
+      this.newObj(document.getElementById("board"));
+      this.newTick(document.getElementsByClassName("wordObj"));
+    }, 600);
+    
+    setTimeout(() => {
+      clearInterval(this.mainthread);
+      this.mainthread = setInterval(() => {
+        this.newObj(document.getElementById("board"));
+        this.newTick(document.getElementsByClassName("wordObj"));
+      }, 300);
+    }, 5000);
+
+    setTimeout(() => {
+      clearInterval(this.mainthread);
+      this.mainthread = setInterval(() => {
+        this.newObj(document.getElementById("board"));
+        this.newTick(document.getElementsByClassName("wordObj"));
+      }, 250);
+    }, 10000);
+
+    setTimeout(() => {
+      clearInterval(this.mainthread);
+      this.props.setGameObj(null);
+      if (this.props.sectors.length == 0) {
+        this.props.setGameEnded(true);
+      } else {
+        this.props.setPoints((points) => ({
+          words: points.words + this.state.points,
+        }));
+        this.props.setStage(1);
+      }
+    }, 15000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.mainthread);
+  }
+
+
   render() {
-    console.log("rendered");
     if (!this.state.inBrowser) {
       // Make sure if component loads in NoSSR mode
       return null; // if doesnt, return null
     }
-    const mainThread = setInterval(() => {
-      console.log(this.props.stage);
-      // Main interval for
-      this.newObj(document.getElementById("board")); // Spawning new <label/> objects
-      this.newTick(document.getElementsByClassName("wordObj")); // Update existing <label/> object age/size
-    }, 1000 - this.state.speed); // 1s - this.state.speed                      (each loop delay)
-
-    setTimeout(() => {
-      // Each 5s,
-      console.log("timeout");
-      this.setState({ speed: this.state.speed + 10 }); // set's game-speed (this.state.speed) higher
-      setTimeout(
-        () =>
-          setTimeout(() => {
-            this.props.setGameObj(null);
-            if (this.props.sectors.length == 0) {
-              this.props.setGameEnded(true);
-            } else {
-              this.props.setPoints((points) => ({
-                words: points.words + this.state.points,
-              }));
-
-              this.props.setStage(1);
-            }
-          }, 6000),
-        5000
-      ); // 5s + 5s timer + 1s(for discreptencies), after goes to endscreen
-    }, 5000); // final timer sum: 15s + 1s(for discreptencies)
 
     return (
       // Return html objects to be rendered
       <div className={styles.backdrop} onClick={(e) => this.clickEvent(e)}>
+        <h2>+{this.state.points}</h2>
         <div className={styles.canvas} id="board" />
       </div>
-    ); // /Return html objects to be rendered
+    );
   }
 }

@@ -20,7 +20,7 @@ export default function Game({ isActive, setIsActive }) {
   const [gameObj, setGameObj] = useState(null);
   const [gameEnded, setGameEnded] = useState(true);
   const [points, setPoints] = useState<IPoints>({
-    questions: 1,
+    questions: 0,
     map: 0,
     words: 0,
   });

@@ -1,11 +1,18 @@
 .backdrop {
     position: relative;
     overflow: hidden;
-    background-color: #EBE1D1;
+    background-color: #FFFFFF;
     border: 15px solid #495F41;
     border-radius: 40px;
     height: 100%;
     width: 100%;
+
+    h2 {
+        float: right;
+        margin-top: 5px;
+        margin-right: 20px;
+        color: #495f41;
+    }
 }
 
 .canvas {
