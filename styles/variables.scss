@@ -1,5 +1,7 @@
 $orange: #faa430;
+$pink: #fd6579;
 $green: #9aca3c;
+$dark-green: #495f41;
 
 .btn-container {
   display: grid;
@@ -40,7 +42,7 @@ $green: #9aca3c;
   font-family: "Open Sans", sans-serif;
   cursor: pointer;
   transition: 0.3s ease-out;
-  padding: 15px 0;
+  padding: 15px;
   z-index: 5;
   position: relative;
 
@@ -54,4 +56,11 @@ $green: #9aca3c;
 .btn-centered {
   display: block;
   margin: auto;
+}
+
+@media only screen and (max-width: 624px) {
+  .btn {
+    padding: 10px;
+    font-size: 12px;
+  }
 }
