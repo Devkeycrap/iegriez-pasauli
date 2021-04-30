@@ -1,3 +1,5 @@
+@import "./variables.scss";
+
 .main {
   height: 100%;
 }
@@ -12,20 +14,88 @@
   display: grid;
   grid-template-rows: 20vh 1fr;
   height: 100vh;
-  background: #435d43;
+  background: $dark-green;
 }
 
 .game-info {
-  h2 {
-    padding-bottom: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  button {
+    width: 50%;
+    margin: auto;
+    max-width: 200px;
+  }
+
+  .info {
+    display: grid;
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      img {
+        width: 30px;
+      }
+      h3 {
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: center;
+        font-style: italic;
+        margin: 12px 0;
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .points {
+    margin: auto;
     text-align: center;
-    font-size: 18px;
-    margin: 10px 0;
-    text-transform: uppercase;
-    color: white;
-    span {
+    h2 {
+      text-align: center;
+      font-size: 18px;
+      text-transform: uppercase;
+      margin: auto;
+      color: white;
+    }
+    h3 {
+      color: white;
+      font-weight: normal;
+      font-size: 16px;
+      text-transform: uppercase;
       font-size: 28px;
+      font-weight: bold;
       color: #9aca3c;
+    }
+  }
+}
+
+@media only screen and (max-width: 624px) {
+  .game-info {
+    button {
+      width: 75%;
+    }
+
+    .info {
+      div {
+        h3 {
+          font-size: 12px;
+        }
+        img {
+          width: 20px;
+        }
+      }
+    }
+
+    .points {
+      h2 {
+        font-size: 12px;
+      }
+      h3 {
+        font-size: 14px;
+      }
     }
   }
 }
