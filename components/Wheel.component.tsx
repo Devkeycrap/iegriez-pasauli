@@ -108,6 +108,7 @@ export default function Wheel({
           object: currentSectorParams.object,
           name: currentSectorParams.text,
         });
+        removeSector(currentSectorParams.object);
       }, 2000);
     }
   }

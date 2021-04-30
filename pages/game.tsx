@@ -18,9 +18,9 @@ import IPoints from "../models/Points.model";
 export default function Game({ isActive, setIsActive }) {
   const [stage, setStage] = useState(1);
   const [gameObj, setGameObj] = useState(null);
-  const [gameEnded, setGameEnded] = useState(true);
+  const [gameEnded, setGameEnded] = useState(false);
   const [points, setPoints] = useState<IPoints>({
-    questions: 1,
+    questions: 0,
     map: 0,
     words: 0,
   });
