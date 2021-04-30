@@ -129,7 +129,7 @@ export default class Map extends Component<MapProps> {
     }
     axios
       .post(
-        `https://iegriez-pasauli-backend.herokuapp.com/map/${this.props.gameObj.object}/answer/${e.target.name}/${this.state.questionIndex}`,
+        `https://iegriez-pasauli-backend.herokuapp.com/map/${this.props.gameObj.object}/answer/${item.icon}/${this.state.questionIndex}`,
         {
           answer: this.state.answers[item.icon].answer,
         },
