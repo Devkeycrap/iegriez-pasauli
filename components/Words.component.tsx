@@ -11,6 +11,13 @@ interface WordProps {
 }
 
 export default class Words extends Component<WordProps> {
+  constructor(props) {
+    super(props);
+  }
+  mainthread = setInterval(() => {
+    this.newObj(document.getElementById("board"));
+    this.newTick(document.getElementsByClassName("wordObj"));
+  }, 600);
   state = {
     // Declare class variables
     inBrowser: false, // variable - this.state.inBrowser
@@ -77,7 +84,7 @@ export default class Words extends Component<WordProps> {
       obj.style.cursor = "pointer"; // Set <label/> - onHover cursor
       obj.style.color = "#495F41"; // Set <label/> - text color
 
-      obj.style.width = "min-content"
+      obj.style.width = "min-content";
 
       obj.classList.add("wordObj"); // /Style <label/> element
       try {
@@ -111,6 +118,7 @@ export default class Words extends Component<WordProps> {
 
     if (correct) {
       // If compare loop returns, true,
+      console.log(this.state.points);
       this.setState({ points: this.state.points + 1 }); // Add 1 point to game counter
       e.target.remove(); // Delete correctly clicked <label/>
     } else if (e.target.tagName == "LABEL") {
@@ -120,14 +128,9 @@ export default class Words extends Component<WordProps> {
   }
 
   componentDidMount() {
-     // Set inBrowser: true, for later validation NoSSR
+    // Set inBrowser: true, for later validation NoSSR
     this.setState({ inBrowser: true });
 
-    this.mainthread = setInterval(() => {
-      this.newObj(document.getElementById("board"));
-      this.newTick(document.getElementsByClassName("wordObj"));
-    }, 600);
-    
     setTimeout(() => {
       clearInterval(this.mainthread);
       this.mainthread = setInterval(() => {
@@ -150,18 +153,18 @@ export default class Words extends Component<WordProps> {
       if (this.props.sectors.length == 0) {
         this.props.setGameEnded(true);
       } else {
+        console.log(this.state.points);
         this.props.setPoints((points) => ({
           map: points.words + this.state.points,
         }));
         this.props.setStage(1);
       }
-    }, 15000)
+    }, 15000);
   }
 
   componentWillUnmount() {
     clearInterval(this.mainthread);
   }
-
 
   render() {
     if (!this.state.inBrowser) {
