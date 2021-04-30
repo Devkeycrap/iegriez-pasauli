@@ -2,7 +2,7 @@
 
 ## Website:
 
-Didn't have enough time to deploy :(
+Didn't have enough time to deploy 😢
 
 ## To run locally:
 
