@@ -15,14 +15,11 @@ export default function Questions({ gameObj, setStage, setPoints }) {
   useEffect(() => {
     if (questions.questions.length == 0) {
       axios
-        .get(
-          `https://iegriez-pasauli.herokuapp.com:8000/quiz/${gameObj.object}/questions`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        )
+        .get(`http://localhost:8000/quiz/${gameObj.object}/questions`, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
         .then((res) => {
           setQuestions(res.data);
         });
@@ -33,7 +30,7 @@ export default function Questions({ gameObj, setStage, setPoints }) {
     setCurrentQuestion({ ...currentQuestion, isCorrect: null });
     axios
       .post(
-        `https://iegriez-pasauli.herokuapp.com:8000/quiz/${gameObj.object}/answer/${currentQuestion.index}`,
+        `http://localhost:8000/quiz/${gameObj.object}/answer/${currentQuestion.index}`,
         {
           answer,
           headers: {
