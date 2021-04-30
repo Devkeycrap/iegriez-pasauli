@@ -16,11 +16,11 @@ import End from "../components/End.component";
 import IPoints from "../models/Points.model";
 
 export default function Game({ isActive, setIsActive }) {
-  const [stage, setStage] = useState(3);
+  const [stage, setStage] = useState(4);
   const [gameObj, setGameObj] = useState(null);
-  const [gameEnded, setGameEnded] = useState(false);
+  const [gameEnded, setGameEnded] = useState(true);
   const [points, setPoints] = useState<IPoints>({
-    questions: 0,
+    questions: 1,
     map: 0,
     words: 0,
   });
@@ -78,6 +78,10 @@ export default function Game({ isActive, setIsActive }) {
     ssr: false,
   });
 
+  const Words = dynamic(() => import("../components/Words.component"), {
+    ssr: false,
+  });
+
   return (
     <div className={styles.main}>
       {gameEnded && (
@@ -91,7 +95,7 @@ export default function Game({ isActive, setIsActive }) {
             <Link href="/">
               <button
                 onClick={exitGame}
-                className={`${styles.btn} ${styles["btn-orange"]}`}
+                className={`${styles.btn} ${styles["btn-neutral"]}`}
               >
                 Uz sākumu
               </button>
@@ -145,7 +149,16 @@ export default function Game({ isActive, setIsActive }) {
                 setPoints={setPoints}
                 setStage={setStage}
                 gameObj={gameObj}
+              />
+            )}
+            {stage === 4 && (
+              <Words
+                stage={stage}
+                setPoints={setPoints}
+                sectors={sectors}
+                setGameEnded={setGameEnded}
                 setGameObj={setGameObj}
+                setStage={setStage}
               />
             )}
           </div>

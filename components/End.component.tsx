@@ -30,31 +30,30 @@ export default function End({
 
   return (
     <div className={styles.end}>
-      <div>
-        <h1>Spēle beigusies!</h1>
-        <h2>Tavs rezultāts</h2>
+      <div className={styles.container}>
+        <h2>Spēle beigusies!</h2>
+        <h4>Tu esi <span>{getResultLevel.name}</span>!</h4>
+        <h5>Tavi rezultāti</h5>
         <div className={styles["result-table"]}>
-          <h4>Patiesība/meli</h4>
-          <h5>{points.questions}</h5>
-          <h4>Karte</h4>
-          <h5>{points.map}</h5>
-          <h4>Augošie vārdi</h4>
-          <h5>{points.words}</h5>
+          <h3>Patiesība/meli</h3>
+          <h4>{points.questions}</h4>
+          <h3>Pasaules karte</h3>
+          <h4>{points.map}</h4>
+          <h3>Augošie vārdi</h3>
+          <h4>{points.words}</h4>
+      </div>
+      <div className={styles["btn-container"]}>
+          <Link href="/">
+            <button onClick={exitGame} className="btn btn-neutral">
+              Uz sākumu
+            </button>
+          </Link>
+          <Link href="/game">
+            <button onClick={restartGame} className="btn btn-orange">
+              Spēlēt vēlreiz
+            </button>
+          </Link>
         </div>
-        <h1>
-          Tu esi <span>{getResultLevel.name}</span>
-        </h1>
-        <h4>{getResultLevel.interval}</h4>
-        <Link href="/">
-          <button onClick={exitGame} className="btn btn-neutral">
-            Uz sākumu
-          </button>
-        </Link>
-        <Link href="/game">
-          <button onClick={restartGame} className="btn btn-green">
-            Spēlēt vēlreiz
-          </button>
-        </Link>
       </div>
     </div>
   );
