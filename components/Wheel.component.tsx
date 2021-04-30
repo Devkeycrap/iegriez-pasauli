@@ -108,6 +108,7 @@ export default function Wheel({
           object: currentSectorParams.object,
           name: currentSectorParams.text,
         });
+        removeSector(currentSectorParams.object);
       }, 2000);
     }
   }
@@ -128,7 +129,6 @@ export default function Wheel({
 
   function saveAndTransition() {
     console.log(currentSectorParams);
-    removeSector(currentSectorParams.object);
     setStage(2);
   }
 

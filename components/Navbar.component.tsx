@@ -26,7 +26,7 @@ export default function Navbar() {
         <li>
           <Link href="/about-us">
             <a className={router.pathname === "/about-us" ? styles.active : ""}>
-              Par mums
+              Komanda
             </a>
           </Link>
         </li>
