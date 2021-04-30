@@ -4,7 +4,6 @@ import Questions from "../components/Questions.component";
 import Timer from "../components/Timer.component";
 import Wheel from "../components/Wheel.component";
 import dynamic from "next/dynamic";
-import Endscreen from '../components/Endscreen.component';
 import styles from "../styles/game.module.scss";
 import {
   bananasPath,
@@ -17,12 +16,11 @@ import End from "../components/End.component";
 import IPoints from "../models/Points.model";
 
 export default function Game({ isActive, setIsActive }) {
-
-  const [stage, setStage] = useState(3);
+  const [stage, setStage] = useState(4);
   const [gameObj, setGameObj] = useState(null);
   const [gameEnded, setGameEnded] = useState(false);
   const [points, setPoints] = useState<IPoints>({
-    questions: 0,
+    questions: 1,
     map: 0,
     words: 0,
   });
@@ -82,7 +80,7 @@ export default function Game({ isActive, setIsActive }) {
 
   const Words = dynamic(() => import("../components/Words.component"), {
     ssr: false,
-  })
+  });
 
   return (
     <div className={styles.main}>
@@ -97,7 +95,7 @@ export default function Game({ isActive, setIsActive }) {
             <Link href="/">
               <button
                 onClick={exitGame}
-                className={`${styles.btn} ${styles["btn-orange"]}`}
+                className={`${styles.btn} ${styles["btn-neutral"]}`}
               >
                 Uz sākumu
               </button>
@@ -151,18 +149,15 @@ export default function Game({ isActive, setIsActive }) {
                 setPoints={setPoints}
                 setStage={setStage}
                 gameObj={gameObj}
-                setGameObj={setGameObj}
               />
             )}
             {stage === 4 && (
               <Words
-                setStage={setStage}
-              />
-            )}
-            {stage === 5 && (
-              <Endscreen
-                points={points}
+                stage={stage}
                 setPoints={setPoints}
+                sectors={sectors}
+                setGameEnded={setGameEnded}
+                setGameObj={setGameObj}
                 setStage={setStage}
               />
             )}
