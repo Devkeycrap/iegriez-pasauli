@@ -30,7 +30,7 @@ export default function Questions({ gameObj, setStage, setPoints }) {
     setCurrentQuestion({ ...currentQuestion, isCorrect: null });
     axios
       .post(
-        `http://localhost:8000/quiz/${gameObj.object}/answer/${currentQuestion.index}`,
+        `https://iegriez-pasauli.herokuapp.com:8000/quiz/${gameObj.object}/answer/${currentQuestion.index}`,
         {
           answer,
           headers: {

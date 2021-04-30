@@ -8,14 +8,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.enable("trust proxy"); //to detect if req.secure is true/false
 
-// //Block http requests. Only allow https requests
-// app.use(function (req, res, next) {
-//   if (req.headers["x-forwarded-proto"] !== "https") {
-//     return res.status(404).send("Not found");
-//   } else {
-//     next();
-//   }
-// });
+//Block http requests. Only allow https requests
+app.use(function (req, res, next) {
+  if (req.headers["x-forwarded-proto"] !== "https") {
+    return res.status(404).send("Not found");
+  } else {
+    next();
+  }
+});
 
 app.get("/quiz/:item/questions", (req, res) => {
   // Get data from JSON and return questions

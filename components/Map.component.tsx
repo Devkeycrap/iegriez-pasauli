@@ -90,7 +90,7 @@ export default class Map extends Component<MapProps> {
     axios
       //${this.props.gameObj.object}
       .get(
-        `http://localhost:8000/map/Hamburger/questions/${this.state.questionIndex}`
+        `https://iegriez-pasauli.herokuapp.com:8000/map/Hamburger/questions/${this.state.questionIndex}`
       )
       .then((res) => {
         res.data.questions.map(
@@ -129,7 +129,7 @@ export default class Map extends Component<MapProps> {
     }
     axios
       .post(
-        `http://localhost:8000/map/${this.props.gameObj}/answer/${e.target.name}/${this.state.questionIndex}`,
+        `https://iegriez-pasauli.herokuapp.com:8000/map/${this.props.gameObj}/answer/${e.target.name}/${this.state.questionIndex}`,
         {
           answer: this.state.answers[item.icon].answer,
         },
