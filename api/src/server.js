@@ -18,7 +18,10 @@ app.get("/quiz/:item/questions", (req, res) => {
       const questions = JSON.parse(data)
         ["items"].findOne((item) => item.name == req.params.item)
         ["quiz"].map((item) => item.question);
-      res.status(200).json({ questions });
+      res
+        .status(200)
+        .json({ questions })
+        .setHeader("Access-Control-Allow-Origin", "*");
     }
   });
 });
