@@ -90,7 +90,7 @@ export default class Map extends Component<MapProps> {
     axios
       //${this.props.gameObj.object}
       .get(
-        `https://iegriez-pasauli-backend.herokuapp.com/map/${this.props.gameObj}/questions/${this.state.questionIndex}`
+        `https://iegriez-pasauli-backend.herokuapp.com/map/${this.props.gameObj.object}/questions/${this.state.questionIndex}`
       )
       .then((res) => {
         res.data.questions.map(
@@ -129,7 +129,7 @@ export default class Map extends Component<MapProps> {
     }
     axios
       .post(
-        `https://iegriez-pasauli-backend.herokuapp.com/map/${this.props.gameObj}/answer/${e.target.name}/${this.state.questionIndex}`,
+        `https://iegriez-pasauli-backend.herokuapp.com/map/${this.props.gameObj.object}/answer/${e.target.name}/${this.state.questionIndex}`,
         {
           answer: this.state.answers[item.icon].answer,
         },
