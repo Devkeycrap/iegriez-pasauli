@@ -15,11 +15,14 @@ export default function Questions({ gameObj, setStage, setPoints }) {
   useEffect(() => {
     if (questions.questions.length == 0) {
       axios
-        .get(`http://localhost:8000/quiz/${gameObj.object}/questions`, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
+        .get(
+          `https://iegriez-pasauli.herokuapp.com:8000/quiz/${gameObj.object}/questions`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
         .then((res) => {
           setQuestions(res.data);
         });
