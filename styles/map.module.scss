@@ -22,21 +22,11 @@
 }
 
 .popup > div:first-child {
+  font-family: "Open Sans", sans-serif;
   background: white;
 
   padding: 20px 10px;
   box-shadow: 0px 8px 30px 0 rgba(0, 0, 0, 0.13);
-}
-
-.popup.correct > div:first-child {
-  background: #9aca3c;
-
-  color: white;
-}
-.popup.incorrect > div:first-child {
-  background: #fd6579;
-
-  color: white;
 }
 
 .popup > div:first-child > div {
@@ -48,24 +38,25 @@
 }
 
 .popup h2 {
+  font-size: 24px;
   margin-bottom: 8px;
 }
 .popup p {
+  font-size: 16px;
   margin: 0;
   margin-bottom: 10px;
 }
 
 .radio-container {
-  display: flex;
-  height: 30px;
+  margin: 12px 0;
   align-items: center;
 }
 
 .radio-container label {
+  margin-left: 4px;
+  font-size: 14px;
   width: auto;
   font-weight: 700;
-  display: block;
-  margin-left: 4px;
 }
 
 .radio {
@@ -97,7 +88,7 @@
   padding: 30px;
   padding-right: 100px;
   z-index: 2;
-  background: rgba(67, 93, 67, 0.671);
+  background: rgba(73, 95, 65, 0.67);
   color: white;
   border-radius: 20px;
 }
@@ -110,5 +101,83 @@
 
 .map .error {
   margin: 6px 0;
-  color: #fd6579;
+  color: $pink;
+}
+
+.correct {
+  color: $green;
+  p {
+    color: black;
+  }
+  h3 {
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: $green;
+    color: white;
+    margin: 12px 0;
+  }
+  h4 {
+    font-size: 14px;
+  }
+}
+
+.incorrect {
+  color: $pink;
+  p {
+    color: black;
+  }
+  h3 {
+    font-size: 18px;
+  }
+  h4 {
+    font-size: 14px;
+  }
+}
+
+.counter {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Montserrat", sans-serif;
+  top: 20px;
+  left: 50%;
+  font-size: 16px;
+  text-transform: uppercase;
+  transform: translate(-50%);
+  z-index: 4;
+  color: white;
+  padding: 20px;
+  border-radius: 100px;
+  text-shadow: 0px 0px 25px rgba(0, 0, 0, 0.678);
+
+  // text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+
+  span {
+    margin-left: 12px;
+    font-size: 24px;
+    min-width: 50px;
+    height: 50px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: $green;
+    color: white;
+  }
+}
+
+@media only screen and (max-width: 624px) {
+  .counter {
+    font-size: 12px;
+    width: 75%;
+    span {
+      font-size: 16px;
+      min-width: 30px;
+      height: 30px;
+    }
+  }
 }

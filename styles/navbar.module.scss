@@ -1,9 +1,11 @@
+@import "./variables.scss";
+
 .nav {
   height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #435d43;
+  background: $dark-green;
 }
 
 .nav ul {
@@ -28,14 +30,14 @@
   }
 }
 .nav a.active {
-  color: #9aca3c;
+  color: $green;
 
   &::after {
     content: "";
     position: absolute;
     width: 50%;
     height: 2px;
-    background: #9aca3c;
+    background: $green;
     bottom: -2px;
     right: 0;
   }

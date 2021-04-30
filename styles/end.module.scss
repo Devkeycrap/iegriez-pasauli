@@ -1,0 +1,26 @@
+.end {
+  height: 100vh;
+  padding: 100px 10%;
+
+  div {
+    width: 100%;
+  }
+  h1 {
+    font-size: 64px;
+    font-family: "Montserrat", sans-serif;
+    color: white;
+    text-align: center;
+    margin: 100px 0;
+  }
+  h2 {
+    font-size: 48px;
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    font-weight: normal;
+  }
+}
+
+.result-table {
+  display: grid;
+  grid-template-columns: auto auto;
+}

@@ -13,41 +13,46 @@ import {
   headphonesPath,
   longboardPath,
 } from "../public/icons/paths";
+import End from "../components/End.component";
+import IPoints from "../models/Points.model";
 
 export default function Game({ isActive, setIsActive }) {
 
   const [stage, setStage] = useState(3);
   const [gameObj, setGameObj] = useState(null);
   const [gameEnded, setGameEnded] = useState(false);
-  const [points, setPoints] = useState(0);
-
+  const [points, setPoints] = useState<IPoints>({
+    questions: 0,
+    map: 0,
+    words: 0,
+  });
   const [sectors, setSectors] = useState([
     {
-      color: "#FFA52F",
+      color: "#B8D97A",
       image: bananasPath,
       name: "Bananas",
       displayName: "Banāni",
     },
     {
-      color: "#EBE1D1",
+      color: "#CCE49F",
       image: burgerPath,
       name: "Hamburger",
       displayName: "Hamburgers",
     },
     {
-      color: "#2C85A4",
+      color: "#E1EFC5",
       image: headphonesPath,
       name: "Headphones",
       displayName: "Austiņas",
     },
     {
-      color: "#C3E5ED",
+      color: "#F5F9EC",
       image: longboardPath,
       name: "Longboard",
       displayName: "Longbords",
     },
     {
-      color: "#FD6579",
+      color: "#FCFDF9",
       image: tshirtPath,
       imageColor: "",
       name: "T-shirt",
@@ -66,6 +71,11 @@ export default function Game({ isActive, setIsActive }) {
     setGameObj(null);
   };
 
+  const exitGame = () => {
+    setGameEnded(true);
+    setIsActive(false);
+  };
+
   const Map = dynamic(() => import("../components/Map.component"), {
     ssr: false,
   });
@@ -78,28 +88,45 @@ export default function Game({ isActive, setIsActive }) {
     <div className={styles.main}>
       {gameEnded && (
         <div className={styles.endscreen}>
-          Laiks beidzies!
-          <Link href="/">
-            <button className="btn btn-neutral">Home</button>
-          </Link>
-          <Link href="/game">
-            <button onClick={restartGame} className="btn btn-green">
-              Play again
-            </button>
-          </Link>
+          <End exitGame={exitGame} restartGame={restartGame} points={points} />
         </div>
       )}
       {!gameEnded && (
         <div className={styles.game}>
           <div className={styles["game-info"]}>
-            <Timer
-              isActive={isActive}
-              setIsActive={setIsActive}
-              setGameEnded={setGameEnded}
-            />
-            <h2>
-              Iegūtie punkti: <span>{points || 0}</span>
-            </h2>
+            <Link href="/">
+              <button
+                onClick={exitGame}
+                className={`${styles.btn} ${styles["btn-orange"]}`}
+              >
+                Uz sākumu
+              </button>
+            </Link>
+            <div className={styles.info}>
+              <Timer
+                isActive={isActive}
+                setIsActive={setIsActive}
+                setGameEnded={setGameEnded}
+              />
+              {gameObj && (
+                <div>
+                  <h3>{gameObj.name}</h3>
+                  <img
+                    src={`/icons/${gameObj.object.toLowerCase()}.svg`}
+                    alt=""
+                  />
+                </div>
+              )}
+            </div>
+            <div className={styles.points}>
+              <h2>Iegūtie punkti</h2>
+              <h3>
+                {Object.keys(points).reduce(
+                  (sum, key) => sum + parseInt(points[key] || 0),
+                  0
+                ) || 0}
+              </h3>
+            </div>
           </div>
           <div className={styles["stage-container"]}>
             {stage === 1 && (
@@ -107,12 +134,12 @@ export default function Game({ isActive, setIsActive }) {
                 sectors={sectors}
                 setSectors={setSectors}
                 setStage={setStage}
+                gameObj={gameObj}
                 setGameObj={setGameObj}
               />
             )}
             {stage === 2 && (
               <Questions
-                points={points}
                 setPoints={setPoints}
                 gameObj={gameObj}
                 setStage={setStage}
@@ -124,6 +151,7 @@ export default function Game({ isActive, setIsActive }) {
                 setPoints={setPoints}
                 setStage={setStage}
                 gameObj={gameObj}
+                setGameObj={setGameObj}
               />
             )}
             {stage === 4 && (
