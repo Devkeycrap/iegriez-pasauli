@@ -7,12 +7,13 @@ https://iegriez-pasauli.herokuapp.com
 ## To run locally:
 
 - Install Node.js
-- Run 'npm run dev'
+- Do `git clone --recursive https://github.com/Devkeycrap/iegriez-pasauli-entry.git`
+- Run `npm run dev`
 - Go to api folder & run 'npm start'
 
 ## Copyrights
 
 All the images and icons used are royalty free to use and are from either of these resources:
 
-- pexels.com
-- fontawesome.com
+- [Pexels](https://pexels.com "Pexels Home")
+- [FontAwesome](https://fontawesome.com "FontAwesome Home")
