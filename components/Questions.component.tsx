@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import IQuestions from "../models/Questions.model";
-import gsap from "gsap";
 import styles from "../styles/questions.module.scss";
 
-export default function Questions({ gameObj, setStage, setPoints, points }) {
+export default function Questions({ gameObj, setStage, setPoints }) {
   const [questions, setQuestions] = useState<IQuestions>({
     questions: [],
   });
@@ -16,7 +15,7 @@ export default function Questions({ gameObj, setStage, setPoints, points }) {
   useEffect(() => {
     if (questions.questions.length == 0) {
       axios
-        .get(`http://localhost:8000/quiz/${gameObj}/questions`, {
+        .get(`http://localhost:8000/quiz/${gameObj.object}/questions`, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -31,7 +30,7 @@ export default function Questions({ gameObj, setStage, setPoints, points }) {
     setCurrentQuestion({ ...currentQuestion, isCorrect: null });
     axios
       .post(
-        `http://localhost:8000/quiz/${gameObj}/answer/${currentQuestion.index}`,
+        `http://localhost:8000/quiz/${gameObj.object}/answer/${currentQuestion.index}`,
         {
           answer,
           headers: {
@@ -42,7 +41,7 @@ export default function Questions({ gameObj, setStage, setPoints, points }) {
       .then((res) => {
         console.log(res.data);
         if (res.data.isCorrect) {
-          setPoints((points) => points + 5);
+          setPoints((points) => ({ questions: points.questions + 5 }));
           setCurrentQuestion({
             ...currentQuestion,
             isCorrect: true,
