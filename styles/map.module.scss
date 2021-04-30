@@ -27,41 +27,39 @@
 
   padding: 20px 10px;
   box-shadow: 0px 8px 30px 0 rgba(0, 0, 0, 0.13);
+
+  div {
+    width: auto;
+  }
+  h2 {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+  p {
+    font-size: 16px;
+    margin: 0;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+  }
+  .radio-container {
+    margin: 12px 0;
+    align-items: center;
+    label {
+      margin-left: 4px;
+      font-size: 14px;
+      width: auto;
+      font-weight: 700;
+    }
+    .radio {
+      width: 14px;
+      height: 14px;
+    }
+  }
 }
 
-.popup > div:first-child > div {
-  width: auto;
-}
 .popup a {
   top: 10px !important;
   right: 10px !important;
-}
-
-.popup h2 {
-  font-size: 24px;
-  margin-bottom: 8px;
-}
-.popup p {
-  font-size: 16px;
-  margin: 0;
-  margin-bottom: 10px;
-}
-
-.radio-container {
-  margin: 12px 0;
-  align-items: center;
-}
-
-.radio-container label {
-  margin-left: 4px;
-  font-size: 14px;
-  width: auto;
-  font-weight: 700;
-}
-
-.radio {
-  width: 14px;
-  height: 14px;
 }
 
 .help-btn {
@@ -178,6 +176,21 @@
       font-size: 16px;
       min-width: 30px;
       height: 30px;
+    }
+  }
+
+  .popup > div:first-child {
+    position: relative;
+    h2 {
+      font-size: 16px;
+    }
+    p {
+      font-size: 12px;
+    }
+    .radio-container {
+      label {
+        font-size: 12px;
+      }
     }
   }
 }

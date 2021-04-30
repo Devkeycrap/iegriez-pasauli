@@ -11,9 +11,6 @@ interface WordProps {
 }
 
 export default class Words extends Component<WordProps> {
-  constructor(props) {
-    super(props);
-  }
   mainthread = setInterval(() => {
     this.newObj(document.getElementById("board"));
     this.newTick(document.getElementsByClassName("wordObj"));
@@ -118,7 +115,6 @@ export default class Words extends Component<WordProps> {
 
     if (correct) {
       // If compare loop returns, true,
-      console.log(this.state.points);
       this.setState({ points: this.state.points + 1 }); // Add 1 point to game counter
       e.target.remove(); // Delete correctly clicked <label/>
     } else if (e.target.tagName == "LABEL") {
@@ -155,7 +151,8 @@ export default class Words extends Component<WordProps> {
       } else {
         console.log(this.state.points);
         this.props.setPoints((points) => ({
-          map: points.words + this.state.points,
+          ...points,
+          words: points.words + this.state.points,
         }));
         this.props.setStage(1);
       }

@@ -5,7 +5,7 @@ $dark-green: #495f41;
 
 .btn-container {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 1fr 1fr;
   margin: auto;
   gap: 20px;
   button {

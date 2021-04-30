@@ -12,7 +12,7 @@
 
 .game {
   display: grid;
-  grid-template-rows: 20vh 1fr;
+  grid-template-rows: auto 1fr;
   height: 100vh;
   background: $dark-green;
 }
@@ -20,6 +20,7 @@
 .game-info {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  height: 10%;
   button {
     width: 50%;
     margin: auto;

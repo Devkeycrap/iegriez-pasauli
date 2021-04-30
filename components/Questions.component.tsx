@@ -43,7 +43,10 @@ export default function Questions({ gameObj, setStage, setPoints }) {
       )
       .then((res) => {
         if (res.data.isCorrect) {
-          setPoints((points) => ({ questions: points.questions + 5 }));
+          setPoints((points) => ({
+            ...points,
+            questions: points.questions + 5,
+          }));
           setCurrentQuestion({
             ...currentQuestion,
             isCorrect: true,

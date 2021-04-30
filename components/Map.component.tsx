@@ -90,7 +90,7 @@ export default class Map extends Component<MapProps> {
     axios
       //${this.props.gameObj.object}
       .get(
-        `https://iegriez-pasauli-backend.herokuapp.com/map/Hamburger/questions/${this.state.questionIndex}`
+        `https://iegriez-pasauli-backend.herokuapp.com/map/${this.props.gameObj}/questions/${this.state.questionIndex}`
       )
       .then((res) => {
         res.data.questions.map(
@@ -167,6 +167,7 @@ export default class Map extends Component<MapProps> {
         this.getQuestions();
         if (this.state.questionIndex >= 3) {
           this.props.setPoints((points) => ({
+            ...points,
             map: points.map + this.state.localPoints,
           }));
           this.props.setStage(4);

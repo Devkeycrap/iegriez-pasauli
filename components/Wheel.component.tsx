@@ -128,7 +128,6 @@ export default function Wheel({
   }
 
   function saveAndTransition() {
-    removeSector(currentSectorParams.object);
     setStage(2);
   }
 
@@ -138,7 +137,7 @@ export default function Wheel({
   return (
     <div className={styles["wheel-container"]}>
       <h2 className="result" style={{ color: sectorParams.color }}>
-        {sectorParams.text}
+        {gameObj?.name || sectorParams.text}
       </h2>
       <div
         style={{ display: gameObj || sectors.length == 1 ? "none" : "block" }}
