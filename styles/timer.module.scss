@@ -1,25 +1,25 @@
-.timer {
-  width: 100%;
-  user-select: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
-}
-
 .timer svg {
-  width: 150px;
+  user-select: none;
+  z-index: 10;
+  margin: auto;
+  padding: 10px 0;
+  width: 160px;
 }
 
-.time {
-  fill: white;
+@media only screen and (max-width: 1024px) {
+  .timer svg {
+    width: 120px;
+  }
 }
 
 @media only screen and (max-width: 720px) {
-  .timer {
-    top: 100px;
-    left: 50%;
-    transform: translate(-50%);
+  .timer svg {
+    width: 80px;
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  .timer svg {
     width: 60px;
   }
 }

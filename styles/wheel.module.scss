@@ -1,4 +1,5 @@
 @import "./variables.scss";
+
 .wheel-container {
   text-align: center;
 }
@@ -27,10 +28,11 @@
 }
 
 .btn-orange {
+  display: block;
+  margin: auto;
   margin-top: 50px;
-  padding: 20px 60px;
+  padding: 20px 50px;
 }
-
 #spin {
   font: 1.5em/0 sans-serif;
   user-select: none;
@@ -60,8 +62,10 @@
   border-top: none;
 }
 
-.result {
-  transition: 1s;
+.spin-result {
+  img {
+    width: 200px;
+  }
 }
 
 @media only screen and (max-width: 1280px) {
@@ -78,12 +82,12 @@
     width: 300px;
   }
   .btn-orange {
-    padding: 15px 40px;
+    padding: 10px 40px;
   }
   .arrow {
     border-left: 12.5px solid transparent;
     border-right: 12.5px solid transparent;
-    border-top: 25px solid rgb(255, 255, 255);
+    border-top: 25px solid rgb(0, 0, 0);
   }
 }
 
@@ -96,7 +100,6 @@
     width: 200px;
   }
   .btn-orange {
-    margin-top: 20px;
-    padding: 15px 30px;
+    margin-top: 30px;
   }
 }
