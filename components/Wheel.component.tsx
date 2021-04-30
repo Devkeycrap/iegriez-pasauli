@@ -1,8 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "../styles/wheel.module.scss";
-import { gsap } from "gsap";
 
-export default function Wheel({ setStage, setGameObj, sectors, setSectors }) {
+export default function Wheel({
+  setStage,
+  setGameObj,
+  gameObj,
+  sectors,
+  setSectors,
+}) {
   const spinRef = useRef(null);
   const canvasRef = useRef(null);
   const PI = Math.PI;
@@ -23,9 +28,14 @@ export default function Wheel({ setStage, setGameObj, sectors, setSectors }) {
     object: null,
   });
 
-  const [isWheelSpinned, setIsWheelSpinned] = useState(false);
-
   useEffect(() => {
+    if (sectors.length == 1) {
+      setGameObj({
+        object: sectors[0].name,
+        name: sectors[0].displayName,
+      });
+    }
+
     tot = sectors.length;
     canvas = canvasRef.current;
     spinEl = spinRef.current;
@@ -41,8 +51,6 @@ export default function Wheel({ setStage, setGameObj, sectors, setSectors }) {
     rotate(); // Initial rotation
     engine(); // Start engine
     spinEl.addEventListener("click", () => {
-      setIsWheelSpinned(true);
-      console.log("spinned wheel");
       if (!angVel) angVel = rand(0.25, 0.35);
     });
   }, [sectors]);
@@ -95,7 +103,12 @@ export default function Wheel({ setStage, setGameObj, sectors, setSectors }) {
     }
 
     if (angVel == 0) {
-      saveAndTransition();
+      setTimeout(() => {
+        setGameObj({
+          object: currentSectorParams.object,
+          name: currentSectorParams.text,
+        });
+      }, 2000);
     }
   }
 
@@ -114,12 +127,8 @@ export default function Wheel({ setStage, setGameObj, sectors, setSectors }) {
   }
 
   function saveAndTransition() {
-    setTimeout(() => {
-      setIsWheelSpinned(false);
-      setGameObj(currentSectorParams.object);
-      removeSector(currentSectorParams.object);
-      setStage(2);
-    }, 3000);
+    removeSector(currentSectorParams.object);
+    setStage(2);
   }
 
   const removeSector = (object) =>
@@ -130,20 +139,33 @@ export default function Wheel({ setStage, setGameObj, sectors, setSectors }) {
       <h2 className="result" style={{ color: sectorParams.color }}>
         {sectorParams.text}
       </h2>
-      <div className={styles.arrow}></div>
-      <canvas
-        ref={canvasRef}
-        className={styles.wheel}
-        width="1000"
-        height="1000"
-      ></canvas>
-      {!isWheelSpinned && (
+      <div
+        style={{ display: gameObj || sectors.length == 1 ? "none" : "block" }}
+      >
+        <div className={styles.arrow}></div>
+        <canvas
+          ref={canvasRef}
+          className={styles.wheel}
+          width="1000"
+          height="1000"
+        ></canvas>
         <button
           ref={spinRef}
           className={`${styles.btn} ${styles["btn-orange"]}`}
         >
           Iegriezt
         </button>
+      </div>
+      {gameObj && (
+        <div className={styles["spin-result"]}>
+          <img src={`/icons/${gameObj.object.toLowerCase()}.svg`} alt="" />
+          <button
+            onClick={saveAndTransition}
+            className={`${styles.btn} ${styles["btn-orange"]}`}
+          >
+            Turpināt
+          </button>
+        </div>
       )}
     </div>
   );
