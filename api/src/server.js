@@ -16,7 +16,7 @@ app.get("/quiz/:item/questions", (req, res) => {
       res.status(402).send(err);
     } else {
       const questions = JSON.parse(data)
-        ["items"].find((item) => item.name == req.params.item)
+        ["items"].findOne((item) => item.name == req.params.item)
         ["quiz"].map((item) => item.question);
       res.status(200).json({ questions });
     }
@@ -29,7 +29,7 @@ app.post("/quiz/:item/answer/:id", (req, res) => {
     if (err) {
       res.status(402).send(err);
     } else {
-      const answer = JSON.parse(data)["items"].find(
+      const answer = JSON.parse(data)["items"].findOne(
         (item) => item.name == req.params.item
       )["quiz"][req.params.id].answer;
       const userInput = req.body.answer;
@@ -45,7 +45,7 @@ app.get("/map/:item/questions/:question", (req, res) => {
       res.status(402).send(err);
     } else {
       const questions = JSON.parse(data)
-        ["items"].find((item) => item.name == req.params.item)
+        ["items"].findOne((item) => item.name == req.params.item)
         ["map"].map((item) => ({
           icon: item.icon,
           question: item.questions.map((item) => item.question)[
@@ -67,14 +67,14 @@ app.post(`/map/:item/answer/:icon/:question`, (req, res) => {
     } else {
       const userAnswer = req.body.answer;
       const correctAnswer = JSON.parse(data)
-        ["items"].find((item) => item.name)
-        ["map"].find((item) => item.icon == req.params.icon).questions[
+        ["items"].findOne((item) => item.name)
+        ["map"].findOne((item) => item.icon == req.params.icon).questions[
         req.params.question
       ].correct;
 
       const message = JSON.parse(data)
-        ["items"].find((item) => item.name)
-        ["map"].find((item) => item.icon == req.params.icon).questions[
+        ["items"].findOne((item) => item.name)
+        ["map"].findOne((item) => item.icon == req.params.icon).questions[
         req.params.question
       ].correctMessage;
 
