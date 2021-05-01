@@ -32,7 +32,6 @@ export default function Wheel({
 
   useEffect(() => {
     if (sectors.length == 1) {
-      console.log(currentSectorParams.object);
       setGameObj({
         object: sectors[0].name,
         name: sectors[0].displayName,

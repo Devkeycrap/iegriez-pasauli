@@ -145,7 +145,6 @@ export default class Words extends Component<WordProps> {
 
     setTimeout(() => {
       clearInterval(this.mainthread);
-      console.log(this.state.points);
       this.props.setGameObj(null);
       if (this.props.sectors.length == 0) {
         this.props.setPoints((points) => ({
