@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
 import Navbar from "../components/Navbar.component";
 import "../styles/globals.scss";
 
@@ -11,7 +12,13 @@ function MyApp({ Component, pageProps }) {
         <title>Iegriez pasauli</title>
       </Head>
       {!isActive && <Navbar />}
-      <Component {...pageProps} setIsActive={setIsActive} isActive={isActive} />
+      <AnimatePresence exitBeforeEnter={true}>
+        <Component
+          {...pageProps}
+          setIsActive={setIsActive}
+          isActive={isActive}
+        />
+      </AnimatePresence>
     </div>
   );
 }

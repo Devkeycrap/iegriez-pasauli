@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "../styles/wheel.module.scss";
+import { motion } from "framer-motion";
+import { fadeInUp } from "../models/animations/animations";
 
 export default function Wheel({
   setStage,
@@ -128,6 +130,9 @@ export default function Wheel({
   }
 
   function saveAndTransition() {
+    if (sectors.length == 1) {
+      setSectors([]);
+    }
     setStage(2);
   }
 
@@ -135,20 +140,27 @@ export default function Wheel({
     setSectors((sectors) => sectors.filter((sector) => sector.name !== object));
 
   return (
-    <div className={styles["wheel-container"]}>
+    <motion.div exit={{ opacity: 0 }} className={styles["wheel-container"]}>
       <h2 className="result" style={{ color: sectorParams.color }}>
         {gameObj?.name || sectorParams.text}
       </h2>
       <div
         style={{ display: gameObj || sectors.length == 1 ? "none" : "block" }}
       >
-        <div className={styles.arrow}></div>
-        <canvas
-          ref={canvasRef}
-          className={styles.wheel}
-          width="1000"
-          height="1000"
-        ></canvas>
+        <motion.div
+          variants={fadeInUp}
+          exit={{ opacity: 0 }}
+          initial="initial"
+          animate="animate"
+        >
+          <div className={styles.arrow}></div>
+          <canvas
+            ref={canvasRef}
+            className={styles.wheel}
+            width="1000"
+            height="1000"
+          ></canvas>
+        </motion.div>
         <button
           ref={spinRef}
           className={`${styles.btn} ${styles["btn-orange"]}`}
@@ -167,6 +179,6 @@ export default function Wheel({
           </button>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }

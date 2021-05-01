@@ -1,11 +1,15 @@
 import styles from "../styles/home.module.scss";
 import Link from "next/link";
-import Head from "next/head";
-import Wheel from "../components/Wheel.component";
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
-    <div className={styles.home}>
+    <motion.div
+      exit={{ opacity: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className={styles.home}
+    >
       <div>
         <h1>
           Vai zini, kas ir <br />
@@ -18,6 +22,6 @@ export default function Home() {
           </button>
         </Link>
       </div>
-    </div>
+    </motion.div>
   );
 }

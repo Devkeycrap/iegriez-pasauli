@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import IQuestions from "../models/Questions.model";
 import styles from "../styles/questions.module.scss";
+import { motion } from "framer-motion";
+import { fadeInUp, stagger } from "../models/animations/animations";
 
 export default function Questions({ gameObj, setStage, setPoints }) {
   const [questions, setQuestions] = useState<IQuestions>({
@@ -71,11 +73,18 @@ export default function Questions({ gameObj, setStage, setPoints }) {
   };
 
   return (
-    <div className={styles.questions}>
+    <motion.div
+      exit={{ opacity: 0 }}
+      initial="initial"
+      animate="animate"
+      className={styles.questions}
+    >
       {currentQuestion.isCorrect == null && (
         <div>
           <h1>Patiesība vai meli</h1>
-          <h2>{questions && questions.questions[currentQuestion.index]}</h2>
+          <motion.h2 variants={fadeInUp}>
+            {questions && questions.questions[currentQuestion.index]}
+          </motion.h2>
           <div className={styles["btn-container"]}>
             <button
               onClick={() => answer(true)}
@@ -137,6 +146,6 @@ export default function Questions({ gameObj, setStage, setPoints }) {
           </div>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }

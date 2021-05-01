@@ -22,17 +22,18 @@ export default function End({
 
   const getResultLevel = () => {
     const totalPoints: number = getTotalPoints();
-    if (totalPoints >= 75) return { name: "Apritnieks", interval: "75-100" };
-    else if (totalPoints >= 35)
-      return { name: "Vidritnieks", interval: "35-74" };
-    else return { name: "Švakrinieks", interval: "1-34" };
+    if (totalPoints >= 75) return "Apritnieks (75-100p)";
+    else if (totalPoints >= 35) return "Vidritnieks (35-74p)";
+    else return "Švakritnieks (1-34p)";
   };
 
   return (
     <div className={styles.end}>
       <div className={styles.container}>
         <h2>Spēle beigusies!</h2>
-        <h4>Tu esi <span>{getResultLevel.name}</span>!</h4>
+        <h4>
+          Tu esi <span>{getResultLevel()}</span>!
+        </h4>
         <h5>Tavi rezultāti</h5>
         <div className={styles["result-table"]}>
           <h3>Patiesība/meli</h3>
@@ -41,8 +42,8 @@ export default function End({
           <h4>{points.map}</h4>
           <h3>Augošie vārdi</h3>
           <h4>{points.words}</h4>
-      </div>
-      <div className={styles["btn-container"]}>
+        </div>
+        <div className={styles["btn-container"]}>
           <Link href="/">
             <button onClick={exitGame} className="btn btn-neutral">
               Uz sākumu
