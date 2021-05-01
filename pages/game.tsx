@@ -14,6 +14,7 @@ import {
 } from "../public/icons/paths";
 import End from "../components/End.component";
 import IPoints from "../models/Points.model";
+import { motion } from "framer-motion";
 
 export default function Game({ isActive, setIsActive }) {
   const [stage, setStage] = useState(1);
@@ -31,31 +32,31 @@ export default function Game({ isActive, setIsActive }) {
       name: "Bananas",
       displayName: "Banāni",
     },
-    {
-      color: "#CCE49F",
-      image: burgerPath,
-      name: "Hamburger",
-      displayName: "Hamburgers",
-    },
-    {
-      color: "#E1EFC5",
-      image: headphonesPath,
-      name: "Headphones",
-      displayName: "Austiņas",
-    },
-    {
-      color: "#F5F9EC",
-      image: longboardPath,
-      name: "Longboard",
-      displayName: "Longbords",
-    },
-    {
-      color: "#FCFDF9",
-      image: tshirtPath,
-      imageColor: "",
-      name: "T-shirt",
-      displayName: "T-krekls",
-    },
+    // {
+    //   color: "#CCE49F",
+    //   image: burgerPath,
+    //   name: "Hamburger",
+    //   displayName: "Hamburgers",
+    // },
+    // {
+    //   color: "#E1EFC5",
+    //   image: headphonesPath,
+    //   name: "Headphones",
+    //   displayName: "Austiņas",
+    // },
+    // {
+    //   color: "#F5F9EC",
+    //   image: longboardPath,
+    //   name: "Longboard",
+    //   displayName: "Longbords",
+    // },
+    // {
+    //   color: "#FCFDF9",
+    //   image: tshirtPath,
+    //   imageColor: "",
+    //   name: "T-shirt",
+    //   displayName: "T-krekls",
+    // },
   ]);
 
   useEffect(() => {
@@ -83,7 +84,12 @@ export default function Game({ isActive, setIsActive }) {
   });
 
   return (
-    <div className={styles.main}>
+    <motion.div
+      exit={{ opacity: 0 }}
+      initial="initial"
+      animate="animate"
+      className={styles.main}
+    >
       {gameEnded && (
         <div className={styles.endscreen}>
           <End exitGame={exitGame} restartGame={restartGame} points={points} />
@@ -164,6 +170,6 @@ export default function Game({ isActive, setIsActive }) {
           </div>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }

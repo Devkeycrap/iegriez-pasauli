@@ -1,11 +1,18 @@
 import styles from "../styles/aboutgame.module.scss";
+import { motion } from "framer-motion";
+import { fadeInUp, stagger } from "../models/animations/animations";
 
 export default function AboutGame() {
   return (
-    <div className={styles["about-game"]}>
+    <motion.div
+      exit={{ opacity: 0 }}
+      initial="initial"
+      animate="animate"
+      className={styles["about-game"]}
+    >
       <h4>Par spēli</h4>
-      <div className={styles["page-wrapper"]}>
-        <div className={styles.level}>
+      <motion.div variants={stagger} className={styles["page-wrapper"]}>
+        <motion.div variants={fadeInUp} className={styles.level}>
           <div className={styles["title-wrapper"]}>
             <h1>
               <span>1.</span>līmenis
@@ -20,8 +27,8 @@ export default function AboutGame() {
               Austiņas.
             </p>
           </div>
-        </div>
-        <div className={styles.level}>
+        </motion.div>
+        <motion.div variants={fadeInUp} className={styles.level}>
           <div className={styles["title-wrapper"]}>
             <h1>
               <span>2.</span>līmenis
@@ -36,8 +43,8 @@ export default function AboutGame() {
               atņemti, bet tu būsi zaudējis iespēju nopelnīt šos 5 punktus.
             </p>
           </div>
-        </div>
-        <div className={styles.level}>
+        </motion.div>
+        <motion.div variants={fadeInUp} className={styles.level}>
           <div className={styles["title-wrapper"]}>
             <h1>
               <span>3.</span>līmenis
@@ -52,8 +59,8 @@ export default function AboutGame() {
               jautājumiem. Kopā iespēja nopelnīt 75 punktus.
             </p>
           </div>
-        </div>
-        <div className={styles.level}>
+        </motion.div>
+        <motion.div variants={fadeInUp} className={styles.level}>
           <div className={styles["title-wrapper"]}>
             <h1>
               <span>4.</span>līmenis
@@ -68,7 +75,7 @@ export default function AboutGame() {
               varēsi nopelnīt visvairāk punktu!
             </p>
           </div>
-        </div>
+        </motion.div>
         <div className={styles.restart}>
           <svg
             aria-hidden="true"
@@ -90,7 +97,7 @@ export default function AboutGame() {
             <h5>Kamēr nav izspēlēti visi priekšmeti</h5>
           </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

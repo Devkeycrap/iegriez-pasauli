@@ -10,18 +10,21 @@
   text-align: center;
 }
 
-.questions h1 {
-  font-size: 72px;
-  color: white;
-  font-family: "Montserrat", sans-serif;
-}
-.questions h2 {
-  font-size: 24px;
-  color: white;
-  font-weight: normal;
+.questions {
+  h1 {
+    font-size: 72px;
+    color: white;
+    font-family: "Montserrat", sans-serif;
+  }
+  h2 {
+    font-size: 24px;
+    color: white;
+    margin: 20px 0;
+    font-weight: normal;
+  }
 }
 
-.overlay {
+.questions .overlay {
   width: 100%;
   display: grid;
   place-items: center;
