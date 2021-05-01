@@ -32,31 +32,31 @@ export default function Game({ isActive, setIsActive }) {
       name: "Bananas",
       displayName: "Banāni",
     },
-    // {
-    //   color: "#CCE49F",
-    //   image: burgerPath,
-    //   name: "Hamburger",
-    //   displayName: "Hamburgers",
-    // },
-    // {
-    //   color: "#E1EFC5",
-    //   image: headphonesPath,
-    //   name: "Headphones",
-    //   displayName: "Austiņas",
-    // },
-    // {
-    //   color: "#F5F9EC",
-    //   image: longboardPath,
-    //   name: "Longboard",
-    //   displayName: "Longbords",
-    // },
-    // {
-    //   color: "#FCFDF9",
-    //   image: tshirtPath,
-    //   imageColor: "",
-    //   name: "T-shirt",
-    //   displayName: "T-krekls",
-    // },
+    {
+      color: "#CCE49F",
+      image: burgerPath,
+      name: "Hamburger",
+      displayName: "Hamburgers",
+    },
+    {
+      color: "#E1EFC5",
+      image: headphonesPath,
+      name: "Headphones",
+      displayName: "Austiņas",
+    },
+    {
+      color: "#F5F9EC",
+      image: longboardPath,
+      name: "Longboard",
+      displayName: "Longbords",
+    },
+    {
+      color: "#FCFDF9",
+      image: tshirtPath,
+      imageColor: "",
+      name: "T-shirt",
+      displayName: "T-krekls",
+    },
   ]);
 
   useEffect(() => {
