@@ -114,17 +114,18 @@ export default function Game({ isActive, setIsActive }) {
               />
               {gameObj && (
                 <div>
-                  <h3>{gameObj.name}</h3>
+                  <h3 style={{WebkitUserSelect: "none"}}>{gameObj.name}</h3>
                   <img
                     src={`/icons/${gameObj.object.toLowerCase()}.svg`}
+                    style={{WebkitUserSelect: "none"}}
                     alt=""
                   />
                 </div>
               )}
             </div>
             <div className={styles.points}>
-              <h2>Iegūtie punkti</h2>
-              <h3>
+              <h2 style={{WebkitUserSelect: "none"}}>Iegūtie punkti</h2>
+              <h3 style={{WebkitUserSelect: "none"}}>
                 {Object.keys(points).reduce(
                   (sum, key) => sum + parseInt(points[key] || 0),
                   0

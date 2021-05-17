@@ -141,7 +141,7 @@ export default function Wheel({
 
   return (
     <motion.div exit={{ opacity: 0 }} className={styles["wheel-container"]}>
-      <h2 className="result" style={{ color: sectorParams.color }}>
+      <h2 className="result" style={{ color: sectorParams.color, WebkitUserSelect: "none" }}>
         {gameObj?.name || sectorParams.text}
       </h2>
       <div
@@ -170,7 +170,7 @@ export default function Wheel({
       </div>
       {gameObj && (
         <div className={styles["spin-result"]}>
-          <img src={`/icons/${gameObj.object.toLowerCase()}.svg`} alt="" />
+          <img src={`/icons/${gameObj.object.toLowerCase()}.svg`} alt="" style={{WebkitUserSelect: "none"}}/>
           <button
             onClick={saveAndTransition}
             className={`${styles.btn} ${styles["btn-orange"]}`}

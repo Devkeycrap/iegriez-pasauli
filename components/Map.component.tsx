@@ -184,11 +184,11 @@ export default class Map extends Component<MapProps> {
     return (
       <div className={styles.map}>
         {/* Help box */}
-        <h2 className={styles.counter}>
+        <h2 className={styles.counter} style={{WebkitUserSelect: "none"}}>
           Uzkrātais punktu skaits: <span>{this.state.localPoints}</span>
         </h2>
         {this.state.helpOpened && (
-          <div className={styles.help}>
+          <div className={styles.help} style={{WebkitUserSelect: "none"}}>
             <div
               className={styles.close}
               onClick={() => this.setState({ helpOpened: false })}
@@ -201,6 +201,7 @@ export default class Map extends Component<MapProps> {
         )}
         <div
           className={styles["help-btn"]}
+          style={{WebkitUserSelect: "none"}}
           onClick={() => this.setState({ helpOpened: !this.state.helpOpened })}
         >
           Info
@@ -283,7 +284,7 @@ export default class Map extends Component<MapProps> {
                       {this.state.answers && this.state.answers[item.icon] && (
                         <h4>{this.state.answers[item.icon].message}</h4>
                       )}
-                      {this.state.answers[item.icon].isCorrect && <h3>+5</h3>}
+                      {this.state.answers[item.icon].isCorrect && <h3 style={{WebkitUserSelect: "none"}}>+5</h3>}
                     </div>
                   )}
                 </Popup>
