@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import styles from "../styles/timer.module.scss";
 
+//
+// Timer counter (default countdown: 900s/15min)
+//
 export default function Timer({ isActive, setIsActive, setGameEnded }) {
   const [seconds, setSeconds] = useState(900);
   const [strokeOffset, setStrokeOffset] = useState("251.2, 251.2");

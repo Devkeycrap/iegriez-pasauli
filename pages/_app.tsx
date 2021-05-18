@@ -4,6 +4,9 @@ import { AnimatePresence } from "framer-motion";
 import Navbar from "../components/Navbar.component";
 import "../styles/globals.scss";
 
+//
+// Page layout
+//
 function MyApp({ Component, pageProps }) {
   const [isActive, setIsActive] = useState(false);
   return (

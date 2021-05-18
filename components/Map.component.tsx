@@ -21,7 +21,9 @@ interface MapProps {
   setPoints: (points: any) => void;
 }
 
-export default class Map extends Component<MapProps> {
+//
+// Map component (level 3)
+//
   state = {
     localPoints: 0,
     inBrowser: false,

@@ -2,6 +2,9 @@ import styles from "../styles/aboutgame.module.scss";
 import { motion } from "framer-motion";
 import { fadeInUp, stagger } from "../models/animations/animations";
 
+//
+// About game page
+//
 export default function AboutGame() {
   return (
     <motion.div

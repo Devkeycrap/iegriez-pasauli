@@ -5,6 +5,9 @@ import styles from "../styles/questions.module.scss";
 import { motion } from "framer-motion";
 import { fadeInUp, stagger } from "../models/animations/animations";
 
+//
+// Questions component (level 2)
+//
 export default function Questions({ gameObj, setStage, setPoints }) {
   const [questions, setQuestions] = useState<IQuestions>({
     questions: [],

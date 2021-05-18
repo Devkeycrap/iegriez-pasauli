@@ -2,6 +2,9 @@ import Link from "next/link";
 import IPoints from "../models/Points.model";
 import styles from "../styles/end.module.scss";
 
+//
+// End result component
+//
 export default function End({
   exitGame,
   restartGame,

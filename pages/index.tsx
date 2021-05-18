@@ -2,6 +2,9 @@ import styles from "../styles/home.module.scss";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
+//
+// Landing page
+//
 export default function Home() {
   return (
     <motion.div

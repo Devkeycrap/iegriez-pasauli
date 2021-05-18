@@ -3,6 +3,9 @@ import styles from "../styles/wheel.module.scss";
 import { motion } from "framer-motion";
 import { fadeInUp } from "../models/animations/animations";
 
+//
+// Fortune wheel component (level 1)
+//
 export default function Wheel({
   setStage,
   setGameObj,

@@ -10,6 +10,9 @@ interface WordProps {
   sectors: any[];
 }
 
+//
+// Floating words component (level 4)
+//
 export default class Words extends Component<WordProps> {
   mainthread = setInterval(() => {
     this.newObj(document.getElementById("board"));
@@ -65,9 +68,10 @@ export default class Words extends Component<WordProps> {
       // Redundant if statment, seems to speed up the code, for no appearent reson, but if it works it works.
       const obj = document.createElement("label"); // Create blank html <label/> element
 
-      obj.innerHTML = this.state.wordList.dictionary[
-        Math.floor(Math.random() * this.state.wordList.dictionary.length)
-      ]; // Style <label/> element
+      obj.innerHTML =
+        this.state.wordList.dictionary[
+          Math.floor(Math.random() * this.state.wordList.dictionary.length)
+        ]; // Style <label/> element
       obj.style.fontFamily = "montserrat, Sans-serif"; // Set <label/> - font-family
       obj.style.webkitUserSelect = "none"; // Set <label/> - webkituserselect
 
