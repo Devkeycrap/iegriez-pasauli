@@ -20,7 +20,7 @@ export default function Wheel({
   const friction = 0.991; // 0.995=soft, 0.99=mid, 0.98=hard
   let ang = 0; // Angle in radians
   const rand = (m, M) => Math.random() * (M - m) + m;
-  let tot, canvas, spinEl, result, ctx, dia, rad, arc, getIndex, angVel;
+  let tot, canvas, spinEl, ctx, dia, rad, arc, getIndex, angVel;
   let currentSectorParams = {
     text: "",
     color: "",

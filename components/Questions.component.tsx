@@ -3,7 +3,7 @@ import axios from "axios";
 import IQuestions from "../models/Questions.model";
 import styles from "../styles/questions.module.scss";
 import { motion } from "framer-motion";
-import { fadeInUp, stagger } from "../models/animations/animations";
+import { fadeInUp } from "../models/animations/animations";
 
 //
 // Questions component (level 2)

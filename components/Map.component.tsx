@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { ChangeEvent, Component, MouseEvent } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import axios from "axios";
 import styles from "../styles/map.module.scss";
@@ -11,19 +11,20 @@ import {
 } from "../models/Markers.model";
 import IPoints from "../models/Points.model";
 
-interface MapProps {
+interface IMapProps {
   gameObj: {
     object: string;
     name: string;
   };
   points: IPoints;
   setStage: (stage: number) => void;
-  setPoints: (points: any) => void;
+  setPoints: (points: IPoints) => void;
 }
 
 //
 // Map component (level 3)
 //
+export default class Map extends Component<IMapProps> {
   state = {
     localPoints: 0,
     inBrowser: false,
@@ -78,7 +79,7 @@ interface MapProps {
     }
   };
 
-  handleRadio = (e: any) => {
+  handleRadio = (e: ChangeEvent<HTMLInputElement>) => {
     this.setState({
       answers: {
         ...this.state.answers,
@@ -106,7 +107,7 @@ interface MapProps {
       });
   };
 
-  submitQuestion = (e: any, item) => {
+  submitQuestion = (e: MouseEvent<HTMLElement>, item) => {
     e.preventDefault();
 
     // Check answered question count
@@ -168,10 +169,10 @@ interface MapProps {
         });
         this.getQuestions();
         if (this.state.questionIndex >= 3) {
-          this.props.setPoints((points) => ({
-            ...points,
-            map: points.map + this.state.localPoints,
-          }));
+          this.props.setPoints({
+            ...this.props.points,
+            map: this.props.points.map + this.state.localPoints,
+          } as IPoints);
           this.props.setStage(4);
         }
       }, 2000);
@@ -262,7 +263,9 @@ interface MapProps {
                         className={`${styles.btn} ${styles["btn-orange"]}`}
                         type="button"
                         name={item.icon}
-                        onClick={(e) => this.submitQuestion(e, item)}
+                        onClick={(e: MouseEvent<HTMLElement>) =>
+                          this.submitQuestion(e, item)
+                        }
                       >
                         Atbildēt
                       </button>
