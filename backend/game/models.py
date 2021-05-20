@@ -1,21 +1,20 @@
 from django.db import models
-from django.db.models.deletion import CASCADE
 
 # Create your models here.
 
 
-class WheelOfFortuneItem(models.Model):
+class Item(models.Model):
     name = models.CharField(max_length=20)
 
 
 class Quiz(models.Model):
-    wheel_fk = models.ForeignKey(WheelOfFortuneItem, on_delete=models.CASCADE)
+    wheel_fk = models.ForeignKey(Item, on_delete=models.CASCADE)
     question = models.CharField(max_length=300)
     expected_answer = models.BooleanField()
 
 
 class Map(models.Model):
-    wheel_fk = models.ForeignKey(WheelOfFortuneItem, on_delete=models.CASCADE)
+    wheel_fk = models.ForeignKey(Item, on_delete=models.CASCADE)
     icon_name = models.CharField(max_length=20)
 
 
