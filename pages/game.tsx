@@ -17,7 +17,7 @@ import IPoints from "../models/Points.model";
 import { motion } from "framer-motion";
 
 export default function Game({ isActive, setIsActive }) {
-  const [stage, setStage] = useState(1);
+  const [stage, setStage] = useState(4);
   const [gameObj, setGameObj] = useState(null);
   const [gameEnded, setGameEnded] = useState(false);
   const [points, setPoints] = useState<IPoints>({
@@ -112,7 +112,7 @@ export default function Game({ isActive, setIsActive }) {
                 setIsActive={setIsActive}
                 setGameEnded={setGameEnded}
               />
-              {gameObj && (
+              {stage!=1 && gameObj && (
                 <div>
                   <h3 style={{WebkitUserSelect: "none"}}>{gameObj.name}</h3>
                   <img

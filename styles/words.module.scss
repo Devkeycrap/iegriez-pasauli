@@ -1,23 +1,50 @@
 .backdrop {
+    box-shadow: 0 0 2px 2px white;
     position: relative;
     overflow: hidden;
     background-color: #FFFFFF;
     border: 15px solid #495F41;
+    margin: 40px;
     border-radius: 40px;
     height: 100%;
     width: 100%;
 
-    h2 {
-        float: right;
-        margin-top: 5px;
-        margin-right: 20px;
-        color: #495f41;
+    .points-backdrop {
+        display: grid;
+        padding: 5px;
+        min-width: 50px;
+        min-height: 50px;
+        width: fit-content;
+        background: black;
+        border-radius: 42%;
+        position: absolute;
+        z-index: 100;
+        right: 10px;
+        top: 10px;
+        place-items: center;
+        h2 {
+            margin: auto;
+            -webkit-user-select: none;
+            font-style: italic;
+            color: #9aca3c;
+        }
     }
 }
 
 .canvas {
+    top: 0px;
     position: relative;
-    margin: 0 auto;
-    height: 100%;
-    width: 95%;
+    margin: auto auto;
+    height: 95%;
+    width: 90%;
+    padding: 10px;
+    label {
+        color: black;
+        font-weight: bold;
+        font-family: montserrat, Sans-serif;
+        -webkit-user-select: none;
+        white-space: nowrap;
+        overflow: hidden;
+        cursor: pointer;
+    }
 }

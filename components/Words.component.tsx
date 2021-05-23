@@ -16,12 +16,12 @@ export default class Words extends Component<WordProps> {
     this.newTick(document.getElementsByClassName("wordObj"));
   }, 600);
   state = {
-    // Declare class variables
-    inBrowser: false, // variable - this.state.inBrowser
-    points: 0, // variable - this.state.points
-    speed: 1000, // variable - this.state.speed
+    inBrowser: false,
+    points: 0,
+    speed: 1000,
+    maxObjCount: 20,
+    objCount: 0,
     wordList: {
-      // Word dictionary, with predefined correct awnsers
 
       correct: [
         "remontē",
@@ -61,29 +61,22 @@ export default class Words extends Component<WordProps> {
 
   newObj(parent) {
     // Function for creating new componenet(word)
-    if (true) {
+    if (this.state.objCount < this.state.maxObjCount) {
       // Redundant if statment, seems to speed up the code, for no appearent reson, but if it works it works.
       const obj = document.createElement("label"); // Create blank html <label/> element
 
       obj.innerHTML = this.state.wordList.dictionary[
         Math.floor(Math.random() * this.state.wordList.dictionary.length)
       ]; // Style <label/> element
-      obj.style.fontFamily = "montserrat, Sans-serif"; // Set <label/> - font-family
-      obj.style.webkitUserSelect = "none"; // Set <label/> - webkituserselect
 
       obj.style.left = Math.random() * 100 + "%"; // Set <label/> - horizontal  axis
       obj.style.top = Math.random() * 100 + "%"; // Set <label/> - vertical    axis
       obj.style.position = "absolute"; // Set <label/> - position
       obj.style.fontSize = "16px"; // Set <label/> - font-size
-
-      obj.style.whiteSpace = "no-wrap"; // Set <label/> - whit-space
-      obj.style.overflow = "hidden"; // Set <label/> - overflow
-      obj.style.cursor = "pointer"; // Set <label/> - onHover cursor
-      obj.style.color = "#495F41"; // Set <label/> - text color
-
       obj.style.width = "min-content";
 
       obj.classList.add("wordObj"); // /Style <label/> element
+      this.setState({objCount: this.state.objCount+1});
       try {
         parent.appendChild(obj); // Try adding the html <label/> to game canvas
       } catch {}
@@ -94,13 +87,16 @@ export default class Words extends Component<WordProps> {
   newTick(elements) {
     // Function for updating existing component(word) age/size.
     for (let i = 0; i < elements.length; i++) {
-      let element = elements[i]; // loop trough each existing obj in the current tick
+      let element = elements[i];
       let wordSize = parseInt(
         window.getComputedStyle(element).getPropertyValue("font-size")
-      ); // Get fontsize and parse to Int
-      if (wordSize > 60) element.remove(); // if fontsize above threshold (60) delete obj
-      element.style.zIndex = wordSize + 1; // Change word zIndex aka location on canvas in z dimension
-      element.style.fontSize = wordSize + 1 + "px"; // Update word fontSize after adding 1 px to it's last value
+      );
+      if (wordSize > 60) {
+        element.remove();
+        this.setState({objCount: this.state.objCount-1});
+      }
+      element.style.zIndex = wordSize + 1;
+      element.style.fontSize = wordSize + 1 + "px";
     }
   }
 
@@ -117,6 +113,7 @@ export default class Words extends Component<WordProps> {
       // If compare loop returns, true,
       this.setState({ points: this.state.points + 1 }); // Add 1 point to game counter
       e.target.remove(); // Delete correctly clicked <label/>
+      this.setState({objCount: this.state.objCount-1});
     } else if (e.target.tagName == "LABEL") {
       e.target.style.color = "#FD6579"; // else if clicked word is incorrect, we set the color to red
       e.target.style.fontWeight = "bold";
@@ -143,23 +140,23 @@ export default class Words extends Component<WordProps> {
       }, 250);
     }, 10000);
 
-    setTimeout(() => {
-      clearInterval(this.mainthread);
-      this.props.setGameObj(null);
-      if (this.props.sectors.length == 0) {
-        this.props.setPoints((points) => ({
-          ...points,
-          words: points.words + this.state.points,
-        }));
-        this.props.setGameEnded(true);
-      } else {
-        this.props.setPoints((points) => ({
-          ...points,
-          words: points.words + this.state.points,
-        }));
-        this.props.setStage(1);
-      }
-    }, 15000);
+      setTimeout(() => {
+        clearInterval(this.mainthread);
+        this.props.setGameObj(null);
+        if (this.props.sectors.length == 0) {
+          this.props.setPoints((points) => ({
+            ...points,
+            words: points.words + this.state.points,
+          }));
+          this.props.setGameEnded(true);
+        } else {
+          this.props.setPoints((points) => ({
+            ...points,
+            words: points.words + this.state.points,
+          }));
+          this.props.setStage(1);
+        }
+      }, 15000);
   }
 
   componentWillUnmount() {
@@ -175,7 +172,7 @@ export default class Words extends Component<WordProps> {
     return (
       // Return html objects to be rendered
       <div className={styles.backdrop} onClick={(e) => this.clickEvent(e)}>
-        <h2>+{this.state.points}</h2>
+        <div className={styles["points-backdrop"]}><h2>+{this.state.points}</h2></div>
         <div className={styles.canvas} id="board" />
       </div>
     );

@@ -1,165 +1,110 @@
-.about-game {
-    background: #495f41;;
+.about-us {
+  background: #495f41;
+  color: white;
+  h4 {
+    position: absolute;
+    font-family: "Montserrat", sans-serif;
+    transform: rotate(90deg) translate(-50%, 250%);
+    font-weight: normal;
+    bottom: 100px;
+    left: 50px;
+    font-size: 24px;
     color: white;
-  
-    h4 {
-      position: absolute;
-      font-family: "Montserrat", sans-serif;
-      transform: rotate(90deg) translate(-50%, 250%);
-      font-weight: normal;
-      bottom: 100px;
-      left: 50px;
-      font-size: 24px;
-      color: white;
-      text-transform: uppercase;
-      letter-spacing: 10px;
-      -webkit-user-select: none;
-    }
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    -webkit-user-select: none;
   }
-  
-  .page-wrapper {
-    padding: 0px 15%;
-  
-    .level {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      margin: 100px 0;
-    }
-    h1 {
-      font-size: 64px;
-      font-family: "Montserrat", sans-serif;
-      text-align: left;
-      text-transform: uppercase;
-  
-      span {
-        font-size: 128px;
-      }
-    }
-    h5 {
-      color: #9aca3c;
-      text-transform: uppercase;
-      font-size: 24px;
-      font-weight: bold;
-      font-style: italic;
-      text-align: left;
-    }
-  }
-  
-  .title-wrapper {
-    position: relative;
-    width: 50%;
-    padding-right: 50px;
-  }
-  
-  .paragraph-wrapper {
-    width: 50%;
-    min-width: 400px;
-    padding: 50px 0;
-    p {
-      font-size: 24px;
-    }
-  }
-  
-  .restart {
-    position: relative;
-    margin: 40px 0;
-    div {
-      top: 50%;
-      left: 50%;
-      width: 50%;
-      transform: translate(-50%, -50%);
-      position: absolute;
-    }
-    svg {
-      opacity: 0.3;
-    }
-  }
-  
-  @media only screen and (max-width: 1200px) {
-    .about-game {
-      h4 {
-        font-size: 16px;
-        left: 10px;
-        bottom: 30px;
-      }
-    }
-    .page-wrapper {
-      padding: 0 100px;
-      h1 {
-        text-align: center;
-      }
-      h5 {
-        text-align: center;
-      }
-    }
-    .title-wrapper {
-      width: 100%;
-      padding: 0;
-    }
-    .paragraph-wrapper {
-      width: 100%;
-      min-width: 0;
-    }
-  
-    .restart {
-      h1 {
-        font-size: 38px;
-      }
-      h5 {
-        font-size: 20px;
-      }
-    }
-  }
-  
-  @media only screen and (max-width: 624px) {
-    .about-game {
-      h4 {
-        font-size: 12px;
-        letter-spacing: 5px;
-  
-        left: 20px;
-        bottom: 30px;
-      }
-    }
-    .page-wrapper {
-      padding: 0 80px;
-      .level {
-        margin: 25px 0;
-      }
-      h1 {
-        text-align: center;
-        font-size: 24px;
-        span {
-          font-size: 32px;
-        }
-      }
-      h5 {
-        text-align: center;
-        font-size: 12px;
-      }
-      p {
-        font-size: 16px;
-      }
-    }
-    .title-wrapper {
-      width: 100%;
-      padding: 0;
-    }
-    .image-wrapper {
-      font-size: 14px;
-      text-align: center;
-    }
-  }
+}
 
-  .icon {
-    width: 40%;
-    height: 40%;
-    border-radius: 10px;
+.page-wrapper {
+  padding: 14vh 10%;
+  height: 80vh;
+  .content-wrapper {
+    width: 100%;
+    display: flex;
+    height: max-content;
+    flex-wrap: wrap;
+    justify-content:center;
+  }
+}
+
+.user-card {
+  display: grid;
+  width: min-content;
+  padding: 0 50px;
+
+  .image {
+    width: 90%;
+    margin: auto;
+    position: relative;
     cursor: pointer;
+    .icon {
+      width: 100%;
+      height: 100%;
+      border-radius: 35px;
+    }
+    .icon-overlay {
+      position: absolute;
+      transition: .4s ease;
+      background-color: black;
+      opacity: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 34.5px;
+      width: 100%;
+      height: 98.5%;
+      img {
+        -webkit-user-select: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+      }
+    }
+    &:hover .icon-overlay {
+      opacity: 0.6;
+      img {
+        opacity: 1;
+      }
+    }
   }
-
-  .icon:hover {
-    filter: grayscale(100%);
+  .data-wrapper {
+    margin-top: 20px;
+    width: min-content;
+    .cell {
+      display: grid;
+      text-align: center;
+      h1 {
+        font-size: 400%;
+        height: min-content;
+      }
+      h3 {
+        font-size: 175%;
+        height: min-content;
+        font-weight: normal;
+        text-transform: uppercase;
+      }
+    }
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    &::before {
+      content: "{";
+      color: #9aca3c;
+      font-family: "Montserrat", sans-serif;
+      font-size: 700%;
+      padding-right: 5px;
+    }
+    &::after {
+      content: "}";
+        color: #9aca3c;
+        font-family: "Montserrat", sans-serif;
+        font-size: 700%;
+        padding-left: 5px;
+        
+    }
   }
+}
