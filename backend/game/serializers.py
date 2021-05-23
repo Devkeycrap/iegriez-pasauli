@@ -1,17 +1,24 @@
 from django.db.models import fields
 from rest_framework import serializers
 
-from .models import Quiz, MapIcon
+from .models import Quiz, MapIcon, QuizQuestion
 
 
 # Quiz serializer
-class QuizSerializer(serializers.ModelSerializer):
+class QuizQuestionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Quiz
-        fields = '__all__'
+        model = QuizQuestion
+        fields = ('pk', 'quiz_fk', 'question')
 
+
+class QuizAnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = QuizQuestion
+        fields = ('pk', 'quiz_fk', 'expected_answer')
 
 # Map serializer
+
+
 class MapSerializer(serializers.ModelSerializer):
     class Meta:
         model = MapIcon
