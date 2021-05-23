@@ -84,8 +84,10 @@
       h3 {
         font-size: 175%;
         height: min-content;
-        font-weight: normal;
+        //font-weight: normal;
         text-transform: uppercase;
+        font-style: italic;
+        color: #9aca3c;
       }
     }
     display: flex;
@@ -93,14 +95,14 @@
     align-items: center;
     &::before {
       content: "{";
-      color: #9aca3c;
+      color: #7ca84a;
       font-family: "Montserrat", sans-serif;
       font-size: 700%;
       padding-right: 5px;
     }
     &::after {
       content: "}";
-        color: #9aca3c;
+        color: #7ca84a;
         font-family: "Montserrat", sans-serif;
         font-size: 700%;
         padding-left: 5px;
