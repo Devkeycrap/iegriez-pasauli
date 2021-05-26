@@ -1,18 +1,15 @@
-import { useEffect, useRef, useState } from "react";
+// General imports
+import { useEffect, useState } from "react";
 import axios from "axios";
-import IQuestions from "../models/Questions.model";
+
+// Styles & animations
 import styles from "../styles/questions.module.scss";
 import { motion } from "framer-motion";
-import { fadeInUp, stagger } from "../models/animations/animations";
+import { fadeInUp } from "../models/animations/animations";
 
-export default function Questions({ gameObj, setStage, setPoints }) {
-  const [questions, setQuestions] = useState<IQuestions>({
-    questions: [],
-  });
-  const [currentQuestion, setCurrentQuestion] = useState({
-    index: 0,
-    isCorrect: null,
-  });
+// Redux
+import { connect } from "react-redux";
+import { getQuestions, setCurrentQuestion } from "../actions/questions";
 
   useEffect(() => {
     if (questions.questions.length == 0) {

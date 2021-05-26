@@ -1,8 +1,11 @@
-import styles from "../styles/words.module.scss"; // Import stylesheet for component
-import { Component } from "react"; // Import class Componenet from react
+// General imports
+import { Component } from "react";
+
+// Styles & animations
+import styles from "../styles/words.module.scss";
 
 interface WordProps {
-  setGameEnded: (gameEnded: boolean) => void; // Import props from parent code
+  setGameEnded: (gameEnded: boolean) => void;
   setGameObj: (object: any) => void;
   setStage: (stage: number) => void;
   setPoints: (points: any) => void;
@@ -65,9 +68,10 @@ export default class Words extends Component<WordProps> {
       // Redundant if statment, seems to speed up the code, for no appearent reson, but if it works it works.
       const obj = document.createElement("label"); // Create blank html <label/> element
 
-      obj.innerHTML = this.state.wordList.dictionary[
-        Math.floor(Math.random() * this.state.wordList.dictionary.length)
-      ]; // Style <label/> element
+      obj.innerHTML =
+        this.state.wordList.dictionary[
+          Math.floor(Math.random() * this.state.wordList.dictionary.length)
+        ]; // Style <label/> element
       obj.style.fontFamily = "montserrat, Sans-serif"; // Set <label/> - font-family
       obj.style.webkitUserSelect = "none"; // Set <label/> - webkituserselect
 

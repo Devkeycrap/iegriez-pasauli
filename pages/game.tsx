@@ -1,10 +1,18 @@
-import Link from "next/link";
+// General imports
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import dynamic from "next/dynamic";
+
+// Components
 import Questions from "../components/Questions.component";
 import Timer from "../components/Timer.component";
 import Wheel from "../components/Wheel.component";
-import dynamic from "next/dynamic";
-import styles from "../styles/game.module.scss";
+import End from "../components/End.component";
+
+// Interfaces
+import IPoints from "../models/Points.model";
+
+// Icons for wheel (temporary)
 import {
   bananasPath,
   tshirtPath,
@@ -12,13 +20,14 @@ import {
   headphonesPath,
   longboardPath,
 } from "../public/icons/paths";
-import End from "../components/End.component";
-import IPoints from "../models/Points.model";
+
+// Styles & animations
+import styles from "../styles/game.module.scss";
 import { motion } from "framer-motion";
 
-export default function Game({ isActive, setIsActive }) {
-  const [stage, setStage] = useState(1);
-  const [gameObj, setGameObj] = useState(null);
+// Redux
+import { connect } from "react-redux";
+import { setGameObj } from "../actions/gameObj";
   const [gameEnded, setGameEnded] = useState(false);
   const [points, setPoints] = useState<IPoints>({
     questions: 0,

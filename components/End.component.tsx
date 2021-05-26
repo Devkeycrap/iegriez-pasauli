@@ -1,6 +1,9 @@
+// General imports
 import Link from "next/link";
-import IPoints from "../models/Points.model";
 import styles from "../styles/end.module.scss";
+
+// Interfaces
+import IPoints from "../models/Points.model";
 
 export default function End({
   exitGame,

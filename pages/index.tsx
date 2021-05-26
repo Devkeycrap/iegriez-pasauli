@@ -1,7 +1,11 @@
-import styles from "../styles/home.module.scss";
+// General imports
 import Link from "next/link";
+
+// Styles & animations
+import styles from "../styles/home.module.scss";
 import { motion } from "framer-motion";
 
+// Landing page
 export default function Home() {
   return (
     <motion.div

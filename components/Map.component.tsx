@@ -1,6 +1,9 @@
+// General imports
 import { Component } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import axios from "axios";
+
+// Styles & animations
 import styles from "../styles/map.module.scss";
 import {
   iconFood,
@@ -9,6 +12,8 @@ import {
   iconTransport,
   iconWaste,
 } from "../models/Markers.model";
+
+// Interfaces
 import IPoints from "../models/Points.model";
 
 interface MapProps {
