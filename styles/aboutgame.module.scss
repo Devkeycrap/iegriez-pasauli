@@ -1,5 +1,5 @@
 .about-game {
-  background: #495f41;;
+  background: #495f41;
   color: white;
 
   h4 {
@@ -13,6 +13,7 @@
     color: white;
     text-transform: uppercase;
     letter-spacing: 10px;
+    user-select: none;
     -webkit-user-select: none;
   }
 }
