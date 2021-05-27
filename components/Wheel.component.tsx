@@ -55,6 +55,10 @@ export default function Wheel({
     spinEl.addEventListener("click", () => {
       if (!angVel) angVel = rand(0.25, 0.35);
     });
+
+    return () => {
+      angVel = 0;
+    }
   }, [sectors]);
 
   function drawSector(sector, i) {

@@ -14,6 +14,20 @@ export default function AboutGame() {
     <h4>Komanda</h4>
       <motion.div variants={stagger} className={styles["page-wrapper"]}>
         <motion.div variants={fadeInUp} className={styles["content-wrapper"]}>
+          <div className={styles["user-card"]}>
+            <div className={styles.image}>
+              <img className={styles.icon} src="https://avatars.githubusercontent.com/u/66126144" alt=""/>
+              <div className={styles["icon-overlay"]} onClick={() => window.open("https://github.com/devkeycrap")}>
+                <img src={linkIcon}/>
+              </div>
+            </div>
+            <motion.div variants={fadeInUp} className={styles["data-wrapper"]}>
+              <div className={styles.cell}>
+                <h1>Ronalds</h1>
+                <h3>Programētājs</h3>
+              </div>
+            </motion.div>
+          </div>
 
           <div className={styles["user-card"]}>
             <div className={styles.image}>
@@ -29,22 +43,6 @@ export default function AboutGame() {
               </div>
             </motion.div>
           </div>
-
-          <div className={styles["user-card"]}>
-            <div className={styles.image}>
-              <img className={styles.icon} src="https://avatars.githubusercontent.com/u/66126144" alt=""/>
-              <div className={styles["icon-overlay"]} onClick={() => window.open("https://github.com/devkeycrap")}>
-                <img src={linkIcon}/>
-              </div>
-            </div>
-            <motion.div variants={fadeInUp} className={styles["data-wrapper"]}>
-              <div className={styles.cell}>
-                <h1>Ronalds</h1>
-                <h3>Programētājs</h3>
-              </div>
-            </motion.div>
-          </div>
-          
         </motion.div>
       </motion.div>
     </motion.div>
