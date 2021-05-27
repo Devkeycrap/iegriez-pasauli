@@ -116,7 +116,7 @@ export default class Words extends Component<WordProps> {
       this.setState({objCount: this.state.objCount-1});
     } else if (e.target.tagName == "LABEL") {
       e.target.style.color = "#FD6579"; // else if clicked word is incorrect, we set the color to red
-      e.target.style.fontWeight = "bold";
+      e.target.style.pointerEvents = "none";
     }
   }
 
