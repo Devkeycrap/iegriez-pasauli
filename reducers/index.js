@@ -5,7 +5,10 @@ import game from "./game";
 import points from "./points";
 import wheelSectors from "./wheelSectors";
 
+export default combineReducers({
+  questions,
   gameObj,
   game,
   points,
   wheelSectors,
+});
