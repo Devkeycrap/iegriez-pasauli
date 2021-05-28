@@ -22,6 +22,7 @@ function MyApp({ Component, pageProps }) {
     <div className="root">
       <Head>
         <title>Iegriez pasauli</title>
+          <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
       {!isActive && <Navbar />}
       <AnimatePresence exitBeforeEnter={true}>
