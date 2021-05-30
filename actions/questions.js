@@ -24,11 +24,13 @@ export const getQuestions = (item) => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
-export const setCurrentQuestion = (index, isCorrect) => (dispatch) =>
-  dispatch({
-    type: SET_CURRENT_QUESTION,
-    payload: {
-      index,
-      isCorrect,
-    },
-  });
+export const setCurrentQuestion =
+  ({ index, isCorrect }) =>
+  (dispatch) =>
+    dispatch({
+      type: SET_CURRENT_QUESTION,
+      payload: {
+        index,
+        isCorrect,
+      },
+    });
