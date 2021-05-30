@@ -125,7 +125,6 @@ export default class Words extends Component<WordProps> {
       this.mainthread = setInterval(() => {
         this.newObj(document.getElementById("board"));
         this.newTick(document.getElementsByClassName("wordObj"));
-        this.newTick(document.getElementsByClassName("wordObj"));
       }, 300);
     }, 5000);
 
@@ -138,24 +137,23 @@ export default class Words extends Component<WordProps> {
       }, 250);
     }, 10000);
 
-      // Main 15 second timer (5 + 5 + 5)
-      // setTimeout(() => {
-      //   clearInterval(this.mainthread);
-      //   this.props.setGameObj(null);
-      //   if (this.props.sectors.length == 0) {
-      //     this.props.setPoints((points) => ({
-      //       ...points,
-      //       words: points.words + this.state.points,
-      //     }));
-      //     this.props.setGameEnded(true);
-      //   } else {
-      //     this.props.setPoints((points) => ({
-      //       ...points,
-      //       words: points.words + this.state.points,
-      //     }));
-      //     this.props.setStage(1);
-      //   }
-      // }, 15000);
+      setTimeout(() => {
+        clearInterval(this.mainthread);
+        this.props.setGameObj(null);
+        if (this.props.sectors.length == 0) {
+          this.props.setPoints((points) => ({
+            ...points,
+            words: points.words + this.state.points,
+          }));
+          this.props.setGameEnded(true);
+        } else {
+          this.props.setPoints((points) => ({
+            ...points,
+            words: points.words + this.state.points,
+          }));
+          this.props.setStage(1);
+        }
+      }, 15000);
   }
 
   componentWillUnmount() {
@@ -186,9 +184,6 @@ export default class Words extends Component<WordProps> {
           <div className={styles["points-backdrop"]}><h2>+{this.state.points}</h2></div>
           <div className={styles.canvas} id="board" />
         </div>
-        {/* <div className={styles["overlay"]}>
-          
-        </div> */}
       </>
     );
   }

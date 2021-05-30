@@ -1,7 +1,6 @@
 .backdrop {
     position: relative;
     overflow: hidden;
-    //background-color: #FFFFFF;
     background-color: #3C5431;
     border: 15px solid #495F41;
     margin: 40px;
@@ -15,7 +14,6 @@
         min-width: 50px;
         min-height: 50px;
         width: fit-content;
-        //background: black;
         background: #1B3624;
         border-radius: 42%;
         position: absolute;
@@ -46,7 +44,6 @@
     padding: 10px;
     label {
         color: rgb(122, 143, 84);
-        //-webkit-text-stroke: 0.5px black;
         font-weight: bold;
         font-family: montserrat, Sans-serif;
         -webkit-user-select: none;
