@@ -1,5 +1,6 @@
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -10,7 +11,9 @@ SECRET_KEY = 'django-insecure-l((9&cnoxf@1g9)q+)897xq6+nxw9w(g8%+t-35nl5sepc!5z=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 # Application definition
@@ -23,11 +26,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     'game',
     'users',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -89,6 +94,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# REST_FRAMEWORK = {
+#     'DEFAULT_THROTTLE_CLASSES': [
+#         'rest_framework.throttling.AnonRateThrottle',
+#         'rest_framework.throttling.UserRateThrottle'
+#     ],
+#     'DEFAULT_THROTTLE_RATES': {
+#         'anon': '10/day',
+#         'user': '5/day',
+#         'users': '1000/day'
+#     }
+# }
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -108,6 +125,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

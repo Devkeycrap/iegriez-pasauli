@@ -17,6 +17,10 @@ class QuizAnswerSerializer(serializers.ModelSerializer):
         fields = ('pk', 'quiz_fk', 'expected_answer')
 
 # Map serializer
+class MapIconSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MapIcon
+        fields = '__all__'
 
 
 class MapSerializer(serializers.ModelSerializer):

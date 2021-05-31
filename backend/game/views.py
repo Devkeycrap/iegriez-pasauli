@@ -29,12 +29,10 @@ class QuizAnswerViewSet(viewsets.ModelViewSet):
     serializer_class = QuizAnswerSerializer
 
     def get_queryset(self):
-        queryset = QuizQuestion.objects.all()
-        gameObj = self.request.query_params.get('object')
-        answer_id = self.request.query_params.get('id')
+class MapIconViewSet(viewsets.ModelViewSet):
+    model = MapIcon
+    serializer_class = MapIconSerializer
+    queryset = MapIcon.objects.all()
 
-        if gameObj:
-            queryset = queryset.filter(
-                quiz_fk__game_item_fk__name=gameObj, pk=answer_id)
 
         return queryset

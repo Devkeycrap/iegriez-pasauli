@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.functional import empty
 
 
 # Overall models
@@ -37,6 +38,9 @@ class MapIcon(models.Model):
     game_item_fk = models.ForeignKey(
         GameItem, verbose_name='Game item', on_delete=models.CASCADE)
     icon_name = models.CharField(max_length=20)
+    image = models.ImageField(
+        upload_to='map/icons/'
+    )
 
     def __str__(self) -> str:
         return str(self.icon_name)
