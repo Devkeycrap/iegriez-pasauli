@@ -29,4 +29,4 @@ class QuizAdmin(admin.ModelAdmin):
 @admin.register(MapIcon)
 class MapIconAdmin(admin.ModelAdmin):
     inlines = [MapQuestionAdmin]
-    list_display = ('game_item_fk', 'image')
+    list_display = ('icon_name', 'game_item_fk')
