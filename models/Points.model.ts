@@ -1,5 +1,5 @@
 export default interface IPoints {
-  questions: number,
+  quiz: number,
   map: number,
   words: number
 }
