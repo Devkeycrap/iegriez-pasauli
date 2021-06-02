@@ -12,6 +12,7 @@ import Navbar from "../components/Navbar.component";
 // Redux
 import { Provider } from "react-redux";
 import store from "../store";
+import TransitionScene from "../components/TransitionScene.component";
 
 // Main app component
 function MyApp({ Component, pageProps }) {
@@ -24,6 +25,7 @@ function MyApp({ Component, pageProps }) {
           <title>Iegriez pasauli</title>
           <link rel="shortcut icon" href="/favicon.ico" />
         </Head>
+        <TransitionScene />
         {!isActive && <Navbar />}
         <AnimatePresence exitBeforeEnter={true}>
           <Component
