@@ -1,3 +1,4 @@
+// Styles & animations
 import styles from "../styles/spinner.module.scss";
 
 export default function Spinner() {
