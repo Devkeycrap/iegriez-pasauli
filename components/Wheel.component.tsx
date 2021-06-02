@@ -1,17 +1,31 @@
+// General imports
 import { useEffect, useRef, useState } from "react";
+
+// Components
+import Spinner from "./Spinner.component";
+
+// Styles & animations
 import styles from "../styles/wheel.module.scss";
 import { motion } from "framer-motion";
 import { fadeInUp } from "../models/animations/animations";
 
-export default function Wheel({
-  setStage,
+// Redux
+import { connect } from "react-redux";
+import { setGameObj } from "../actions/gameObj";
+import { switchStage } from "../actions/game";
+import { playTransition } from "../actions/transition";
+
+export function Wheel({
+  switchStage,
   setGameObj,
   gameObj,
   sectors,
   setSectors,
+  playTransition,
 }) {
   const spinRef = useRef(null);
   const canvasRef = useRef(null);
+
   const PI = Math.PI;
   const TAU = 2 * PI;
   const friction = 0.991; // 0.995=soft, 0.99=mid, 0.98=hard
@@ -39,7 +53,7 @@ export default function Wheel({
     if (sectors.length == 1) {
       setGameObj({
         object: sectors[0].name,
-        name: sectors[0].displayName,
+        translatedName: sectors[0].displayName,
       });
     }
 
@@ -84,8 +98,6 @@ export default function Wheel({
       ctx.scale(0.4, 0.4);
     }
     ctx.fill(path);
-    // TEXT
-    //
     ctx.restore();
   }
 
@@ -99,7 +111,6 @@ export default function Wheel({
     };
 
     if (newSectorParams.object !== currentSectorParams.object) {
-      new Audio("/sfx/tick.wav").play();
       currentSectorParams = newSectorParams;
       setSectorParams({
         ...sectorParams,
@@ -113,7 +124,7 @@ export default function Wheel({
       setTimeout(() => {
         setGameObj({
           object: currentSectorParams.object,
-          name: currentSectorParams.text,
+          translatedName: currentSectorParams.text,
         });
         removeSector(currentSectorParams.object);
       }, 2000);
@@ -138,7 +149,7 @@ export default function Wheel({
     if (sectors.length == 1) {
       setSectors([]);
     }
-    setStage(2);
+    switchStage(2);
   }
 
   const removeSector = (object) =>
@@ -146,11 +157,16 @@ export default function Wheel({
 
   return (
     <motion.div exit={{ opacity: 0 }} className={styles["wheel-container"]}>
-      <h2 className="result" style={{ color: sectorParams.color, WebkitUserSelect: "none" }}>
-        {gameObj?.name || sectorParams.text}
+      <h2
+        className="result"
+        style={{ color: sectorParams.color, WebkitUserSelect: "none" }}
+      >
+        {gameObj.translatedName || sectorParams.text}
       </h2>
       <div
-        style={{ display: gameObj || sectors.length == 1 ? "none" : "block" }}
+        style={{
+          display: gameObj.object || sectors.length == 1 ? "none" : "block",
+        }}
       >
         <motion.div
           variants={fadeInUp}
@@ -173,9 +189,14 @@ export default function Wheel({
           Iegriezt
         </button>
       </div>
-      {gameObj && (
+      {gameObj.object && (
         <div className={styles["spin-result"]}>
-          <img src={`/icons/${gameObj.object.toLowerCase()}.svg`} alt="" style={{WebkitUserSelect: "none"}}/>
+          {!gameObj.isLoaded && <Spinner />}
+          <img
+            onLoad={() => setGameObj({ ...gameObj, isLoaded: true })}
+            src={`/icons/${gameObj.object.toLowerCase()}.svg`}
+            alt=""
+          />
           <button
             onClick={saveAndTransition}
             className={`${styles.btn} ${styles["btn-orange"]}`}
@@ -187,3 +208,13 @@ export default function Wheel({
     </motion.div>
   );
 }
+
+const mapStateToProps = (state) => ({
+  gameObj: state.gameObj,
+});
+
+export default connect(mapStateToProps, {
+  setGameObj,
+  switchStage,
+  playTransition,
+})(Wheel);
