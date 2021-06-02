@@ -31,6 +31,11 @@ export default function Wheel({
   });
 
   useEffect(() => {
+    playTransition({
+      title: "Laimes rats",
+      description: "Iegriez ratu un nosaki spēles priekšmetu!",
+      length: 3000,
+    });
     if (sectors.length == 1) {
       setGameObj({
         object: sectors[0].name,
