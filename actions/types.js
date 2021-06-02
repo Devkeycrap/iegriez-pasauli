@@ -18,3 +18,6 @@ export const EXIT_GAME = "EXIT_GAME";
 export const SET_POINTS = "SET_POINTS";
 
 export const REMOVE_SECTOR = "REMOVE_SECTOR";
+
+export const MAP_ICONS_LOADING = "MAP_ICONS_LOADING";
+export const MAP_ICONS_LOADED = "MAP_ICONS_LOADED";
