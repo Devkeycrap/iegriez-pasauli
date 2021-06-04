@@ -34,25 +34,20 @@ class QuizQuestion(models.Model):
 
 
 # Map models
-class MapIcon(models.Model):
+class MapQuestion(models.Model):
     game_item_fk = models.ForeignKey(
         GameItem, verbose_name='Game item', on_delete=models.CASCADE)
-    icon_name = models.CharField(max_length=20)
-    image = models.ImageField(
-        upload_to='map/icons/'
-    )
+    statement = models.CharField(max_length=300)
+    answers = models.ManyToManyField('MapAnswer')
 
     def __str__(self) -> str:
-        return str(self.icon_name)
+        return 'Question'
 
 
-class MapIconQuestion(models.Model):
-    map_icon_fk = models.ForeignKey(
-        MapIcon, verbose_name='Icon', on_delete=models.CASCADE)
-    question = models.CharField(max_length=300)
+class MapAnswer(models.Model):
+    answer = models.CharField(max_length=300)
     answer_message = models.CharField(max_length=300)
-    correct_answer = models.CharField(max_length=300)
-    incorrect_answer = models.CharField(max_length=300)
+    is_correct = models.BooleanField()
 
     def __str__(self) -> str:
-        return str(self.id)
+        return 'Answer'

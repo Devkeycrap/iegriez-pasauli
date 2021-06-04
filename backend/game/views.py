@@ -1,25 +1,25 @@
-from django.shortcuts import render
+from .models import GameItem, MapAnswer, MapQuestion, QuizQuestion
+from rest_framework import viewsets
+from .serializers import GameItemSerializer, MapAnswerSerializer, MapAnswerValidationSerializer, MapQuestionSerializer, QuizQuestionSerializer, QuizAnswerSerializer
 
-from .models import Quiz, MapIcon, QuizQuestion
-from rest_framework import viewsets, permissions, mixins, generics
-from .serializers import QuizQuestionSerializer, QuizAnswerSerializer
+# Game item viewset
 
 
-# Quiz viewset
+class GameItemViewSet(viewsets.ModelViewSet):
+    model = GameItem
+    serializer_class = GameItemSerializer
+    queryset = GameItem.objects.all()
+
+
+# Quiz viewsets
 class QuizQuestionViewSet(viewsets.ModelViewSet):
     model = QuizQuestion
     serializer_class = QuizQuestionSerializer
 
     def get_queryset(self):
-        game_obj = self.request.query_params.get('object')
-        question_id = self.request.query_params.get('id')
-        queryset = QuizQuestion.objects.all()
 
-        if game_obj:
-            queryset = queryset.filter(
-                quiz_fk__game_item_fk__name=game_obj, pk=question_id
-            )
-            print("Couldn't find any objects")
+        queryset = QuizQuestion.objects.filter(
+            quiz_fk__game_item_fk__name=self.request.query_params.get('item'))
 
         return queryset
 
@@ -29,10 +29,25 @@ class QuizAnswerViewSet(viewsets.ModelViewSet):
     serializer_class = QuizAnswerSerializer
 
     def get_queryset(self):
-class MapIconViewSet(viewsets.ModelViewSet):
-    model = MapIcon
-    serializer_class = MapIconSerializer
-    queryset = MapIcon.objects.all()
-
+        queryset = QuizQuestion.objects.filter(
+            id=self.request.query_params.get('id')
+        )
 
         return queryset
+
+
+# Map viewsets
+class MapQuestionViewSet(viewsets.ModelViewSet):
+    model = MapQuestion
+    serializer_class = MapQuestionSerializer
+
+    def get_queryset(self):
+        return MapQuestion.objects.filter(game_item_fk__name=self.request.query_params.get('item'))
+
+
+class MapAnswerValidationViewSet(viewsets.ModelViewSet):
+    model = MapAnswer
+    serializer_class = MapAnswerValidationSerializer
+
+    def get_queryset(self):
+        return MapAnswer.objects.filter(id=self.request.query_params.get('id'))

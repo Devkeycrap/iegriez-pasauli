@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Quiz, MapIcon, GameItem, MapIconQuestion, QuizQuestion
+from .models import Quiz, GameItem, MapQuestion, QuizQuestion, MapAnswer
 
 
 class QuizQuestionAdmin(admin.StackedInline):
@@ -9,9 +9,8 @@ class QuizQuestionAdmin(admin.StackedInline):
 
 
 class MapQuestionAdmin(admin.StackedInline):
-    model = MapIconQuestion
-    fields = ('map_icon_fk', 'question', 'answer_message',
-              'correct_answer', 'incorrect_answer')
+    model = MapQuestion
+    fields = ('question', 'answer_message')
 
 
 @admin.register(GameItem)
@@ -26,7 +25,12 @@ class QuizAdmin(admin.ModelAdmin):
     list_display = ('game_item_fk',)
 
 
-@admin.register(MapIcon)
-class MapIconAdmin(admin.ModelAdmin):
-    inlines = [MapQuestionAdmin]
-    list_display = ('icon_name', 'game_item_fk')
+@admin.register(MapQuestion)
+class MapQuestionAdmin(admin.ModelAdmin):
+    # inlines = [MapAnswerAdmin]
+    list_display = ('game_item_fk',)
+
+
+@admin.register(MapAnswer)
+class MapAnswerAdmin(admin.ModelAdmin):
+    list_display = ('answer',)

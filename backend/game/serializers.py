@@ -1,29 +1,45 @@
-from django.db.models import fields
 from rest_framework import serializers
 
-from .models import Quiz, MapIcon, QuizQuestion
+from .models import GameItem, MapAnswer, MapQuestion, QuizQuestion
 
 
-# Quiz serializer
+# Game item serializer
+class GameItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GameItem
+        fields = '__all__'
+
+
+# Quiz question serializer
 class QuizQuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = QuizQuestion
-        fields = ('pk', 'quiz_fk', 'question')
+        fields = ('id', 'question')
 
 
+# Quiz answer serializer
 class QuizAnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = QuizQuestion
-        fields = ('pk', 'quiz_fk', 'expected_answer')
+        fields = ('id', 'expected_answer')
+
 
 # Map serializer
-class MapIconSerializer(serializers.ModelSerializer):
+class MapAnswerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = MapIcon
-        fields = '__all__'
+        model = MapAnswer
+        fields = ('id', 'answer')
 
 
-class MapSerializer(serializers.ModelSerializer):
+class MapAnswerValidationSerializer(serializers.ModelSerializer):
     class Meta:
-        model = MapIcon
-        fields = '__all__'
+        model = MapAnswer
+        fields = ('id', 'answer', 'is_correct')
+
+
+class MapQuestionSerializer(serializers.ModelSerializer):
+    answers = MapAnswerSerializer(read_only=True, many=True)
+
+    class Meta:
+        model = MapQuestion
+        fields = ('id', 'statement', 'answers')
