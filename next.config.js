@@ -14,4 +14,7 @@ module.exports = {
     // Important: return the modified config
     return config;
   },
+  env: {
+    HOST: "http://localhost:8000",
+  },
 };
