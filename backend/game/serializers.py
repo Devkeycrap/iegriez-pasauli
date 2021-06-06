@@ -34,7 +34,7 @@ class MapAnswerSerializer(serializers.ModelSerializer):
 class MapAnswerValidationSerializer(serializers.ModelSerializer):
     class Meta:
         model = MapAnswer
-        fields = ('id', 'answer', 'is_correct')
+        fields = ('id', 'answer', 'is_correct', 'answer_message')
 
 
 class MapQuestionSerializer(serializers.ModelSerializer):
