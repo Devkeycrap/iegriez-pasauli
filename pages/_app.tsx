@@ -24,6 +24,11 @@ function MyApp({ Component, pageProps }) {
         <Head>
           <title>Iegriez pasauli</title>
           <link rel="shortcut icon" href="/favicon.ico" />
+          <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.js"></script>
+          <link
+            href="https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.css"
+            rel="stylesheet"
+          />
         </Head>
         <TransitionScene />
         {!isActive && <Navbar />}
