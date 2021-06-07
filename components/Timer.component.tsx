@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 import { endGame } from "../actions/game";
 import styles from "../styles/timer.module.scss";
 
-export default function Timer({ isActive, setIsActive, setGameEnded }) {
-  const [seconds, setSeconds] = useState(900);
+export function Timer({ isActive, endGame }) {
   const [strokeOffset, setStrokeOffset] = useState("251.2, 251.2");
 
   useEffect(() => {
