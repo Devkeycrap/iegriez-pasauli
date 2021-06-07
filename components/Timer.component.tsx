@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { endGame } from "../actions/game";
 import styles from "../styles/timer.module.scss";
 
 export default function Timer({ isActive, setIsActive, setGameEnded }) {
@@ -62,3 +64,9 @@ export default function Timer({ isActive, setIsActive, setGameEnded }) {
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({
+  isActive: state.game.isActive,
+});
+
+export default connect(mapStateToProps, { endGame })(Timer);
