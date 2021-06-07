@@ -6,7 +6,7 @@ import {
   QUESTIONS_LOADED,
 } from "./types";
 
-// GET quiz questions
+// Get quiz questions
 export const getQuestions = (item) => (dispatch) => {
   dispatch({
     type: QUESTIONS_LOADING,
@@ -24,6 +24,7 @@ export const getQuestions = (item) => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
+// Set current current quiz question state
 export const setCurrentQuestion =
   ({ index, isCorrect }) =>
   (dispatch) =>

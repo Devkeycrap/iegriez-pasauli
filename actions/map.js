@@ -1,8 +1,7 @@
 import axios from "axios";
 import { MAP_ICONS_LOADING, MAP_ICONS_LOADED } from "./types";
 
-// GET map icons
-export const getIcons = (item) => (dispatch) => {
+// Get map icons with questions to display on the map
   dispatch({
     type: MAP_ICONS_LOADING,
   });
@@ -16,11 +15,5 @@ export const getIcons = (item) => (dispatch) => {
     });
 };
 
-const formatResponse = (res) => {
-  let response = [];
-  for (let i = 0; i < res.length; i++) {
-    for (let j = 0; j < res.length; j++) {}
-  }
-  console.log(response);
-  return response;
+// Set map questions
 };

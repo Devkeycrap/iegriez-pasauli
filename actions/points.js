@@ -1,6 +1,6 @@
 import { SET_POINTS } from "./types";
 
-// SET points
+// Set game points
 export const setPoints = (points) => (dispatch) => {
   dispatch({
     type: SET_POINTS,
