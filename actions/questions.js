@@ -12,7 +12,7 @@ export const getQuestions = (item) => (dispatch) => {
     type: QUESTIONS_LOADING,
   });
   axios
-    .get("http://localhost:8000/api/quiz/questions/", {
+    .get(`${process.env.HOST}/api/quiz/questions/`, {
       params: { item },
     })
     .then((res) => {

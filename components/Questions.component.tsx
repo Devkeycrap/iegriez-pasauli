@@ -33,7 +33,7 @@ export function Questions({
   const answer = (answer: boolean) => {
     // setCurrentQuestion({ ...currentQuestion, isCorrect: null });
     axios
-      .get(`http://localhost:8000/api/quiz/answers/`, {
+      .get(`${process.env.HOST}/api/quiz/answers/`, {
         params: {
           id: questions[currentQuestion.index].id,
         },
