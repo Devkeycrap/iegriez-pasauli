@@ -1,0 +1,51 @@
+@import "./variables.scss";
+
+.transitionscene {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  background: rgba(73, 95, 65, 0.9);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 15;
+  backdrop-filter: blur(3px);
+  user-select: none;
+  transition: 0.5s;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.transitionscene.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.transitionscene h1,
+.transitionscene p {
+  text-align: center;
+}
+
+.title {
+  display: inline-block;
+  font-size: 100px;
+  line-height: 1em;
+  font-family: "Montserrat", sans-serif;
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  transform: translateY(-100px);
+  color: white;
+}
+
+.description {
+  display: inline-block;
+  font-size: 24px;
+  font-style: italic;
+  font-weight: normal;
+  text-align: center;
+  line-height: 1em;
+  font-family: "Open Sans", sans-serif;
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  transform: translateY(-50px);
+  color: $green;
+}
