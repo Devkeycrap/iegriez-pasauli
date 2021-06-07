@@ -111,7 +111,6 @@ export function Game({
               <Timer />
               {gameObj.object && (
                 <div>
-                  <h3>{gameObj.translatedName}</h3>
                   <img
                     src={`/icons/${gameObj.object.toLowerCase()}.svg`}
                     alt=""
