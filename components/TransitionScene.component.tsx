@@ -1,7 +1,6 @@
 import styles from "../styles/transitionScene.module.scss";
 import { Tween, SplitChars } from "react-gsap";
 import { connect } from "react-redux";
-import { useEffect } from "react";
 
 export function TransitionScene({ title, description, isActive }) {
   return (
@@ -14,7 +13,7 @@ export function TransitionScene({ title, description, isActive }) {
                 y: "0",
                 clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
               }}
-              stagger={0.1}
+              stagger={0.05}
             >
               <SplitChars wrapper={<span className={styles.title} />}>
                 {title}
