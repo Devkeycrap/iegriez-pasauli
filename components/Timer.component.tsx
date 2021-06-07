@@ -11,7 +11,7 @@ export function Timer({ isActive, endGame }) {
     if (isActive) {
       interval = setInterval(() => {
         if (seconds == 0) {
-          setIsActive(false);
+          endGame();
           clearInterval(interval);
           setGameEnded(true);
         }
