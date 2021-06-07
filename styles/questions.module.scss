@@ -6,7 +6,6 @@
 }
 
 .questions {
-  min-height: 400px;
   text-align: center;
 }
 
@@ -59,7 +58,7 @@
 
 @media only screen and (max-width: 624px) {
   .questions .btn-container {
-    width: 100%;
+    width: 80%;
   }
   .questions {
     h1 {
