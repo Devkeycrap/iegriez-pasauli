@@ -8,17 +8,13 @@ import {
   CLEAR_QUESTIONS,
 } from "./types";
 
-const clearGame = () => (dispatch) => {
+export const startGame = () => (dispatch) => {
   dispatch({
     type: CLEAR_GAME_OBJECT,
   });
   dispatch({
     type: CLEAR_QUESTIONS,
   });
-};
-
-export const startGame = () => (dispatch) => {
-  clearGame();
 
   dispatch({
     type: START_GAME,
@@ -38,8 +34,6 @@ export const exitGame = () => (dispatch) => {
 };
 
 export const restartGame = () => (dispatch) => {
-  clearGame();
-
   dispatch({
     type: RESTART_GAME,
   });
