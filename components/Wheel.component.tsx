@@ -43,11 +43,12 @@ export function Wheel({
     color: "",
     object: null,
   });
+  const [wheelSpinned, setWheelSpinned] = useState(false);
 
   useEffect(() => {
     playTransition({
       title: "Laimes rats",
-      description: "Iegriez ratu un nosaki spēles priekšmetu!",
+      description: "Iegriez ratu un sāc spēli!",
       length: 3000,
     });
     if (sectors.length == 1) {
@@ -122,11 +123,7 @@ export function Wheel({
 
     if (angVel == 0) {
       setTimeout(() => {
-        setGameObj({
-          object: currentSectorParams.object,
-          translatedName: currentSectorParams.text,
-        });
-        removeSector(currentSectorParams.object);
+        saveAndTransition();
       }, 2000);
     }
   }
@@ -146,6 +143,11 @@ export function Wheel({
   }
 
   function saveAndTransition() {
+    setGameObj({
+      object: currentSectorParams.object,
+      translatedName: currentSectorParams.text,
+    });
+    removeSector(currentSectorParams.object);
     if (sectors.length == 1) {
       setSectors([]);
     }
@@ -183,28 +185,14 @@ export function Wheel({
           ></canvas>
         </motion.div>
         <button
+          style={{ display: !wheelSpinned ? "initial" : "none" }}
           ref={spinRef}
+          onClick={() => setWheelSpinned(true)}
           className={`${styles.btn} ${styles["btn-orange"]}`}
         >
           Iegriezt
         </button>
       </div>
-      {gameObj.object && (
-        <div className={styles["spin-result"]}>
-          {!gameObj.isLoaded && <Spinner />}
-          <img
-            onLoad={() => setGameObj({ ...gameObj, isLoaded: true })}
-            src={`/icons/${gameObj.object.toLowerCase()}.svg`}
-            alt=""
-          />
-          <button
-            onClick={saveAndTransition}
-            className={`${styles.btn} ${styles["btn-orange"]}`}
-          >
-            Turpināt
-          </button>
-        </div>
-      )}
     </motion.div>
   );
 }

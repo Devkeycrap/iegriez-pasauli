@@ -13,6 +13,7 @@ import { getQuestions, setCurrentQuestion } from "../actions/questions";
 import { switchStage } from "../actions/game";
 import { setPoints } from "../actions/points";
 import Spinner from "./Spinner.component";
+import { playTransition } from "../actions/transition";
 
 export function Questions({
   points,
@@ -24,9 +25,15 @@ export function Questions({
   getQuestions,
   currentQuestion,
   setCurrentQuestion,
+  playTransition,
 }) {
   // Get questions for current item
   useEffect(() => {
+    playTransition({
+      title: "Viktorīna",
+      description: "Vai esi spējīgs atminēt visus jautājumus?",
+      length: 3000,
+    });
     getQuestions(gameObj.object);
   }, []);
 
@@ -39,7 +46,6 @@ export function Questions({
         },
       })
       .then((res) => {
-        console.log(res.data);
         if (res.data[0].expected_answer == answer) {
           console.log("worked");
           setPoints({
@@ -161,4 +167,5 @@ export default connect(mapStateToProps, {
   setCurrentQuestion,
   switchStage,
   setPoints,
+  playTransition,
 })(Questions);
