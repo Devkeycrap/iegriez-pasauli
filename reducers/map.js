@@ -1,23 +1,25 @@
-import { MAP_ICONS_LOADED } from "../actions/types";
+import { MAP_QUESTIONS_LOADED, SET_MAP_QUESTIONS } from "../actions/types";
 
 const initialState = {
-  localPoints: 0,
-  inBrowser: false,
-  questions: null,
-  answers: {},
+  questions: [],
+  answers: [],
   questionIndex: 0,
-  helpOpened: false,
   errors: {},
   isCurrentQuestionCorrect: null,
-  icons: [],
 };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case MAP_ICONS_LOADED:
+    case MAP_QUESTIONS_LOADED:
       return {
         ...state,
-        icons: action.payload,
+        questions: action.payload,
+      };
+
+    case SET_MAP_QUESTIONS:
+      return {
+        ...state,
+        questions: action.payload,
       };
     default:
       return state;
