@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import { switchStage } from "../actions/game";
 import { setPoints } from "../actions/points";
 import { getQuestions, setQuestions } from "../actions/map";
+import { playTransition } from "../actions/transition";
 
 import IMapIcon from "../models/MapIcon.model";
 
@@ -30,6 +31,7 @@ interface MapProps {
   getQuestions: (item: string) => void;
   setQuestions: (questions: IMapIcon[]) => void;
   questions: IMapIcon[];
+  playTransition: (props) => void;
 }
 
 export class Map extends Component<MapProps> {
@@ -54,6 +56,11 @@ export class Map extends Component<MapProps> {
   componentDidMount() {
     // CSR
     // this.getQuestions();
+    this.props.playTransition({
+      title: "Karte",
+      description: "Spied uz ikonām un atbildi uz apgalvojumiem!",
+      length: 3000,
+    });
     this.props.getQuestions(this.props.gameObj.object);
   }
 
@@ -297,7 +304,7 @@ export class Map extends Component<MapProps> {
         >
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="mapbox://styles/devkey/ckoclzmjl086p17od55gdtbho?optimize=true"
+            url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
           />
         </MapContainer> */}
       </div>
@@ -316,4 +323,5 @@ export default connect(mapStateToProps, {
   switchStage,
   getQuestions,
   setQuestions,
+  playTransition,
 })(Map);
