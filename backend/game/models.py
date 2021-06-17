@@ -15,12 +15,16 @@ class Quiz(models.Model):
     game_item_fk = models.ForeignKey(
         GameItem, verbose_name='Game item', on_delete=models.CASCADE)
 
-    def __str__(self) -> str:
-        return str(self.game_item_fk)
+    @property
+    def question_count(self):
+        return self.questions.count()
 
     class Meta:
-        verbose_name = 'Quiz'
         verbose_name_plural = 'Quizes'
+        ordering = ('id')
+
+    def __str__(self) -> str:
+        return str(self.game_item_fk)
 
 
 class QuizQuestion(models.Model):
