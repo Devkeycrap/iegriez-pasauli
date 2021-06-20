@@ -11,30 +11,14 @@ class GameItem(models.Model):
 
 
 # Quiz models
-class Quiz(models.Model):
+class QuizQuestion(models.Model):
     game_item_fk = models.ForeignKey(
         GameItem, verbose_name='Game item', on_delete=models.CASCADE)
-
-    @property
-    def question_count(self):
-        return self.questions.count()
-
-    class Meta:
-        verbose_name_plural = 'Quizes'
-        ordering = ('id')
+    question = models.CharField(max_length=300)
+    is_correct = models.BooleanField(verbose_name='True')
 
     def __str__(self) -> str:
         return str(self.game_item_fk)
-
-
-class QuizQuestion(models.Model):
-    quiz_fk = models.ForeignKey(
-        Quiz, verbose_name='Quiz', on_delete=models.CASCADE)
-    question = models.CharField(max_length=300)
-    expected_answer = models.BooleanField(verbose_name='True')
-
-    def __str__(self) -> str:
-        return str(self.id)
 
 
 # Map models
