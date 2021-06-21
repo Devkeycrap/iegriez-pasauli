@@ -5,6 +5,7 @@ import styles from "../styles/timer.module.scss";
 
 export function Timer({ isActive, endGame }) {
   const [strokeOffset, setStrokeOffset] = useState("251.2, 251.2");
+  const [seconds, setSeconds] = useState(900);
 
   useEffect(() => {
     let interval = null;
@@ -13,7 +14,6 @@ export function Timer({ isActive, endGame }) {
         if (seconds == 0) {
           endGame();
           clearInterval(interval);
-          setGameEnded(true);
         }
         setStrokeOffset(
           `${
