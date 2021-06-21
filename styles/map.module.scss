@@ -1,4 +1,4 @@
-// @import "https://unpkg.com/leaflet@1.7.1/dist/leaflet.css";
+@import "https://unpkg.com/leaflet@1.7.1/dist/leaflet.css";
 @import "./variables.scss";
 
 .map {
@@ -26,13 +26,14 @@
 
 .popup {
   left: 20px;
+  transition: none !important;
 }
 
-.popup > div:nth-child(2) {
-  box-shadow: 0px 0px 20px 0px black !important;
-  border-radius: 20px;
-  padding: 20px;
-}
+// .popup > div:nth-child(2) {
+//   box-shadow: 0px 0px 20px 0px black !important;
+//   border-radius: 20px;
+//   padding: 20px;
+// }
 
 .popup a {
   color: white !important;
@@ -86,8 +87,9 @@
   justify-content: center;
   align-items: center;
   font-family: "Montserrat", sans-serif;
-  top: 250px;
+  bottom: 100px;
   left: 50%;
+  height: fit-content;
   font-size: 16px;
   text-transform: uppercase;
   transform: translate(-50%);
@@ -96,8 +98,6 @@
   padding: 20px;
   border-radius: 100px;
   text-shadow: 0px 0px 25px rgba(0, 0, 0, 0.678);
-
-  // text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
 
   span {
     margin-left: 12px;
