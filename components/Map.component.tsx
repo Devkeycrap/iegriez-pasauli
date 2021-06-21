@@ -1,8 +1,8 @@
 // General imports
 import { Component } from "react";
-import { MapContainer, TileLayer } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import axios from "axios";
-import ReactMapGl, { Popup, Marker } from "react-map-gl";
+// import ReactMapGl, { Popup, Marker } from "react-map-gl";
 
 // Styles & animations
 import styles from "../styles/map.module.scss";
@@ -15,6 +15,8 @@ import { getQuestions, setQuestions } from "../actions/map";
 import { playTransition } from "../actions/transition";
 
 import IMapIcon from "../models/MapIcon.model";
+
+import { dotCorrect, dotIncorrect, dotNeutral } from "../models/Markers.model";
 
 interface MapProps {
   gameObj: {
@@ -170,7 +172,7 @@ export class Map extends Component<MapProps> {
         </h2>
 
         {/* leaflet.js map component */}
-        <ReactMapGl
+        {/* <ReactMapGl
           {...this.state.viewport}
           mapboxApiAccessToken={
             "pk.eyJ1IjoiZGV2a2V5IiwiYSI6ImNrcGgzcXZhaTJoODYycGxsc3QyM2lzNnAifQ.06fOYFbbtJWs95bamJyNwQ"
@@ -293,20 +295,103 @@ export class Map extends Component<MapProps> {
               )}
             </Popup>
           )}
-        </ReactMapGl>
-        {/* <MapContainer
+        </ReactMapGl> */}
+
+        <MapContainer
           className={styles["map-container"]}
           maxZoom={4}
           center={[51.505, -0.09]}
           zoom={4}
+          style={{ width: "100vw", height: "100vh", zIndex: 0 }}
           scrollWheelZoom={false}
           zoomControl={false}
         >
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
+            url="https://tile.jawg.io/jawg-dark/{z}/{x}/{y}{r}.png?access-token=9AUzah9Vs15KRZwaOGTebGYk3tGtWfglxz7QPv1jiGAzulcJlAfBvLCPf61wYOxI"
           />
-        </MapContainer> */}
+          {/* Load icons with questions to map */}
+          {this.props.questions &&
+            this.props.questions.map((item, i) => (
+              <Marker
+                icon={dotNeutral}
+                // Set icon positions to random place in Europe
+                position={[item.position[0], item.position[1]]}
+                key={i}
+              >
+                <Popup
+                  onOpen={() => this.setState({ selectedIcon: item })}
+                  className={`${styles.popup}`}
+                >
+                  {/* If user has answered, display information without inputs */}
+                  {this.state.selectedIcon &&
+                    !this.state.selectedIcon.answerMessage && (
+                      <div>
+                        <h2>{item.statement}</h2>
+                        {this.state.selectedIcon.answers.map((item, i) => (
+                          <div key={i} className={styles["radio-container"]}>
+                            <input
+                              id={i}
+                              type="radio"
+                              className={styles.radio}
+                              name={this.state.selectedIcon.id}
+                              value={item.id}
+                              onChange={(e) => {
+                                this.setState({
+                                  selectedIcon: {
+                                    ...this.state.selectedIcon,
+                                    answer: e.target.value,
+                                  },
+                                });
+                              }}
+                            />
+                            <label htmlFor={i}>{item.answer}</label>
+                          </div>
+                        ))}
+                        {/* {this.state.errors[item.icon]?.noInputError && (
+                        <p className={styles.error}>Lūdzu izvēlies atbildi!</p>
+                      )}
+
+                      {this.state.answers && this.state.answers[item.icon] && (
+                        <h4>{this.state.answers[item.icon].message}</h4>
+                      )} */}
+
+                        <button
+                          className={`${styles.btn} ${styles["btn-orange"]}`}
+                          type="button"
+                          name={this.state.selectedIcon.icon}
+                          onClick={(e) => this.submitQuestion(e)}
+                        >
+                          Atbildēt
+                        </button>
+                      </div>
+                    )}
+                  {this.state.selectedIcon &&
+                    this.state.selectedIcon.answerMessage && (
+                      <div
+                        className={
+                          this.state.selectedIcon.isCorrect
+                            ? styles.correct
+                            : styles.incorrect
+                        }
+                      >
+                        <h2>
+                          {this.state.selectedIcon.isCorrect
+                            ? "Pareizi"
+                            : "Nepareizi"}
+                        </h2>
+                        <p>{this.state.selectedIcon.question}</p>
+
+                        <h4>{this.state.selectedIcon.answerMessage}</h4>
+                        {this.state.selectedIcon.isCorrect && (
+                          <h3 style={{ WebkitUserSelect: "none" }}>+5</h3>
+                        )}
+                      </div>
+                    )}
+                </Popup>
+              </Marker>
+            ))}
+        </MapContainer>
       </div>
     );
   }
