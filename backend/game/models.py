@@ -38,4 +38,4 @@ class MapAnswer(models.Model):
     is_correct = models.BooleanField()
 
     def __str__(self) -> str:
-        return 'Answer'
+        return str(self.answer)

@@ -18,13 +18,12 @@ class QuizQuestionSerializer(serializers.ModelSerializer):
 
 
 # Quiz answer serializer
-class QuizAnswerSerializer(serializers.ModelSerializer):
+class QuizAnswerValidationSerializer(serializers.ModelSerializer):
     class Meta:
         model = QuizQuestion
-        fields = ('id', 'expected_answer')
+        fields = ('id', 'is_correct')
 
 
-# Map serializer
 class MapAnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = MapAnswer
