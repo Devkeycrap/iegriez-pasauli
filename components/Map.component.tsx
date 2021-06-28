@@ -2,7 +2,6 @@
 import { Component } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import axios from "axios";
-// import ReactMapGl, { Popup, Marker } from "react-map-gl";
 
 // Styles & animations
 import styles from "../styles/map.module.scss";
@@ -65,25 +64,6 @@ export class Map extends Component<MapProps> {
     });
     this.props.getQuestions(this.props.gameObj.object);
   }
-
-  // private getQuestions = () => {
-  //   // Get questions for current object
-  //   axios
-  //     .get(
-  //       `https://iegriez-pasauli-backend.herokuapp.com/map/${this.props.gameObj.object}/questions/${this.state.questionIndex}`
-  //     )
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       res.data.questions.map(
-  //         (item) =>
-  //           (item["position"] = [
-  //             Math.random() * 20 + 40,
-  //             Math.random() * 30 - 5,
-  //           ])
-  //       );
-  //       this.setState({ questions: res.data.questions });
-  //     });
-  // };
 
   private submitQuestion = (e: any) => {
     console.log(this.state.selectedIcon, "selected item");
@@ -170,133 +150,6 @@ export class Map extends Component<MapProps> {
         <h2 className={styles.counter} style={{ WebkitUserSelect: "none" }}>
           Uzkrātais punktu skaits: <span>{this.state.localPoints}</span>
         </h2>
-
-        {/* leaflet.js map component */}
-        {/* <ReactMapGl
-          {...this.state.viewport}
-          mapboxApiAccessToken={
-            "pk.eyJ1IjoiZGV2a2V5IiwiYSI6ImNrcGgzcXZhaTJoODYycGxsc3QyM2lzNnAifQ.06fOYFbbtJWs95bamJyNwQ"
-          }
-          onViewportChange={(viewport) =>
-            this.setState({
-              viewport,
-            })
-          }
-          mapStyle={
-            "mapbox://styles/devkey/ckoclzmjl086p17od55gdtbho?optimize=true"
-          }
-        >
-          {this.props.questions &&
-            this.props.questions.map((item, i) => (
-              <Marker
-                // icon={
-                //   (this.state.answers[item.icon] &&
-                //     (this.state.answers[item.icon].isCorrect
-                //       ? dotCorrect
-                //       : dotIncorrect)) ||
-                //   dotNeutral
-                // }
-                longitude={item.position[1]}
-                latitude={item.position[0]}
-                // Set icon positions to random place in Europe
-                // position={item.position}
-                key={i}
-              >
-                <button
-                  className={styles.marker}
-                  onClick={() =>
-                    this.setState({
-                      selectedIcon: item,
-                    })
-                  }
-                >
-                  {!("isCorrect" in item) && (
-                    <img src="/icons/dot-neutral.svg" alt="Neutral" />
-                  )}
-
-                  {"isCorrect" in item && item.isCorrect == true && (
-                    <img src="/icons/dot-correct.svg" alt="Correct" />
-                  )}
-
-                  {"isCorrect" in item && item.isCorrect == false && (
-                    <img src="/icons/dot-incorrect.svg" alt="Incorrect" />
-                  )}
-                </button>
-              </Marker>
-            ))}
-          {this.state.selectedIcon && (
-            <Popup
-              longitude={this.state.selectedIcon.position[1]}
-              latitude={this.state.selectedIcon.position[0]}
-              className={styles.popup}
-            >
-              {!this.state.selectedIcon.answerMessage ? (
-                <div>
-                  <h2>{this.state.selectedIcon.statement}</h2>
-                  <p>{this.state.selectedIcon.question}</p>
-                  {this.state.selectedIcon.answers.map((item, i) => (
-                    <div key={i} className={styles["radio-container"]}>
-                      <input
-                        id={i}
-                        type="radio"
-                        className={styles.radio}
-                        name={this.state.selectedIcon.id}
-                        value={item.id}
-                        onChange={(e) => {
-                          this.setState({
-                            selectedIcon: {
-                              ...this.state.selectedIcon,
-                              answer: e.target.value,
-                            },
-                          });
-                        }}
-                      />
-                      <label htmlFor={i}>{item.answer}</label>
-                    </div>
-                  ))}
-                  {this.state.errors[this.state.selectedIcon.icon]
-                    ?.noInputError && (
-                    <p className={styles.error}>Lūdzu izvēlies atbildi!</p>
-                  )}
-
-                  {this.state.selectedIcon && (
-                    <h4>{this.state.selectedIcon.answerMessage}</h4>
-                  )}
-
-                  <button
-                    className={`${styles.btn} ${styles["btn-orange"]}`}
-                    type="button"
-                    name={this.state.selectedIcon.icon}
-                    onClick={(e) => this.submitQuestion(e)}
-                  >
-                    Atbildēt
-                  </button>
-                </div>
-              ) : (
-                <div
-                  className={
-                    this.state.selectedIcon.isCorrect
-                      ? styles.correct
-                      : styles.incorrect
-                  }
-                >
-                  <h2>
-                    {this.state.selectedIcon.isCorrect
-                      ? "Pareizi"
-                      : "Nepareizi"}
-                  </h2>
-                  <p>{this.state.selectedIcon.question}</p>
-
-                  <h4>{this.state.selectedIcon.answerMessage}</h4>
-                  {this.state.selectedIcon.isCorrect && (
-                    <h3 style={{ WebkitUserSelect: "none" }}>+5</h3>
-                  )}
-                </div>
-              )}
-            </Popup>
-          )}
-        </ReactMapGl> */}
-
         <MapContainer
           className={styles["map-container"]}
           maxZoom={4}
@@ -348,13 +201,6 @@ export class Map extends Component<MapProps> {
                             <label htmlFor={i}>{item.answer}</label>
                           </div>
                         ))}
-                        {/* {this.state.errors[item.icon]?.noInputError && (
-                        <p className={styles.error}>Lūdzu izvēlies atbildi!</p>
-                      )}
-
-                      {this.state.answers && this.state.answers[item.icon] && (
-                        <h4>{this.state.answers[item.icon].message}</h4>
-                      )} */}
 
                         <button
                           className={`${styles.btn} ${styles["btn-orange"]}`}
