@@ -1,0 +1,22 @@
+@import "./variables.scss";
+
+.spinner {
+  display: grid;
+  place-items: center;
+  z-index: 12;
+
+  svg {
+    width: 200px;
+    height: 200px;
+    fill: white;
+  }
+}
+
+@media only screen and (max-width: 628px) {
+  .spinner {
+    svg {
+      width: 50px;
+      height: 50px;
+    }
+  }
+}

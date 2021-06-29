@@ -1,19 +1,22 @@
 @import "https://unpkg.com/leaflet@1.7.1/dist/leaflet.css";
 @import "./variables.scss";
 
-.map-container {
-  height: 100%;
-  width: 100vw;
-  position: relative;
-  z-index: 0;
-}
-
 .map {
   height: 100%;
-  width: 100vw;
-  position: relative;
+  width: 100%;
+  overflow: hidden;
 }
-
+.marker {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+.marker img {
+  width: 40px;
+  height: 40px;
+  user-select: none;
+  -webkit-user-drag: none;
+}
 .btn-orange {
   margin-top: 12px;
   padding: 10px 15px;
@@ -21,80 +24,22 @@
   width: 100%;
 }
 
-.popup > div:first-child {
-  font-family: "Open Sans", sans-serif;
-  background: white;
-
-  padding: 20px 10px;
-  box-shadow: 0px 8px 30px 0 rgba(0, 0, 0, 0.13);
-
-  div {
-    width: auto;
-  }
-  h2 {
-    font-size: 24px;
-    margin-bottom: 8px;
-  }
-  p {
-    font-size: 16px;
-    margin: 0;
-    margin-bottom: 10px;
-    word-wrap: break-word;
-  }
-  .radio-container {
-    margin: 12px 0;
-    align-items: center;
-    label {
-      margin-left: 4px;
-      font-size: 14px;
-      width: auto;
-      font-weight: 700;
-    }
-    .radio {
-      width: 14px;
-      height: 14px;
-    }
-  }
+.popup {
+  left: 20px;
+  transition: none !important;
 }
+
+// .popup > div:nth-child(2) {
+//   box-shadow: 0px 0px 20px 0px black !important;
+//   border-radius: 20px;
+//   padding: 20px;
+// }
 
 .popup a {
+  color: white !important;
+  text-shadow: 0px 0px 20px black;
   top: 10px !important;
   right: 10px !important;
-}
-
-.help-btn {
-  display: grid;
-  width: 40px;
-  font-style: italic;
-  height: 40px;
-  place-items: center;
-  background: white;
-  top: 20px;
-  right: 20px;
-  border-radius: 50%;
-  position: absolute;
-  z-index: 2;
-  font-size: 12px;
-  cursor: pointer;
-}
-
-.help {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 30%;
-  padding: 30px;
-  padding-right: 100px;
-  z-index: 2;
-  background: rgba(73, 95, 65, 0.67);
-  color: white;
-  border-radius: 20px;
-}
-.help .close {
-  cursor: pointer;
-  display: inline-block;
-  font-size: 20px;
-  transform: translate(-125%, -80%);
 }
 
 .map .error {
@@ -142,8 +87,9 @@
   justify-content: center;
   align-items: center;
   font-family: "Montserrat", sans-serif;
-  top: 20px;
+  bottom: 100px;
   left: 50%;
+  height: fit-content;
   font-size: 16px;
   text-transform: uppercase;
   transform: translate(-50%);
@@ -152,8 +98,6 @@
   padding: 20px;
   border-radius: 100px;
   text-shadow: 0px 0px 25px rgba(0, 0, 0, 0.678);
-
-  // text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
 
   span {
     margin-left: 12px;
@@ -168,8 +112,15 @@
   }
 }
 
+@media only screen and (max-width: 1024px) {
+  .counter {
+    top: 200px;
+  }
+}
+
 @media only screen and (max-width: 624px) {
   .counter {
+    top: 140px;
     font-size: 12px;
     width: 75%;
     span {

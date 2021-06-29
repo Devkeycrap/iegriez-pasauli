@@ -1,10 +1,18 @@
-import Link from "next/link";
+// General imports
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import dynamic from "next/dynamic";
+
+// Components
 import Questions from "../components/Questions.component";
 import Timer from "../components/Timer.component";
 import Wheel from "../components/Wheel.component";
-import dynamic from "next/dynamic";
-import styles from "../styles/game.module.scss";
+import End from "../components/End.component";
+
+// Interfaces
+import IPoints from "../models/Points.model";
+
+// Icons for wheel (temporary)
 import {
   bananasPath,
   tshirtPath,
@@ -12,19 +20,24 @@ import {
   headphonesPath,
   longboardPath,
 } from "../public/icons/paths";
-import End from "../components/End.component";
-import IPoints from "../models/Points.model";
+
+// Styles & animations
+import styles from "../styles/game.module.scss";
 import { motion } from "framer-motion";
 
-export default function Game({ isActive, setIsActive }) {
-  const [stage, setStage] = useState(1);
-  const [gameObj, setGameObj] = useState(null);
-  const [gameEnded, setGameEnded] = useState(false);
-  const [points, setPoints] = useState<IPoints>({
-    questions: 0,
-    map: 0,
-    words: 0,
-  });
+// Redux
+import { connect } from "react-redux";
+import { setGameObj } from "../actions/gameObj";
+import { startGame, exitGame } from "../actions/game";
+
+export function Game({
+  hasFinished,
+  gameObj,
+  startGame,
+  exitGame,
+  points,
+  stage,
+}) {
   const [sectors, setSectors] = useState([
     {
       color: "#B8D97A",
@@ -60,20 +73,8 @@ export default function Game({ isActive, setIsActive }) {
   ]);
 
   useEffect(() => {
-    setIsActive(true);
+    startGame();
   }, []);
-
-  const restartGame = () => {
-    setStage(1);
-    setGameEnded(false);
-    setIsActive(true);
-    setGameObj(null);
-  };
-
-  const exitGame = () => {
-    setGameEnded(true);
-    setIsActive(false);
-  };
 
   const Map = dynamic(() => import("../components/Map.component"), {
     ssr: false,
@@ -90,42 +91,36 @@ export default function Game({ isActive, setIsActive }) {
       animate="animate"
       className={styles.main}
     >
-      {gameEnded && (
+      {hasFinished && (
         <div className={styles.endscreen}>
-          <End exitGame={exitGame} restartGame={restartGame} points={points} />
+          <End />
         </div>
       )}
-      {!gameEnded && (
+      {!hasFinished && (
         <div className={styles.game}>
           <div className={styles["game-info"]}>
             <Link href="/">
               <button
-                onClick={exitGame}
+                onClick={() => exitGame()}
                 className={`${styles.btn} ${styles["btn-neutral"]}`}
               >
                 Uz sākumu
               </button>
             </Link>
             <div className={styles.info}>
-              <Timer
-                isActive={isActive}
-                setIsActive={setIsActive}
-                setGameEnded={setGameEnded}
-              />
-              {gameObj && (
+              <Timer />
+              {gameObj.object && (
                 <div>
-                  <h3 style={{WebkitUserSelect: "none"}}>{gameObj.name}</h3>
                   <img
                     src={`/icons/${gameObj.object.toLowerCase()}.svg`}
-                    style={{WebkitUserSelect: "none"}}
                     alt=""
                   />
                 </div>
               )}
             </div>
             <div className={styles.points}>
-              <h2 style={{WebkitUserSelect: "none"}}>Iegūtie punkti</h2>
-              <h3 style={{WebkitUserSelect: "none"}}>
+              <h2 style={{ WebkitUserSelect: "none" }}>Iegūtie punkti</h2>
+              <h3 style={{ WebkitUserSelect: "none" }}>
                 {Object.keys(points).reduce(
                   (sum, key) => sum + parseInt(points[key] || 0),
                   0
@@ -134,43 +129,27 @@ export default function Game({ isActive, setIsActive }) {
             </div>
           </div>
           <div className={styles["stage-container"]}>
-            {stage === 1 && (
-              <Wheel
-                sectors={sectors}
-                setSectors={setSectors}
-                setStage={setStage}
-                gameObj={gameObj}
-                setGameObj={setGameObj}
-              />
-            )}
-            {stage === 2 && (
-              <Questions
-                setPoints={setPoints}
-                gameObj={gameObj}
-                setStage={setStage}
-              />
-            )}
-            {stage === 3 && (
-              <Map
-                points={points}
-                setPoints={setPoints}
-                setStage={setStage}
-                gameObj={gameObj}
-              />
-            )}
-            {stage === 4 && (
-              <Words
-                stage={stage}
-                setPoints={setPoints}
-                sectors={sectors}
-                setGameEnded={setGameEnded}
-                setGameObj={setGameObj}
-                setStage={setStage}
-              />
-            )}
+            {stage === 1 && <Wheel sectors={sectors} setSectors={setSectors} />}
+            {stage === 2 && <Questions />}
+            {stage === 3 && <Map />}
+            {stage === 4 && <Words sectors={sectors} />}
           </div>
         </div>
       )}
     </motion.div>
   );
 }
+
+const mapStateToProps = (state) => ({
+  gameObj: state.gameObj,
+  hasFinished: state.game.hasFinished,
+  isActive: state.game.isActive,
+  points: state.points,
+  stage: state.game.stage,
+});
+
+export default connect(mapStateToProps, {
+  setGameObj,
+  startGame,
+  exitGame,
+})(Game);

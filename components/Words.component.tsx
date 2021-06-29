@@ -1,16 +1,29 @@
-import styles from "../styles/words.module.scss"; // Import stylesheet for component
-import { Component } from "react"; // Import class Componenet from react
+// General imports
+import { Component } from "react";
+import { connect } from "react-redux";
+
+// Styles & animations
+import styles from "../styles/words.module.scss";
+
+import { setPoints } from "../actions/points";
+import { endGame, switchStage } from "../actions/game";
+import { clearGameObj } from "../actions/gameObj";
 
 interface WordProps {
-  setGameEnded: (gameEnded: boolean) => void; // Import props from parent code
-  setGameObj: (object: any) => void;
-  setStage: (stage: number) => void;
+  endGame: () => void;
+  clearGameObj: () => void;
+  switchStage: (stage: number) => void;
   setPoints: (points: any) => void;
+  points: {
+    quiz: number;
+    map: number;
+    words: number;
+  };
   stage: number;
   sectors: any[];
 }
 
-export default class Words extends Component<WordProps> {
+export class Words extends Component<WordProps> {
   mainthread = setInterval(() => {
     this.newObj(document.getElementById("board"));
     this.newTick(document.getElementsByClassName("wordObj"));
@@ -65,9 +78,10 @@ export default class Words extends Component<WordProps> {
       // Redundant if statment, seems to speed up the code, for no appearent reson, but if it works it works.
       const obj = document.createElement("label"); // Create blank html <label/> element
 
-      obj.innerHTML = this.state.wordList.dictionary[
-        Math.floor(Math.random() * this.state.wordList.dictionary.length)
-      ]; // Style <label/> element
+      obj.innerHTML =
+        this.state.wordList.dictionary[
+          Math.floor(Math.random() * this.state.wordList.dictionary.length)
+        ]; // Style <label/> element
       obj.style.fontFamily = "montserrat, Sans-serif"; // Set <label/> - font-family
       obj.style.webkitUserSelect = "none"; // Set <label/> - webkituserselect
 
@@ -145,19 +159,15 @@ export default class Words extends Component<WordProps> {
 
     setTimeout(() => {
       clearInterval(this.mainthread);
-      this.props.setGameObj(null);
+      this.props.clearGameObj();
+      this.props.setPoints({
+        ...this.props.points,
+        words: this.props.points.words + this.state.points,
+      });
       if (this.props.sectors.length == 0) {
-        this.props.setPoints((points) => ({
-          ...points,
-          words: points.words + this.state.points,
-        }));
-        this.props.setGameEnded(true);
+        this.props.endGame();
       } else {
-        this.props.setPoints((points) => ({
-          ...points,
-          words: points.words + this.state.points,
-        }));
-        this.props.setStage(1);
+        this.props.switchStage(1);
       }
     }, 15000);
   }
@@ -181,3 +191,15 @@ export default class Words extends Component<WordProps> {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  stage: state.game.stage,
+  points: state.points,
+});
+
+export default connect(mapStateToProps, {
+  endGame,
+  setPoints,
+  clearGameObj,
+  switchStage,
+})(Words);

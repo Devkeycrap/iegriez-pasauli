@@ -1,25 +1,46 @@
+// General imports
 import Head from "next/head";
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
-import Navbar from "../components/Navbar.component";
+
+// Styles & animations
 import "../styles/globals.scss";
 
+// Components
+import Navbar from "../components/Navbar.component";
+
+// Redux
+import { Provider } from "react-redux";
+import store from "../store";
+import TransitionScene from "../components/TransitionScene.component";
+
+// Main app component
 function MyApp({ Component, pageProps }) {
   const [isActive, setIsActive] = useState(false);
+
   return (
-    <div className="root">
-      <Head>
-        <title>Iegriez pasauli</title>
-      </Head>
-      {!isActive && <Navbar />}
-      <AnimatePresence exitBeforeEnter={true}>
-        <Component
-          {...pageProps}
-          setIsActive={setIsActive}
-          isActive={isActive}
-        />
-      </AnimatePresence>
-    </div>
+    <Provider store={store}>
+      <div className="root">
+        <Head>
+          <title>Iegriez pasauli</title>
+          <link rel="shortcut icon" href="/favicon.ico" />
+          <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.js"></script>
+          <link
+            href="https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.css"
+            rel="stylesheet"
+          />
+        </Head>
+        <TransitionScene />
+        {!isActive && <Navbar />}
+        <AnimatePresence exitBeforeEnter={true}>
+          <Component
+            {...pageProps}
+            setIsActive={setIsActive}
+            isActive={isActive}
+          />
+        </AnimatePresence>
+      </div>
+    </Provider>
   );
 }
 

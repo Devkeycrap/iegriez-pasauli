@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { endGame } from "../actions/game";
 import styles from "../styles/timer.module.scss";
 
-export default function Timer({ isActive, setIsActive, setGameEnded }) {
-  const [seconds, setSeconds] = useState(900);
+export function Timer({ isActive, endGame }) {
   const [strokeOffset, setStrokeOffset] = useState("251.2, 251.2");
+  const [seconds, setSeconds] = useState(900);
 
   useEffect(() => {
     let interval = null;
     if (isActive) {
       interval = setInterval(() => {
         if (seconds == 0) {
-          setIsActive(false);
+          endGame();
           clearInterval(interval);
-          setGameEnded(true);
         }
         setStrokeOffset(
           `${
@@ -62,3 +63,9 @@ export default function Timer({ isActive, setIsActive, setGameEnded }) {
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({
+  isActive: state.game.isActive,
+});
+
+export default connect(mapStateToProps, { endGame })(Timer);

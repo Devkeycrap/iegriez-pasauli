@@ -2,6 +2,9 @@
 
 .end {
   padding: 0 10%;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr 1fr;
 
   h2 {
     margin-bottom: 10px;
@@ -74,6 +77,37 @@
     button {
       margin: 35px 0px;
     }
+  }
+}
+
+.leaderboard {
+  .leaderboard-container {
+    height: 500px;
+    overflow-y: auto;
+  }
+  .user {
+    padding: 0px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    height: 100px;
+  }
+  h3 {
+    margin: 0;
+    color: $green;
+    font-size: 28px;
+  }
+  h4 {
+    font-size: 24px;
+    color: white;
+  }
+}
+
+@media only screen and (max-width: 1240px) {
+  .end {
+    grid-template-columns: none;
+    grid-template-rows: 1fr 1fr;
   }
 }
 

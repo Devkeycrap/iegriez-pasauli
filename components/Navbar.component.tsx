@@ -2,8 +2,12 @@ import Link from "next/link";
 import styles from "../styles/navbar.module.scss";
 import { useRouter } from "next/router";
 
-export default function Navbar() {
+import { connect } from "react-redux";
+
+export function Navbar({ isActive }) {
   const router = useRouter();
+
+  if (isActive) return null;
   return (
     <nav className={styles.nav}>
       <ul>
@@ -34,3 +38,9 @@ export default function Navbar() {
     </nav>
   );
 }
+
+const mapStateToProps = (state) => ({
+  isActive: state.game.isActive,
+});
+
+export default connect(mapStateToProps)(Navbar);
