@@ -43,20 +43,10 @@ export class Map extends Component<MapProps> {
     questionIndex: 0,
     errors: {},
     selectedIcon: null,
-    viewport: {
-      lat: 45.4211,
-      lon: -75.6903,
-      minZoom: 2.5,
-      maxZoom: 2.5,
-      zoom: 2.5,
-      width: "100%",
-      height: "100%",
-    },
   };
 
   componentDidMount() {
     // CSR
-    // this.getQuestions();
     this.props.playTransition({
       title: "Karte",
       description: "Spied uz ikonām un atbildi uz apgalvojumiem!",
@@ -66,7 +56,6 @@ export class Map extends Component<MapProps> {
   }
 
   private submitQuestion = (e: any) => {
-    console.log(this.state.selectedIcon, "selected item");
     e.preventDefault();
 
     // Make a post request to validate answer
@@ -82,21 +71,28 @@ export class Map extends Component<MapProps> {
       return;
     }
     axios
-      .get(`${process.env.HOST}/api/map/answers`, {
+      .get(`${process.env.HOST}/api/map/answers/`, {
         params: {
-          id: this.state.selectedIcon.answer,
+          id: this.state.selectedIcon.id,
         },
       })
       .then((res) => {
-        console.log(res.data);
         const questionIndex = this.props.questions.findIndex(
           (item) => item.id == this.state.selectedIcon.id
         );
         let newQuestions = this.props.questions;
+
+        const correctAnswer = {
+          isCorrect: res.data[0].answers.find(
+            (item) => item.id == this.state.selectedIcon.answer
+          ).is_correct,
+          answerMessage: res.data[0].answer_message,
+        };
+
         newQuestions[questionIndex] = {
           ...newQuestions[questionIndex],
-          isCorrect: res.data[0].is_correct,
-          answerMessage: res.data[0].answer_message,
+          isCorrect: correctAnswer.isCorrect,
+          answerMessage: correctAnswer.answerMessage,
         };
 
         console.log(newQuestions);
@@ -104,8 +100,8 @@ export class Map extends Component<MapProps> {
         this.setState({
           selectedIcon: {
             ...this.state.selectedIcon,
-            isCorrect: res.data[0].is_correct,
-            answerMessage: res.data[0].answer_message,
+            isCorrect: correctAnswer.isCorrect,
+            answerMessage: correctAnswer.answerMessage,
           },
         });
         try {
@@ -167,7 +163,11 @@ export class Map extends Component<MapProps> {
           {this.props.questions &&
             this.props.questions.map((item, i) => (
               <Marker
-                icon={dotNeutral}
+                icon={
+                  (item.isCorrect && item.isCorrect == true && dotCorrect) ||
+                  (item.isCorrect == false && dotIncorrect) ||
+                  dotNeutral
+                }
                 // Set icon positions to random place in Europe
                 position={[item.position[0], item.position[1]]}
                 key={i}
@@ -193,7 +193,7 @@ export class Map extends Component<MapProps> {
                                 this.setState({
                                   selectedIcon: {
                                     ...this.state.selectedIcon,
-                                    answer: e.target.value,
+                                    answer: parseInt(e.target.value),
                                   },
                                 });
                               }}
@@ -223,8 +223,8 @@ export class Map extends Component<MapProps> {
                       >
                         <h2>
                           {this.state.selectedIcon.isCorrect
-                            ? "Pareizi"
-                            : "Nepareizi"}
+                            ? "Pareizi!"
+                            : "Nepareizi!"}
                         </h2>
                         <p>{this.state.selectedIcon.question}</p>
 
