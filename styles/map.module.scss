@@ -25,21 +25,50 @@
 }
 
 .popup {
-  left: 20px;
   transition: none !important;
 }
 
-// .popup > div:nth-child(2) {
-//   box-shadow: 0px 0px 20px 0px black !important;
-//   border-radius: 20px;
-//   padding: 20px;
-// }
+.popup > div:nth-child(1) {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.226),
+    rgba(255, 255, 255, 0)
+  );
+  border: 1px solid rgb(255, 255, 255);
+  backdrop-filter: blur(5px);
+  font-family: "Open Sans";
+  color: white;
+
+  h2 {
+    margin-bottom: 20px;
+    font-family: "Montserrat";
+  }
+
+  h4 {
+    font-size: 14px;
+    font-weight: normal;
+  }
+
+  div:first-child {
+    padding: 10px 15px;
+  }
+}
 
 .popup a {
-  color: white !important;
+  color: rgb(177, 177, 177) !important;
   text-shadow: 0px 0px 20px black;
   top: 10px !important;
   right: 10px !important;
+}
+
+.radio-container {
+  margin: 10px 0;
+
+  label {
+    color: rgb(255, 255, 255);
+    margin-left: 10px;
+    font-size: 14px !important;
+  }
 }
 
 .map .error {
@@ -48,36 +77,14 @@
 }
 
 .correct {
-  color: $green;
-  p {
-    color: black;
-  }
-  h3 {
-    display: grid;
-    place-items: center;
-    font-size: 18px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: $green;
-    color: white;
-    margin: 12px 0;
-  }
-  h4 {
-    font-size: 14px;
+  h2 {
+    color: $green;
   }
 }
 
 .incorrect {
-  color: $pink;
-  p {
-    color: black;
-  }
-  h3 {
-    font-size: 18px;
-  }
-  h4 {
-    font-size: 14px;
+  h2 {
+    color: $pink;
   }
 }
 

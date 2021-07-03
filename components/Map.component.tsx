@@ -39,7 +39,6 @@ export class Map extends Component<MapProps> {
   state = {
     localPoints: 0,
     questions: null,
-    answers: [],
     questionIndex: 0,
     errors: {},
     selectedIcon: null,
@@ -95,7 +94,6 @@ export class Map extends Component<MapProps> {
           answerMessage: correctAnswer.answerMessage,
         };
 
-        console.log(newQuestions);
         this.props.setQuestions(newQuestions);
         this.setState({
           selectedIcon: {
@@ -118,23 +116,20 @@ export class Map extends Component<MapProps> {
     // Update answers state with isCorrect and message to show if user has answered
 
     if (res.data.isCorrect)
-      this.setState({ localPoints: this.state.localPoints + 5 });
+      this.setState({ localPoints: this.state.localPoints + 1 });
 
-    // If all questions are answered, then start next level, else return to start or end game
-    if (this.state.answers.length >= this.props.questions.length) {
+    // If all questions are answered, then start next stage, else return to start or end game
+    let answers: number = 0;
+
+    for (let val of this.props.questions) if (val.answerMessage) answers++;
+
+    if (answers >= this.props.questions.length) {
       setTimeout(() => {
-        this.setState({
-          questionIndex: this.state.questionIndex + 1,
-          answers: [],
+        this.props.setPoints({
+          ...this.props.points,
+          map: this.props.points.map + this.state.localPoints,
         });
-        // this.getQuestions();
-        if (this.state.questionIndex >= 3) {
-          this.props.setPoints({
-            ...this.props.points,
-            map: this.props.points.map + this.state.localPoints,
-          });
-          this.props.switchStage(4);
-        }
+        this.props.switchStage(4);
       }, 2000);
     }
   };
@@ -168,7 +163,6 @@ export class Map extends Component<MapProps> {
                   (item.isCorrect == false && dotIncorrect) ||
                   dotNeutral
                 }
-                // Set icon positions to random place in Europe
                 position={[item.position[0], item.position[1]]}
                 key={i}
               >
@@ -223,15 +217,12 @@ export class Map extends Component<MapProps> {
                       >
                         <h2>
                           {this.state.selectedIcon.isCorrect
-                            ? "Pareizi!"
+                            ? "Pareizi! +1"
                             : "Nepareizi!"}
                         </h2>
                         <p>{this.state.selectedIcon.question}</p>
 
                         <h4>{this.state.selectedIcon.answerMessage}</h4>
-                        {this.state.selectedIcon.isCorrect && (
-                          <h3 style={{ WebkitUserSelect: "none" }}>+5</h3>
-                        )}
                       </div>
                     )}
                 </Popup>
