@@ -11,15 +11,16 @@ export const getQuestions = (item) => (dispatch) => {
     type: MAP_QUESTIONS_LOADING,
   });
   axios
-    .get(`${process.env.HOST}/api/map/questions`, { params: { item } })
+    .get(`${process.env.HOST}/api/map/questions/`, { params: { item } })
     .then((res) => {
-      console.log(res.data);
+      let formattedData = res.data.map((item) => ({
+        ...item,
+        position: [Math.random() * 20 + 40, Math.random() * 30 - 5],
+      }));
+
       dispatch({
         type: MAP_QUESTIONS_LOADED,
-        payload: res.data.map((item) => ({
-          ...item,
-          position: [Math.random() * 20 + 40, Math.random() * 30 - 5],
-        })),
+        payload: formattedData,
       });
     });
 };
