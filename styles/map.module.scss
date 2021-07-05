@@ -48,10 +48,10 @@
     font-size: 14px;
     font-weight: normal;
   }
+}
 
-  div:first-child {
-    padding: 10px 15px;
-  }
+.popup-content {
+  padding: 10px 15px;
 }
 
 .popup a {
@@ -88,6 +88,10 @@
   }
 }
 
+.spinner svg {
+  width: 100px;
+}
+
 .counter {
   position: absolute;
   display: flex;
@@ -119,15 +123,9 @@
   }
 }
 
-@media only screen and (max-width: 1024px) {
-  .counter {
-    top: 200px;
-  }
-}
-
 @media only screen and (max-width: 624px) {
   .counter {
-    top: 140px;
+    bottom: 50px;
     font-size: 12px;
     width: 75%;
     span {

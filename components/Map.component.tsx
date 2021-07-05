@@ -3,6 +3,9 @@ import { Component } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import axios from "axios";
 
+// Components
+import Spinner from "./Spinner.component";
+
 // Styles & animations
 import styles from "../styles/map.module.scss";
 
@@ -69,6 +72,9 @@ export class Map extends Component<MapProps> {
       });
       return;
     }
+    this.setState({
+      selectedIcon: { ...this.state.selectedIcon, loading: true },
+    });
     axios
       .get(`${process.env.HOST}/api/map/answers/`, {
         params: {
@@ -100,6 +106,7 @@ export class Map extends Component<MapProps> {
             ...this.state.selectedIcon,
             isCorrect: correctAnswer.isCorrect,
             answerMessage: correctAnswer.answerMessage,
+            loading: false,
           },
         });
         try {
@@ -172,59 +179,71 @@ export class Map extends Component<MapProps> {
                 >
                   {/* If user has answered, display information without inputs */}
                   {this.state.selectedIcon &&
-                    !this.state.selectedIcon.answerMessage && (
-                      <div>
-                        <h2>{item.statement}</h2>
-                        {this.state.selectedIcon.answers.map((item, i) => (
-                          <div key={i} className={styles["radio-container"]}>
-                            <input
-                              id={i}
-                              type="radio"
-                              className={styles.radio}
-                              name={this.state.selectedIcon.id}
-                              value={item.id}
-                              onChange={(e) => {
-                                this.setState({
-                                  selectedIcon: {
-                                    ...this.state.selectedIcon,
-                                    answer: parseInt(e.target.value),
-                                  },
-                                });
-                              }}
-                            />
-                            <label htmlFor={i}>{item.answer}</label>
+                  this.state.selectedIcon.loading ? (
+                    <div className={styles.spinner}>
+                      <Spinner />
+                    </div>
+                  ) : (
+                    <div className={styles["popup-content"]}>
+                      {this.state.selectedIcon &&
+                        !this.state.selectedIcon.answerMessage && (
+                          <div>
+                            <h2>{item.statement}</h2>
+                            {this.state.selectedIcon.answers.map((item, i) => (
+                              <div
+                                key={i}
+                                className={styles["radio-container"]}
+                              >
+                                <input
+                                  id={i}
+                                  type="radio"
+                                  className={styles.radio}
+                                  name={this.state.selectedIcon.id}
+                                  value={item.id}
+                                  onChange={(e) => {
+                                    this.setState({
+                                      selectedIcon: {
+                                        ...this.state.selectedIcon,
+                                        answer: parseInt(e.target.value),
+                                      },
+                                    });
+                                  }}
+                                />
+                                <label htmlFor={i}>{item.answer}</label>
+                              </div>
+                            ))}
+
+                            <button
+                              className={`${styles.btn} ${styles["btn-orange"]}`}
+                              type="button"
+                              name={this.state.selectedIcon.icon}
+                              onClick={(e) => this.submitQuestion(e)}
+                            >
+                              Atbildēt
+                            </button>
                           </div>
-                        ))}
+                        )}
+                      {this.state.selectedIcon &&
+                        this.state.selectedIcon.answerMessage && (
+                          <div
+                            className={
+                              this.state.selectedIcon.isCorrect
+                                ? styles.correct
+                                : styles.incorrect
+                            }
+                          >
+                            <h2>
+                              {this.state.selectedIcon.isCorrect
+                                ? "Pareizi! +1"
+                                : "Nepareizi!"}
+                            </h2>
+                            <p>{this.state.selectedIcon.question}</p>
 
-                        <button
-                          className={`${styles.btn} ${styles["btn-orange"]}`}
-                          type="button"
-                          name={this.state.selectedIcon.icon}
-                          onClick={(e) => this.submitQuestion(e)}
-                        >
-                          Atbildēt
-                        </button>
-                      </div>
-                    )}
-                  {this.state.selectedIcon &&
-                    this.state.selectedIcon.answerMessage && (
-                      <div
-                        className={
-                          this.state.selectedIcon.isCorrect
-                            ? styles.correct
-                            : styles.incorrect
-                        }
-                      >
-                        <h2>
-                          {this.state.selectedIcon.isCorrect
-                            ? "Pareizi! +1"
-                            : "Nepareizi!"}
-                        </h2>
-                        <p>{this.state.selectedIcon.question}</p>
-
-                        <h4>{this.state.selectedIcon.answerMessage}</h4>
-                      </div>
-                    )}
+                            <h4>{this.state.selectedIcon.answerMessage}</h4>
+                          </div>
+                        )}
+                    </div>
+                  )}
                 </Popup>
               </Marker>
             ))}
