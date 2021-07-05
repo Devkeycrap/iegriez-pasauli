@@ -1,9 +1,6 @@
 // General imports
 import { useEffect, useRef, useState } from "react";
 
-// Components
-import Spinner from "./Spinner.component";
-
 // Styles & animations
 import styles from "../styles/wheel.module.scss";
 import { motion } from "framer-motion";

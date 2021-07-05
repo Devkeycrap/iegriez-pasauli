@@ -88,6 +88,7 @@ export function End({
           {leaderboard &&
             leaderboard.map((item: IUser, i) => (
               <div
+                key={i}
                 className={`${styles.user} ${i == 0 && styles.first} ${
                   i == 1 && styles.second
                 } ${i == 3 && styles.third}`}
