@@ -7,7 +7,7 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  stage: 1,
+  stage: 4,
   isActive: false,
   hasFinished: false,
 };
