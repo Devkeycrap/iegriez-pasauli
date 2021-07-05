@@ -2,13 +2,14 @@ import axios from "axios";
 
 import { REMOVE_SECTOR } from "../actions/types";
 
-const initialState = {
-  sectors: await axios.get("http://localhost:8000/api/gameItems").then((res) =>
+const initialState = async () => {
+  sectors: await axios.get("http://localhost:8000/api/gameItems").then((res) => 
     res.data.map((item) => ({
-      name: item.name,
-    }))
-  ),
-};
+        name: item.name,
+      })
+    )
+  )
+}
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
