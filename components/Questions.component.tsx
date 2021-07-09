@@ -80,7 +80,7 @@ export function Questions({
           let answeredQuestions: number = 0;
           for (let val of questions)
             if ("isCorrect" in val) answeredQuestions++;
-          if (answeredQuestions >= questions.length) {
+          if (answeredQuestions >= questions.length - 1) {
             switchStage(3);
           }
         }, 3000);
