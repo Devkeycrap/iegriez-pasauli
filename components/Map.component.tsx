@@ -149,6 +149,7 @@ export class Map extends Component<MapProps> {
           Uzkrātais punktu skaits: <span>{this.state.localPoints}</span>
         </h2>
         <MapContainer
+          maxBounds={[[50, 10]]}
           className={styles["map-container"]}
           maxZoom={4}
           center={[51.505, -0.09]}
@@ -158,6 +159,7 @@ export class Map extends Component<MapProps> {
           zoomControl={false}
         >
           <TileLayer
+            className={styles.tiles}
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://tile.jawg.io/jawg-dark/{z}/{x}/{y}{r}.png?access-token=9AUzah9Vs15KRZwaOGTebGYk3tGtWfglxz7QPv1jiGAzulcJlAfBvLCPf61wYOxI"
           />
@@ -175,7 +177,7 @@ export class Map extends Component<MapProps> {
               >
                 <Popup
                   onOpen={() => this.setState({ selectedIcon: item })}
-                  className={`${styles.popup}`}
+                  className={styles.popup}
                 >
                   {/* If user has answered, display information without inputs */}
                   {this.state.selectedIcon &&

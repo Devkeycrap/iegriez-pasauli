@@ -4,19 +4,28 @@
 .map {
   height: 100%;
   width: 100%;
+  z-index: 0;
   overflow: hidden;
 }
-.marker {
-  cursor: pointer;
-  background: none;
-  border: none;
+
+.tiles {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 500vw;
+    height: 215vh;
+    transform: translate(-25%, -25%);
+    mix-blend-mode: overlay;
+    background: $green;
+    z-index: 100;
+    pointer-events: none;
+  }
 }
-.marker img {
-  width: 40px;
-  height: 40px;
-  user-select: none;
-  -webkit-user-drag: none;
-}
+
 .btn-orange {
   margin-top: 12px;
   padding: 10px 15px;
@@ -26,6 +35,7 @@
 
 .popup {
   transition: none !important;
+  z-index: 4;
 }
 
 .popup > div:nth-child(1) {
