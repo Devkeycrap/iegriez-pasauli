@@ -14,6 +14,22 @@ export const fadeInUp = {
     },
   },
 };
+
+export const fadeInDown = {
+  initial: {
+    y: -60,
+    opacity: 0,
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: easing,
+    },
+  },
+};
+
 export const stagger = {
   animate: {
     transition: {
