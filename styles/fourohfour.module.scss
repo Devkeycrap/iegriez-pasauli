@@ -1,0 +1,55 @@
+@import "./variables.scss";
+
+.error {
+  text-align: center;
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  place-items: center;
+  font-family: "Montserrat";
+
+  h2 {
+    color: white;
+    margin: 50px 0;
+    font-weight: normal;
+    letter-spacing: 5px;
+    font-size: 28px;
+  }
+
+  h1 {
+    font-size: 64px;
+    color: white;
+  }
+}
+
+.sad {
+  color: $green;
+  font-size: 144px;
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 1280px) {
+  .error {
+    h1 {
+      font-size: 32px;
+    }
+    h2 {
+      font-size: 18px;
+    }
+  }
+  .sad {
+    font-size: 64px;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .error {
+    h1 {
+      font-size: 16px;
+    }
+    h2 {
+      font-size: 14px;
+      margin: 20px 0;
+    }
+  }
+}
