@@ -110,7 +110,7 @@ export class Map extends Component<MapProps> {
           },
         });
         try {
-          this.validateAnswer(res);
+          this.validateAnswer(correctAnswer);
         } catch (err) {
           if (err) {
             console.log(err);
@@ -119,10 +119,9 @@ export class Map extends Component<MapProps> {
       });
   };
 
-  private validateAnswer = (res) => {
-    // Update answers state with isCorrect and message to show if user has answered
-
-    if (res.data.isCorrect)
+  private validateAnswer = (answer) => {
+    console.log(answer);
+    if (answer.isCorrect)
       this.setState({ localPoints: this.state.localPoints + 1 });
 
     // If all questions are answered, then start next stage, else return to start or end game
