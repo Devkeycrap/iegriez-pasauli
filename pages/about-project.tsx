@@ -13,7 +13,7 @@ export default function AboutUs() {
     animate="animate"
     className={styles["about-game"]}
     >
-      <h4>Komanda</h4>
+      <h4>Projekts</h4>
       <div className={styles["page-wrapper"]}>
 
         <motion.div 
@@ -49,12 +49,7 @@ export default function AboutUs() {
                 Kristaps Mihelsons
               </h2>
 
-              <div>
-                <td>
-                  <h3>
-                    @
-                  </h3>
-                  
+              <div>      
                   <h1>
                     <a 
                     href="https://www.instagram.com/kristaps0s/"
@@ -62,12 +57,6 @@ export default function AboutUs() {
                       kristaps0s
                     </a>
                   </h1>
-                </td>
-
-                <td>
-                  <h3>
-                    #
-                  </h3>
                   <h1>
                     <a 
                     href="https://github.com/kristaps0s/"
@@ -75,7 +64,6 @@ export default function AboutUs() {
                       kristaps0s
                     </a>
                   </h1>
-                </td>
               </div>
             </div>
 
@@ -86,28 +74,18 @@ export default function AboutUs() {
                 Ronalds Palacis
               </h2>
                 <div>
-                  <td>
-                    <h3>
-                      @
-                    </h3>
-                    <h1>
-                      <a href="https://www.instagram.com/rwnalds/">
-                        rwnalds
-                      </a>
-                    </h1>
-                  </td>
-                  <td>
-                    <h3>
-                      #
-                    </h3>
-                    <h1>
-                      <a 
-                      href="https://github.com/devkeystuff/"
-                      >
-                        devkeystuff
-                      </a>
-                    </h1>
-                  </td>
+                  <h1>
+                    <a href="https://www.instagram.com/rwnalds/">
+                      rwnalds
+                    </a>
+                  </h1>
+                  <h1>
+                    <a 
+                    href="https://github.com/devkeystuff/"
+                    >
+                      devkeystuff
+                    </a>
+                  </h1>
                 </div>
             </div>
           </div>
