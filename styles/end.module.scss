@@ -1,25 +1,27 @@
 @import "./variables.scss";
 
-.end {
+.container {
   padding: 0 10%;
   display: grid;
   gap: 20px;
-  grid-template-columns: 1fr 1fr;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
 
   h2 {
-    margin-bottom: 10px;
     text-align: center;
     font-size: 64px;
     margin: 50px 0;
+    margin-top: 100px;
     color: white;
     font-family: "Montserrat", sans-serif;
     font-weight: bold;
   }
 
-  h4 {
+  h1 {
     margin: 50px 0;
     text-align: center;
-    font-size: 18px;
+    font-size: 64px;
     color: white;
     font-family: "Montserrat", sans-serif;
     font-weight: normal;
@@ -31,28 +33,23 @@
 
   h5 {
     font-size: 18px;
-    color: $green;
+    margin-top: 50px;
+    color: white;
     text-align: center;
     font-family: "Montserrat", sans-serif;
     font-weight: bold;
     text-transform: uppercase;
   }
-}
-
-.container {
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
 
   .result-table {
-    margin-top: 40px;
-    margin-left: 20px;
+    margin-top: 20px;
     display: grid;
     grid-template-columns: auto auto;
-
+    gap: 10px;
     h3 {
       margin: auto 0;
-      font-size: 20px;
+      font-size: 24px;
+      letter-spacing: 2px;
       font-weight: normal;
       color: white;
       font-family: "Montserrat", sans-serif;
@@ -61,10 +58,17 @@
 
     h4 {
       margin: 0;
-      font-size: 32px;
-      color: #9aca3c;
+      font-size: 50px;
+      color: $green;
+      text-align: right;
       font-family: "Montserrat", sans-serif;
       font-weight: bold;
+
+      span {
+        font-size: 24px;
+        color: white;
+        font-weight: normal;
+      }
     }
   }
 
@@ -76,64 +80,132 @@
 
     button {
       margin: 35px 0px;
+      padding: 20px 50px;
+    }
+  }
+}
+.confetti-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+.confetti {
+  position: absolute;
+}
+
+$colors: (#e72e44, #ffbf00, #12b8fa, #58d647);
+
+@for $i from 0 through 150 {
+  $w: random(8);
+  $l: random(100);
+  .confetti-#{$i} {
+    width: #{$w}px;
+    height: #{$w * 0.4}px;
+    background-color: nth($colors, random(3));
+    top: -10%;
+    left: unquote($l + "%");
+    opacity: random() + 0.5;
+    transform: rotate(#{random() * 360}deg);
+    animation: drop-#{$i}
+      unquote(4 + random() + "s")
+      unquote(random() + "s")
+      infinite;
+  }
+
+  @keyframes drop-#{$i} {
+    100% {
+      top: 110%;
+      left: unquote($l + random(15) + "%");
     }
   }
 }
 
-.leaderboard {
-  .leaderboard-container {
-    height: 500px;
-    overflow-y: auto;
-  }
-  .user {
-    padding: 0px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
-    height: 100px;
-  }
-  h3 {
-    margin: 0;
-    color: $green;
-    font-size: 28px;
-  }
-  h4 {
-    font-size: 24px;
-    color: white;
-  }
-}
+@media only screen and (max-width: 1280px) {
+  .container {
+    h2 {
+      font-size: 32px;
+      margin: 25px 0;
+      margin-top: 50px;
+    }
 
-@media only screen and (max-width: 1240px) {
-  .end {
-    grid-template-columns: none;
-    grid-template-rows: 1fr 1fr;
+    h1 {
+      margin: 25px 0;
+      font-size: 32px;
+      span {
+        font-weight: bold;
+      }
+    }
+    .result-table {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: auto auto;
+
+      h3 {
+        margin: auto 0;
+        font-size: 18px;
+        letter-spacing: 2px;
+        font-weight: normal;
+        color: white;
+        font-family: "Montserrat", sans-serif;
+        text-transform: uppercase;
+      }
+
+      h4 {
+        margin: 0;
+        font-size: 36px;
+        color: $green;
+        text-align: right;
+        font-family: "Montserrat", sans-serif;
+        font-weight: bold;
+
+        span {
+          font-size: 16px;
+          color: white;
+          font-weight: normal;
+        }
+      }
+    }
   }
 }
 
 @media only screen and (max-width: 624px) {
-  .end {
+  .container {
     h2 {
-      font-size: 24px;
+      font-size: 20px;
       margin: 25px 0;
+      margin-top: 50px;
     }
 
-    h4 {
-      font-size: 18px;
+    h1 {
+      font-size: 24px;
+      margin: 0;
+      span {
+        font-weight: bold;
+      }
     }
 
     h5 {
-      font-size: 16px;
+      font-size: 14px;
+      margin-top: 30px;
     }
-  }
-
-  .container {
     .result-table {
       h3 {
         font-size: 16px;
       }
       h4 {
-        font-size: 24px;
+        font-size: 18px;
+        span {
+          font-size: 14px;
+        }
+      }
+    }
+    .btn-container {
+      button {
+        padding: 12px 18px;
+        width: auto;
+        margin: 35px 0px;
       }
     }
   }
