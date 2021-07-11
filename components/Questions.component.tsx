@@ -72,7 +72,7 @@ export function Questions({
         if (res.data.is_correct == answer) {
           setPoints({
             ...points,
-            quiz: points.quiz + 5,
+            quiz: points.quiz + 1,
           });
         }
         setTimeout(() => {
