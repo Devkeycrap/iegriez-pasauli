@@ -60,8 +60,8 @@ export function Game({
     {
       color: "#F5F9EC",
       image: longboardPath,
-      name: "Longboard",
-      displayName: "Longbords",
+      name: "Skateboard",
+      displayName: "Skeitbords",
     },
     {
       color: "#FCFDF9",
