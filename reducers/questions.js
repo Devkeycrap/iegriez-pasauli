@@ -33,10 +33,6 @@ export default function reducer(state = initialState, action) {
         ...state,
         isLoading: false,
         questions: [],
-        currentQuestion: {
-          index: 0,
-          isCorrect: null,
-        },
       };
     default:
       return state;
