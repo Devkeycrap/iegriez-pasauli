@@ -2,6 +2,19 @@
     background: #495f41;;
     color: white;
   
+    h1 {
+      font-family: "Montserrat", sans-serif;
+      color: white;
+      font-size: 70px;
+      text-align: center;
+    }
+
+    p {
+      font-size: 28px;
+      text-align: center;
+      margin: auto;
+    }
+
     h4 {
       position: absolute;
       font-family: "Montserrat", sans-serif;
@@ -18,66 +31,72 @@
   }
   
   .page-wrapper {
-    padding: 0px 15%;
-  
-    .level {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      margin: 100px 0;
-    }
-    h1 {
-      font-size: 64px;
-      font-family: "Montserrat", sans-serif;
-      text-align: left;
-      text-transform: uppercase;
-  
-      span {
-        font-size: 128px;
+    padding: 8% 15%;
+
+    .project {
+      & > p {
+        padding-top: 2%;
+        width: 66%;
       }
     }
-    h5 {
-      color: #9aca3c;
-      text-transform: uppercase;
-      font-size: 24px;
-      font-weight: bold;
-      font-style: italic;
-      text-align: left;
+  
+    .creators {
+      padding-top: 20%;
+      padding-bottom: 6%;
+      & > h1 {
+        font-size: 70px;
+        text-align: center;
+      }
+
+      & > p {
+        font-size: 28px;
+        text-align: center;
+        margin: auto;
+        width: 55%;  
+      }
+
+      & > .wrapper {
+        display: flex;
+        padding: 5% 14%;
+
+        .sm {
+          margin: auto;
+
+          h2 {
+            white-space: nowrap;
+            color: #9aca3c;
+            font-size: 34px;
+            font-style: italic;
+            text-transform: uppercase;
+            padding-bottom: 2%;
+          }
+
+          td {
+            display: flex;
+            h3 {
+              color: #9aca3c;
+              -moz-user-select: none;
+              font-size: 55px;
+              width: fit-content;
+            }
+            h1 {
+              color: white;
+              text-transform: lowercase;
+              width: fit-content;
+              font-size: 55px;
+              width: fit-content;
+              &:hover {
+                transition: 0.15s;
+                color: rgb(219, 208, 208);
+              }
+            }
+          }
+        }
+      }
     }
   }
   
-  .title-wrapper {
-    position: relative;
-    width: 50%;
-    padding-right: 50px;
-  }
-  
-  .paragraph-wrapper {
-    width: 50%;
-    min-width: 400px;
-    padding: 50px 0;
-    p {
-      font-size: 24px;
-    }
-  }
-  
-  .restart {
-    position: relative;
-    margin: 40px 0;
-    div {
-      top: 50%;
-      left: 50%;
-      width: 50%;
-      transform: translate(-50%, -50%);
-      position: absolute;
-    }
-    svg {
-      opacity: 0.3;
-    }
-  }
-  
-  @media only screen and (max-width: 1200px) {
+  @media only screen and (max-width: 1500px) {
     .about-game {
       h4 {
         font-size: 16px;
@@ -85,81 +104,48 @@
         bottom: 30px;
       }
     }
-    .page-wrapper {
-      padding: 0 100px;
-      h1 {
-        text-align: center;
-      }
-      h5 {
-        text-align: center;
+    .creators > .wrapper {
+      flex-wrap: wrap; 
+      & > .sm {
+        padding-bottom: 5%;
+        width: max-content;
       }
     }
-    .title-wrapper {
-      width: 100%;
-      padding: 0;
-    }
-    .paragraph-wrapper {
-      width: 100%;
-      min-width: 0;
-    }
-  
-    .restart {
-      h1 {
-        font-size: 38px;
-      }
-      h5 {
-        font-size: 20px;
-      }
-    }
-  }
-  
-  @media only screen and (max-width: 624px) {
-    .about-game {
-      h4 {
-        font-size: 12px;
-        letter-spacing: 5px;
-  
-        left: 20px;
-        bottom: 30px;
-      }
-    }
-    .page-wrapper {
-      padding: 0 80px;
-      .level {
-        margin: 25px 0;
-      }
-      h1 {
-        text-align: center;
-        font-size: 24px;
-        span {
-          font-size: 32px;
-        }
-      }
-      h5 {
-        text-align: center;
-        font-size: 12px;
-      }
-      p {
-        font-size: 16px;
-      }
-    }
-    .title-wrapper {
-      width: 100%;
-      padding: 0;
-    }
-    .image-wrapper {
-      font-size: 14px;
-      text-align: center;
-    }
+
   }
 
-  .icon {
-    width: 40%;
-    height: 40%;
-    border-radius: 10px;
-    cursor: pointer;
-  }
-
-  .icon:hover {
-    filter: grayscale(100%);
-  }
+  // @media only screen and (max-width: 1330px) {
+  //   .about-game {
+  //     h4 {
+  //       font-size: 16px;
+  //       left: 10px;
+  //       bottom: 30px;
+  //     }
+  //   }
+  //   .page-wrapper {
+      
+  //     .creators > .wrapper {
+  //       flex-wrap: wrap; 
+  //       & > .sm {
+  //         padding-bottom: 5%;
+  //         width: max-content;
+  //       }
+  //     }
+  //   }
+  // }
+  
+  // @media only screen and (max-width: 624px) {
+  //   .about-game {
+  //     h4 {
+  //       font-size: 12px;
+  //       letter-spacing: 5px;
+  
+  //       left: 20px;
+  //       bottom: 30px;
+  //     }
+  //   }
+  //   .page-wrapper {
+      
+  //     }
+      
+  // }

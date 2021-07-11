@@ -1,45 +1,118 @@
 // Styles & animations
 import styles from "../styles/aboutus.module.scss";
+import { fadeInUp, stagger } from "../models/animations/animations";
+import { motion } from "framer-motion";
 
 // Team page
 export default function AboutUs() {
+
   return (
-    <div className={styles["about-game"]}>
+    <motion.div
+    exit={{ opacity: 0 }}
+    initial="initial"
+    animate="animate"
+    className={styles["about-game"]}
+    >
       <h4>Komanda</h4>
       <div className={styles["page-wrapper"]}>
-        <div className={styles.level}>
-          <div className={styles["image-wrapper"]}>
-            <img
-              className={styles.icon}
-              src="https://avatars.githubusercontent.com/u/66126144?v=4"
-              alt="Devkeycrap"
-              onClick={() => window.open("https://github.com/Devkeycrap")}
-            />
+
+        <motion.div 
+        variants={fadeInUp} 
+        className={styles.project}
+        >
+          <h1>
+            Par projektu
+          </h1>
+          <p>
+            Qui sint est voluptatem magni possimus. Nesciunt velit amet sed optio. Quas et suscipit deleniti quam blanditiis praesentium facilis. Iste aliquam quod facere facilis sed. Illum et impedit doloremque similique odit voluptatem aut neque.
+          </p>
+        </motion.div>
+
+        <motion.div 
+        variants={fadeInUp} 
+        className={styles.creators}
+        >
+          <h1>
+            Projekta veidotāji
+          </h1>
+          <p>
+            Ventspils Valsts 1. Ģimnāzijas skolēni,
+          </p>
+
+          <div 
+          className={styles["wrapper"]}
+          >
+            <div 
+            className={styles.sm}
+            >
+              <h2>
+                Kristaps Mihelsons
+              </h2>
+
+              <div>
+                <td>
+                  <h3>
+                    @
+                  </h3>
+                  
+                  <h1>
+                    <a 
+                    href="https://www.instagram.com/kristaps0s/"
+                    >
+                      kristaps0s
+                    </a>
+                  </h1>
+                </td>
+
+                <td>
+                  <h3>
+                    #
+                  </h3>
+                  <h1>
+                    <a 
+                    href="https://github.com/kristaps0s/"
+                    >
+                      kristaps0s
+                    </a>
+                  </h1>
+                </td>
+              </div>
+            </div>
+
+            <div 
+            className={styles.sm}
+            >
+              <h2>
+                Ronalds Palacis
+              </h2>
+                <div>
+                  <td>
+                    <h3>
+                      @
+                    </h3>
+                    <h1>
+                      <a href="https://www.instagram.com/rwnalds/">
+                        rwnalds
+                      </a>
+                    </h1>
+                  </td>
+                  <td>
+                    <h3>
+                      #
+                    </h3>
+                    <h1>
+                      <a 
+                      href="https://github.com/devkeystuff/"
+                      >
+                        devkeystuff
+                      </a>
+                    </h1>
+                  </td>
+                </div>
+            </div>
           </div>
-          <div className={styles["title-wrapper"]}>
-            <h1>
-              <span>R</span>onalds
-            </h1>
-            <h5>Palacis</h5>
-          </div>
-        </div>
-        <div className={styles.level}>
-          <div className={styles["image-wrapper"]}>
-            <img
-              className={styles.icon}
-              src="https://avatars.githubusercontent.com/u/71285785?s=400&v=4"
-              alt="krisaxh"
-              onClick={() => window.open("https://github.com/krisaxh")}
-            />
-          </div>
-          <div className={styles["title-wrapper"]}>
-            <h1>
-              <span>K</span>ristaps
-            </h1>
-            <h5>Mihelsons</h5>
-          </div>
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }
