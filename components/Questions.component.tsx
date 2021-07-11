@@ -132,14 +132,28 @@ export function Questions({
             {("isCorrect" in item && item.isCorrect == true && (
               <div className={styles["answer-message"]}>
                 {"Pareizi!".split("").map((char, i) => (
-                  <span key={i} style={{ animationDelay: i / 10 + "s" }}>
+                  <span
+                    className={styles.correct}
+                    key={i}
+                    style={{ animationDelay: i / 10 + "s" }}
+                  >
                     {char}
                   </span>
                 ))}
               </div>
             )) ||
               ("isCorrect" in item && !item.isCorrect && (
-                <div className={styles["answer-message"]}>Nepareizi!</div>
+                <div className={styles["answer-message"]}>
+                  {"Nepareizi!".split("").map((char, i) => (
+                    <span
+                      className={styles.incorrect}
+                      key={i}
+                      style={{ animationDelay: i / 10 + "s" }}
+                    >
+                      {char}
+                    </span>
+                  ))}
+                </div>
               )) ||
               (!item.isLoading && (
                 <div className={styles["btn-container"]}>
