@@ -3,7 +3,6 @@ import { CLEAR_GAME_OBJECT, SET_GAME_OBJECT } from "../actions/types";
 const initialState = {
   isLoaded: false,
   object: "",
-  translatedName: "",
 };
 
 export default function reducer(state = initialState, action) {
@@ -12,7 +11,6 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         object: action.payload.object,
-        translatedName: action.payload.translatedName,
         isLoaded: action.payload.isLoaded,
       };
     case CLEAR_GAME_OBJECT:
@@ -20,7 +18,6 @@ export default function reducer(state = initialState, action) {
         ...state,
         isLoaded: false,
         object: "",
-        translatedName: "",
       };
     default:
       return state;

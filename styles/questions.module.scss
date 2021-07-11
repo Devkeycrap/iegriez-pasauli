@@ -1,15 +1,12 @@
 @import "./variables.scss";
 
 .questions .btn-container {
-  margin-top: 40px;
   width: 50%;
 }
 
 .questions {
   text-align: center;
-}
 
-.questions {
   h1 {
     font-size: 72px;
     color: white;
@@ -23,25 +20,51 @@
   }
 }
 
-.questions .overlay {
-  width: 100%;
-  display: grid;
-  place-items: center;
-  z-index: 6;
-  h1 {
-    font-family: "Montserrat", sans-serif;
-    font-size: 64px;
-    color: white;
-    text-transform: uppercase;
+.question {
+  margin: 80px 0;
+  height: 100px;
+
+  .spinner svg {
+    width: 100px;
+    height: 100px;
   }
-  h2 {
-    font-family: "Montserrat", sans-serif;
-    font-size: 48px;
-    color: white;
-    text-transform: uppercase;
-  }
+
   .icon {
-    width: 200px;
+    width: 20px;
+  }
+}
+
+.answer-message {
+  position: relative;
+  animation-delay: 2s;
+  span {
+    font-size: 28px;
+    font-weight: bold;
+    font-style: italic;
+    position: relative;
+    opacity: 0;
+
+    animation: animateAnswer 0.4s ease-in-out forwards;
+  }
+  .correct {
+    color: $green;
+  }
+  .incorrect {
+    color: $pink;
+  }
+}
+
+@keyframes animateAnswer {
+  0% {
+    bottom: -0.5em;
+    opacity: 0;
+  }
+  50% {
+    bottom: 0.5em;
+  }
+  100% {
+    bottom: 0;
+    opacity: 1;
   }
 }
 

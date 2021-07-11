@@ -2,16 +2,12 @@ import {
   CLEAR_QUESTIONS,
   QUESTIONS_LOADED,
   QUESTIONS_LOADING,
-  SET_CURRENT_QUESTION,
+  SET_QUESTIONS,
 } from "../actions/types";
 
 const initialState = {
   isLoading: false,
   questions: [],
-  currentQuestion: {
-    index: 0,
-    isCorrect: null,
-  },
 };
 
 export default function reducer(state = initialState, action) {
@@ -27,20 +23,16 @@ export default function reducer(state = initialState, action) {
         questions: action.payload,
         isLoading: false,
       };
-    case SET_CURRENT_QUESTION:
+    case SET_QUESTIONS:
       return {
         ...state,
-        currentQuestion: action.payload,
+        questions: action.payload,
       };
     case CLEAR_QUESTIONS:
       return {
         ...state,
         isLoading: false,
         questions: [],
-        currentQuestion: {
-          index: 0,
-          isCorrect: null,
-        },
       };
     default:
       return state;

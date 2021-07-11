@@ -1,41 +1,28 @@
 import styles from "../styles/transitionScene.module.scss";
-import { Tween, SplitChars } from "react-gsap";
+import { motion } from "framer-motion";
+
 import { connect } from "react-redux";
+import { fadeInDown, fadeInUp, stagger } from "../models/animations/animations";
 
 export function TransitionScene({ title, description, isActive }) {
   return (
-    <div className={`${styles.transitionscene} ${isActive && styles.active}`}>
+    <motion.div
+      exit={{ opacity: 0 }}
+      initial="initial"
+      animate="animate"
+      className={`${styles.transitionscene} ${isActive && styles.active}`}
+    >
       {isActive && (
-        <div>
-          <h1>
-            <Tween
-              to={{
-                y: "0",
-                clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-              }}
-              stagger={0.05}
-            >
-              <SplitChars wrapper={<span className={styles.title} />}>
-                {title}
-              </SplitChars>
-            </Tween>
-          </h1>
-          <p>
-            <Tween
-              to={{
-                y: "0",
-                clipPath: "polygon(0 0, 120% 0, 120% 120%, 0 120%)",
-              }}
-              stagger={0.01}
-            >
-              <SplitChars wrapper={<span className={styles.description} />}>
-                {description}
-              </SplitChars>
-            </Tween>
-          </p>
-        </div>
+        <motion.div variants={stagger}>
+          <motion.h1 className={styles.title} variants={fadeInDown}>
+            {title}
+          </motion.h1>
+          <motion.p className={styles.description} variants={fadeInUp}>
+            {description}
+          </motion.p>
+        </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 }
 

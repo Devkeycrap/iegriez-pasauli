@@ -1,10 +1,6 @@
 import axios from "axios";
 
-import {
-  SET_CURRENT_QUESTION,
-  QUESTIONS_LOADING,
-  QUESTIONS_LOADED,
-} from "./types";
+import { SET_QUESTIONS, QUESTIONS_LOADING, QUESTIONS_LOADED } from "./types";
 
 // Get quiz questions
 export const getQuestions = (item) => (dispatch) => {
@@ -25,13 +21,10 @@ export const getQuestions = (item) => (dispatch) => {
 };
 
 // Set current current quiz question state
-export const setCurrentQuestion =
-  ({ index, isCorrect }) =>
-  (dispatch) =>
-    dispatch({
-      type: SET_CURRENT_QUESTION,
-      payload: {
-        index,
-        isCorrect,
-      },
-    });
+export const setQuestions = (newQuestions) => (dispatch) => {
+  console.log(newQuestions);
+  dispatch({
+    type: SET_QUESTIONS,
+    payload: newQuestions,
+  });
+};
