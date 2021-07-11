@@ -18,6 +18,6 @@ module.exports = {
     return config;
   },
   env: {
-    HOST: "https://iegriez-pasauli.herokuapp.com",
+    HOST: "https://iegriez-pasauli-backend.herokuapp.com",
   },
 };
