@@ -11,6 +11,7 @@ import { fadeInUp, stagger } from "../models/animations/animations";
 import { setPoints } from "../actions/points";
 import { endGame, switchStage } from "../actions/game";
 import { clearGameObj } from "../actions/gameObj";
+import { playTransition } from "../actions/transition";
 
 interface WordProps {
   endGame: () => void;
@@ -188,33 +189,40 @@ export class Words extends Component<WordProps> {
   }
 
   engine() {
+
     clearInterval(this.mainthread);
     this.mainthread = setInterval(() => {
       this.newObj();
       this.newTick(document.getElementsByClassName("wordObj"));
     }, 400);
 
-    setTimeout(() => {
-      clearInterval(this.mainthread);
-      this.props.clearGameObj();
-      if (this.props.sectors.length == 0) {
-        this.props.setPoints((points) => ({
-          ...points,
-          words: points.words + this.state.points,
-        }));
-        this.props.endGame();
-      } else {
-        this.props.setPoints((points) => ({
-          ...points,
-          words: points.words + this.state.points,
-        }));
-        this.props.switchStage(1);
-      }
-    }, 15000);
+    // setTimeout(() => {
+    //   clearInterval(this.mainthread);
+    //   this.props.clearGameObj();
+    //   if (this.props.sectors.length == 0) {
+    //     this.props.setPoints((points) => ({
+    //       ...points,
+    //       words: points.words + this.state.points,
+    //     }));
+    //     this.props.endGame();
+    //   } else {
+    //     this.props.setPoints((points) => ({
+    //       ...points,
+    //       words: points.words + this.state.points,
+    //     }));
+    //     this.props.switchStage(1);
+    //   }
+    // }, 15000);
   }
 
   componentDidMount() {
     this.setState({ inBrowser: true });
+
+    // playTransition({
+    //   title: "Krāj vārdus!",
+    //   description: "Cik vārdus vari sakrāt tu?",
+    //   length: 3000,
+    // });
 
     let seconds = 3;
     /* Countdown timer logic. */
