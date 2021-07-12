@@ -7,7 +7,7 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  stage: 4,
+  stage: 1,
   isActive: false,
   hasFinished: false,
 };
@@ -17,7 +17,7 @@ export default function reducer(state = initialState, action) {
     case START_GAME:
       return {
         ...state,
-        stage: 4,
+        stage: 1,
         isActive: true,
         hasFinished: false,
       };
