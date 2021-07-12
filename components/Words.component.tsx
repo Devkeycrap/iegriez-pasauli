@@ -196,23 +196,23 @@ export class Words extends Component<WordProps> {
       this.newTick(document.getElementsByClassName("wordObj"));
     }, 400);
 
-    // setTimeout(() => {
-    //   clearInterval(this.mainthread);
-    //   this.props.clearGameObj();
-    //   if (this.props.sectors.length == 0) {
-    //     this.props.setPoints((points) => ({
-    //       ...points,
-    //       words: points.words + this.state.points,
-    //     }));
-    //     this.props.endGame();
-    //   } else {
-    //     this.props.setPoints((points) => ({
-    //       ...points,
-    //       words: points.words + this.state.points,
-    //     }));
-    //     this.props.switchStage(1);
-    //   }
-    // }, 15000);
+    setTimeout(() => {
+      clearInterval(this.mainthread);
+      this.props.clearGameObj();
+      if (this.props.sectors.length == 0) {
+        this.props.setPoints((points) => ({
+          ...points,
+          words: points.words + this.state.points,
+        }));
+        this.props.endGame();
+      } else {
+        this.props.setPoints((points) => ({
+          ...points,
+          words: points.words + this.state.points,
+        }));
+        this.props.switchStage(1);
+      }
+    }, 15000);
   }
 
   componentDidMount() {
