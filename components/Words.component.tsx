@@ -193,10 +193,10 @@ export class Words extends Component<WordProps> {
     setTimeout(() => {
       clearInterval(this.mainthread);
       this.props.clearGameObj();
-      this.props.setPoints((points) => ({
-        ...points,
-        words: points.words + this.state.points,
-      }));
+      this.props.setPoints({
+        ...this.props.points,
+        words: this.props.points.words + this.state.points,
+      });
       this.props.endGame();
     }, 15000);
   }
@@ -254,6 +254,7 @@ export class Words extends Component<WordProps> {
             {this.state.currActors.map((obj, i) => {
               return (
                 <label
+                  key={i}
                   id={obj.date}
                   style={{
                     left: obj.pos.x,
@@ -286,8 +287,8 @@ export class Words extends Component<WordProps> {
             <div className={styles["points-backdrop"]}>
               <h2>+{this.state.points}</h2>
             </div>
-            {this.state.corrActors.map((obj) => {
-              return <h2>{obj}</h2>;
+            {this.state.corrActors.map((obj, i) => {
+              return <h2 key={i}>{obj}</h2>;
             })}
           </div>
         </motion.div>
