@@ -19,6 +19,7 @@
 
 .game-info {
   position: absolute;
+  pointer-events: none;
   width: 100vw;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -29,6 +30,7 @@
     rgba(155, 202, 60, 0)
   );
   button {
+    pointer-events: visible;
     width: 40%;
     margin: auto;
     max-width: 200px;

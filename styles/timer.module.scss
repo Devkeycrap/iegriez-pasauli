@@ -1,5 +1,6 @@
 .timer svg {
   user-select: none;
+  pointer-events: none;
   z-index: 10;
   margin: auto;
   padding: 10px 0;

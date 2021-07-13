@@ -69,7 +69,8 @@ export function Questions({
           loading: false,
         };
         setQuestions(newQuestions);
-        if (res.data.is_correct == answer) {
+        console.log(res.data.is_correct);
+        if (res.data[0].is_correct == answer) {
           setPoints({
             ...points,
             quiz: points.quiz + 1,

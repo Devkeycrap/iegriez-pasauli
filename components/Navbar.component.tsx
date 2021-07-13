@@ -28,9 +28,9 @@ export function Navbar({ isActive }) {
           </Link>
         </li>
         <li>
-          <Link href="/about-us">
-            <a className={router.pathname === "/about-us" ? styles.active : ""}>
-              Komanda
+          <Link href="/about-project">
+            <a className={router.pathname === "/about-project" ? styles.active : ""}>
+              Projekts
             </a>
           </Link>
         </li>

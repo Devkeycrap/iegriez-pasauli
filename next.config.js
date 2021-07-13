@@ -1,4 +1,7 @@
 module.exports = {
+  future: {
+    webpack5: true,
+  },
   webpack: (config, options) => {
     config.module.rules.push({
       test: /\.svg$/,
@@ -15,6 +18,6 @@ module.exports = {
     return config;
   },
   env: {
-    HOST: "http://localhost:8000",
+    HOST: "https://iegriez-pasauli-backend.herokuapp.com",
   },
 };

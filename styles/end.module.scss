@@ -86,6 +86,8 @@
 }
 .confetti-container {
   position: absolute;
+  overflow: hidden;
+  pointer-events: none;
   top: 0;
   left: 0;
   width: 100vw;
@@ -98,7 +100,7 @@
 $colors: (#e72e44, #ffbf00, #12b8fa, #58d647);
 
 @for $i from 0 through 150 {
-  $w: random(8);
+  $w: random(12);
   $l: random(100);
   .confetti-#{$i} {
     width: #{$w}px;

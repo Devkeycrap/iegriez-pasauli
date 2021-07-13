@@ -70,6 +70,7 @@ export function End({
       <div className={styles["confetti-container"]}>
         {Array.from(Array(149).keys()).map((item) => (
           <div
+            key={item}
             className={`${styles.confetti} ${styles[`confetti-${item}`]}`}
           ></div>
         ))}

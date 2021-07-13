@@ -2,6 +2,12 @@
     background: #495f41;;
     color: white;
   
+    h1 {
+      font-family: "Montserrat", sans-serif;
+      color: white;
+      text-align: center;
+    }
+
     h4 {
       position: absolute;
       font-family: "Montserrat", sans-serif;
@@ -14,70 +20,85 @@
       text-transform: uppercase;
       letter-spacing: 10px;
       -webkit-user-select: none;
+      user-select: none;
     }
   }
   
   .page-wrapper {
-    padding: 0px 15%;
-  
-    .level {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      margin: 100px 0;
-    }
-    h1 {
-      font-size: 64px;
-      font-family: "Montserrat", sans-serif;
-      text-align: left;
-      text-transform: uppercase;
-  
-      span {
-        font-size: 128px;
+
+    .project {
+      padding-top: 13%;
+      padding-bottom: 14%;
+      & > h1 {
+        font-size: 60px;
+      }
+      & > p {
+        padding-top: 2%;
+        width: 50%;
+        margin: auto;
+        text-align: center;
+        font-size: 30px;
       }
     }
-    h5 {
-      color: #9aca3c;
-      text-transform: uppercase;
-      font-size: 24px;
-      font-weight: bold;
-      font-style: italic;
-      text-align: left;
+  
+    .creators {
+      padding-top: 4%;
+      & > h1 {
+        text-align: center;
+        font-size: 60px;
+      }
+
+      & > p {
+        margin: auto;
+        width: 50%;
+        font-size: 25px;
+        text-align: center;
+      }
+
+      & > .wrapper {
+        display: flex;
+        justify-content: center;
+        padding-bottom: 14%;
+        padding-top: 1%;
+        .sm {
+          display: flex;
+          flex-direction: column;
+          padding: 2%;
+
+          h2 {
+            color: #9aca3c;
+            font-style: italic;
+            font-size: 40px;
+          }
+
+          h1 {
+            color: white;
+            font-size: 50px;
+            text-transform: lowercase;
+            width: fit-content;
+            &::before {
+              color: #9aca3c;
+            }
+
+            &:nth-child(odd)::before {
+              content: "@";
+            }
+
+            &:nth-child(even)::before {
+              content: "#";
+            }
+            
+            &:hover {
+              transition: 0.15s;
+              color: rgb(219, 208, 208);
+            }
+          }
+        }
+      }
     }
   }
-  
-  .title-wrapper {
-    position: relative;
-    width: 50%;
-    padding-right: 50px;
-  }
-  
-  .paragraph-wrapper {
-    width: 50%;
-    min-width: 400px;
-    padding: 50px 0;
-    p {
-      font-size: 24px;
-    }
-  }
-  
-  .restart {
-    position: relative;
-    margin: 40px 0;
-    div {
-      top: 50%;
-      left: 50%;
-      width: 50%;
-      transform: translate(-50%, -50%);
-      position: absolute;
-    }
-    svg {
-      opacity: 0.3;
-    }
-  }
-  
-  @media only screen and (max-width: 1200px) {
+
+  @media only screen and (max-width: 1220px) {
     .about-game {
       h4 {
         font-size: 16px;
@@ -86,34 +107,58 @@
       }
     }
     .page-wrapper {
-      padding: 0 100px;
-      h1 {
-        text-align: center;
+
+      .project {
+        padding-top: 20%;
+        padding-bottom: 25%;
+        & > h1 {
+          margin: auto;
+          padding-bottom: 1%;
+          font-size: 50px;
+        }
+        & > p {
+          font-size: 23px;
+          text-align: center;
+          width: 70%;
+          margin: auto;
+        }
       }
-      h5 {
-        text-align: center;
-      }
-    }
-    .title-wrapper {
-      width: 100%;
-      padding: 0;
-    }
-    .paragraph-wrapper {
-      width: 100%;
-      min-width: 0;
-    }
-  
-    .restart {
-      h1 {
-        font-size: 38px;
-      }
-      h5 {
-        font-size: 20px;
+      
+      .creators {
+        padding-bottom: 20%;
+        & > h1 {
+          text-align: center;
+          margin: auto;
+          font-size: 50px;
+        }
+        & > p {
+          font-size: 24px;
+          width: 80%;
+          margin: auto;
+          text-align: center;
+          padding-bottom: 2%;
+        }
+        .wrapper {
+          
+          flex-wrap: wrap; 
+          padding-bottom: 3%;
+          text-align: left;
+          & > .sm {
+            padding-bottom: 2%;
+            width: max-content;
+            & > h2 {
+              font-size: 28px;
+            }
+            h1 {
+              font-size: 40px;
+            }
+          }
+        }
       }
     }
   }
   
-  @media only screen and (max-width: 624px) {
+  @media only screen and (max-width: 719px) {
     .about-game {
       h4 {
         font-size: 12px;
@@ -123,43 +168,57 @@
         bottom: 30px;
       }
     }
-    .page-wrapper {
-      padding: 0 80px;
-      .level {
-        margin: 25px 0;
+
+    .project {
+      padding-top: 0%;
+      padding-bottom: 10%;
+      & > h1 {
+        margin: auto;
+        width: min-content;
+        padding-bottom: 4%;
+        font-size: 100px;
       }
-      h1 {
+      & > p {
+        font-size: 28px;
+        margin: auto;
         text-align: center;
-        font-size: 24px;
-        span {
-          font-size: 32px;
+        width: 55%;
+      }
+    }
+
+    .creators {
+      text-align: center;
+      padding-bottom: 8%;
+      & > h1 {
+        font-size: 100px;
+        width: min-content;
+        margin: auto;
+      }
+      & > p {
+        font-size: 30px;
+        font-style: italic;
+        text-align: center;
+        padding-top: 2%;
+        padding-bottom: 10%;
+        width: min-content;
+      }
+      .wrapper {
+        flex-wrap: wrap; 
+        flex-direction: column;
+        padding-bottom: 7%;
+        text-align: left;
+        & > .sm {
+          margin: auto;
+          width: max-content;
+          h2 {
+            font-size: 45px;
+          }
+          h1 {
+            font-size: 55px;
+            width: min-content;
+            margin-left: 3%;
+          }
         }
       }
-      h5 {
-        text-align: center;
-        font-size: 12px;
-      }
-      p {
-        font-size: 16px;
-      }
     }
-    .title-wrapper {
-      width: 100%;
-      padding: 0;
-    }
-    .image-wrapper {
-      font-size: 14px;
-      text-align: center;
-    }
-  }
-
-  .icon {
-    width: 40%;
-    height: 40%;
-    border-radius: 10px;
-    cursor: pointer;
-  }
-
-  .icon:hover {
-    filter: grayscale(100%);
   }
