@@ -148,11 +148,10 @@ export class Map extends Component<MapProps> {
           Uzkrātais punktu skaits: <span>{this.state.localPoints}</span>
         </h2>
         <MapContainer
-          maxBounds={[[50, 10]]}
           className={styles["map-container"]}
-          maxZoom={4}
+          maxZoom={5}
           center={[51.505, -0.09]}
-          zoom={4}
+          zoom={5}
           style={{ width: "100vw", height: "100vh", zIndex: 0 }}
           scrollWheelZoom={false}
           zoomControl={false}
