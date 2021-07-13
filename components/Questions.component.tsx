@@ -110,7 +110,7 @@ export function Questions({
               variants={fadeInUp}
               style={{ WebkitUserSelect: "none" }}
             >
-              {item.question}
+              <span>{id + 1}.</span> {item.question}
               {"isCorrect" in item &&
                 (!item.isCorrect != item.answer ? (
                   <span>
@@ -159,12 +159,14 @@ export function Questions({
               (!item.isLoading && (
                 <div className={styles["btn-container"]}>
                   <button
+                    disabled={questions.find((question) => question.isLoading)}
                     onClick={() => submitAnswer(item.id, true)}
                     className={`${styles.btn} ${styles["btn-orange"]}`}
                   >
                     Patiesība
                   </button>
                   <button
+                    disabled={questions.find((question) => question.isLoading)}
                     onClick={() => submitAnswer(item.id, false)}
                     className={`${styles.btn} ${styles["btn-neutral"]}`}
                   >
