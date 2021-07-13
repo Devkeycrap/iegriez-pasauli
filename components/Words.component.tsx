@@ -18,6 +18,7 @@ interface WordProps {
   clearGameObj: () => void;
   switchStage: (stage: number) => void;
   setPoints: (points: any) => void;
+  playTransition: (props: any) => void;
   points: {
     quiz: number;
     map: number;
@@ -203,11 +204,11 @@ export class Words extends Component<WordProps> {
   componentDidMount() {
     this.setState({ inBrowser: true });
 
-    // playTransition({
-    //   title: "Krāj vārdus!",
-    //   description: "Cik vārdus vari sakrāt tu?",
-    //   length: 3000,
-    // });
+    this.props.playTransition({
+      title: "Krāj vārdus!",
+      description: "Cik vārdus vari sakrāt tu?",
+      length: 3000,
+    });
 
     let seconds = 3;
     /* Countdown timer logic. */
@@ -312,4 +313,5 @@ export default connect(mapStateToProps, {
   setPoints,
   clearGameObj,
   switchStage,
+  playTransition,
 })(Words);
