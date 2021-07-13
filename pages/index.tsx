@@ -15,11 +15,8 @@ export default function Home() {
       className={styles.home}
     >
       <div>
-        <h1>
-          Vai zini, kas ir <br />
-          <span>aprites ekonomika</span>?
-        </h1>
-        <p>Pārbaudi savas zināšanas, spēlējot spēli “Iegriez pasauli”!</p>
+        <h1>RITenis</h1>
+        <p>Aprites ekonomikas spēle jauniešiem</p>
         <Link href="game">
           <button className={`${styles.btn}  ${styles["btn-orange"]}`}>
             Sākt spēli

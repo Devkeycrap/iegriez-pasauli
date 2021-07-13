@@ -16,8 +16,8 @@
     position: absolute;
     left: 0;
     top: 0;
-    width: 500vw;
-    height: 215vh;
+    width: 1000vw;
+    height: 710vh;
     transform: translate(-25%, -25%);
     mix-blend-mode: overlay;
     background: $green;
@@ -104,11 +104,12 @@
 
 .counter {
   position: absolute;
+  pointer-events: none;
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: "Montserrat", sans-serif;
-  bottom: 100px;
+  bottom: 65px;
   left: 50%;
   height: fit-content;
   font-size: 16px;

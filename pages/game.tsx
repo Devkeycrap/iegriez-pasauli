@@ -129,7 +129,7 @@ export function Game({
             </div>
           </div>
           <div className={styles["stage-container"]}>
-            {stage === 1 && <Wheel sectors={sectors} setSectors={setSectors} />}
+            {stage === 1 && <Wheel sectors={sectors} />}
             {stage === 2 && <Questions />}
             {stage === 3 && <Map />}
             {stage === 4 && <Words sectors={sectors} />}

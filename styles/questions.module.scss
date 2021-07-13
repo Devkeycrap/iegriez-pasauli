@@ -8,7 +8,7 @@
   text-align: center;
   position: relative;
   top: 110px;
-  padding: 200px;
+  padding: 200px 0;
 
   h1 {
     font-size: 72px;
@@ -41,6 +41,7 @@
   position: relative;
   animation-delay: 2s;
   span {
+    text-transform: uppercase;
     font-size: 28px;
     font-weight: bold;
     font-style: italic;
@@ -87,6 +88,7 @@
     width: 80%;
   }
   .questions {
+    padding: 20px 0;
     h1 {
       font-size: 24px;
     }
@@ -97,6 +99,12 @@
   .overlay {
     .icon {
       width: 150px;
+    }
+  }
+
+  .answer-message {
+    span {
+      font-size: 12px;
     }
   }
 }

@@ -94,7 +94,7 @@ export function Questions({
       animate="animate"
       className={styles.questions}
     >
-      <h1 style={{ WebkitUserSelect: "none" }}>Patiesība vai meli</h1>
+      <h1 style={{ WebkitUserSelect: "none" }}>Izvērtē apgalvojumus!</h1>
 
       {isLoading && <Spinner />}
       {questions &&
