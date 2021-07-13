@@ -1,9 +1,6 @@
 // General imports
 import { useEffect, useRef, useState } from "react";
 
-// Components
-import Spinner from "./Spinner.component";
-
 // Styles & animations
 import styles from "../styles/wheel.module.scss";
 import { motion } from "framer-motion";
@@ -20,7 +17,6 @@ export function Wheel({
   setGameObj,
   gameObj,
   sectors,
-  setSectors,
   playTransition,
 }) {
   const spinRef = useRef(null);
@@ -51,12 +47,6 @@ export function Wheel({
       description: "Iegriez ratu un sāc spēli!",
       length: 3000,
     });
-    if (sectors.length == 1) {
-      setGameObj({
-        object: sectors[0].name,
-        translatedName: sectors[0].displayName,
-      });
-    }
 
     tot = sectors.length;
     canvas = canvasRef.current;
@@ -92,12 +82,15 @@ export function Wheel({
     ctx.translate(rad, rad);
     ctx.rotate(ang + arc / 2);
     ctx.translate(250, -60);
+
+    // Set the scale of particular icons
     if (sector.name == "Bananas") ctx.scale(0.13, 0.13);
-    else if (sector.name == "Longboard") ctx.scale(0.3, 0.3);
+    else if (sector.name == "Skateboard") ctx.scale(0.3, 0.3);
     else if (sector.name == "Hamburger") ctx.scale(0.3, 0.3);
     else {
       ctx.scale(0.4, 0.4);
     }
+
     ctx.fill(path);
     ctx.restore();
   }
@@ -147,15 +140,8 @@ export function Wheel({
       object: currentSectorParams.object,
       translatedName: currentSectorParams.text,
     });
-    removeSector(currentSectorParams.object);
-    if (sectors.length == 1) {
-      setSectors([]);
-    }
     switchStage(2);
   }
-
-  const removeSector = (object) =>
-    setSectors((sectors) => sectors.filter((sector) => sector.name !== object));
 
   return (
     <motion.div exit={{ opacity: 0 }} className={styles["wheel-container"]}>

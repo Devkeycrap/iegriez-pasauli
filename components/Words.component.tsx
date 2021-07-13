@@ -164,11 +164,7 @@ export class Words extends Component<WordProps> {
         ...this.props.points,
         words: this.props.points.words + this.state.points,
       });
-      if (this.props.sectors.length == 0) {
-        this.props.endGame();
-      } else {
-        this.props.switchStage(1);
-      }
+      this.props.endGame();
     }, 15000);
   }
 

@@ -8,9 +8,6 @@ import IPoints from "../models/Points.model";
 // Redux
 import { connect } from "react-redux";
 import { endGame, restartGame } from "../actions/game";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import IUser from "../models/User.model";
 
 export function End({
   endGame,
@@ -21,22 +18,6 @@ export function End({
   restartGame: () => void;
   points: IPoints;
 }) {
-  const [leaderboard, setLeaderboard] = useState<IUser[]>([]);
-
-  useEffect(() => {
-    axios.get("http://localhost:8000/api/users/").then((res) => {
-      const sortedLeaderboard = sortLeaderboard(res.data);
-      setLeaderboard(sortedLeaderboard);
-    });
-  }, []);
-
-  const sortLeaderboard = (leaderboard: IUser[]) => {
-    const sortedLeaderboard = leaderboard.sort((a, b) =>
-      a.points > b.points ? -1 : 1
-    );
-    return sortedLeaderboard;
-  };
-
   const getTotalPoints = (): number => {
     return (
       Object.keys(points).reduce(
@@ -61,11 +42,11 @@ export function End({
       </h1>
       <h5>Tavi rezultāti</h5>
       <div className={styles["result-table"]}>
-        <h3>Patiesība/meli</h3>
+        <h3>Izvērtē apgalvojumus!</h3>
         <h4>
           {points.quiz} <span>punkti</span>
         </h4>
-        <h3>Pasaules karte </h3>
+        <h3>Karte </h3>
         <h4>
           {points.map} <span>punkti</span>
         </h4>
