@@ -1,70 +1,183 @@
 @import "./variables.scss";
 
 .home {
+  width: 100%;
   position: relative;
-  padding: 50px;
-  text-align: center;
-  background-image: url("/img/bg-min.jpg");
-  background-size: cover;
-  z-index: 0;
+  overflow: hidden;
+}
 
-  &::after {
+.main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 80%;
+  align-items: flex-start;
+  padding: 100px;
+
+  h1 {
+    font-size: 144px;
+    color: $green;
+    font-weight: 1000;
+    font-family: "Montserrat", sans-serif;
+  }
+
+  p {
+    color: #686767;
+    font-style: italic;
+    font-size: 32px;
+    font-family: "Open Sans", sans-serif;
+    margin-bottom: 64px;
+  }
+
+  button {
+    width: 300px;
+    padding: 20px 50px;
+  }
+}
+
+.footer {
+  position: absolute;
+  padding: 100px;
+  left: 0;
+  bottom: 0;
+  display: grid;
+  gap: 50px;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+
+  img {
+    width: 180px;
+  }
+
+  p {
+    color: #686767;
+  }
+}
+
+.animation-container {
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+}
+
+.globe-container {
+  width: 1000px;
+  height: 1000px;
+  position: absolute;
+
+  animation: rotate 20s linear infinite;
+}
+
+.globe {
+  position: absolute;
+  width: 1000px;
+  opacity: 0.5;
+}
+
+.ball {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  top: 50%;
+  left: 0;
+  transform: translate(-200%, -50%);
+  background: $green;
+  border-radius: 50%;
+
+  &::before {
     content: "";
+
     width: 100%;
     height: 100%;
     position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -2;
-    background: linear-gradient(to bottom, $dark-green, rgba(73, 95, 65, 0.75));
+    background: $green;
+    border-radius: 50%;
+
+    animation: pulse 1s ease-in-out infinite;
+  }
+}
+.orbit {
+  position: absolute;
+  width: 1300px;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
   }
 }
 
-.home > div {
-  z-index: 3;
+@keyframes pulse {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(2);
+  }
 }
 
-.home h1 {
-  font-size: 5vw;
-  font-weight: 900;
-  color: white;
-  margin: 20px 0;
-  margin-top: 15vh;
-  font-family: "Montserrat", sans-serif;
-}
-.home h1 span {
-  color: $green;
-  font-style: italic;
-}
-
-.home p {
-  color: white;
-  font-style: italic;
-  font-size: 24px;
-}
-
-.btn-orange {
-  padding: 20px 100px;
-  font-size: 18px;
-  margin-top: 60px;
+@media only screen and (max-width: 1500px) {
+  .animation-container {
+    transform: scale(0.8);
+  }
 }
 
 @media only screen and (max-width: 1224px) {
-  .home p {
-    font-size: 16px;
+  .home {
+    h1 {
+      font-size: 80px;
+    }
+
+    p {
+      font-size: 16px;
+    }
   }
-  .btn-orange {
-    padding: 20px 30px;
-    font-size: 14px;
+  .animation-container {
+    transform: scale(0.6);
   }
 }
 
+@media only screen and (max-width: 1000px) {
+  .main {
+    button {
+      width: 200px;
+    }
+  }
+
+  .animation-container {
+    top: 0;
+    left: 0;
+    transform: scale(0.2);
+  }
+  .footer {
+    grid-template-columns: none;
+    grid-template-rows: auto auto;
+
+    p {
+      font-size: 12px;
+    }
+  }
+}
 @media only screen and (max-width: 640px) {
+  .footer {
+    padding: 50px;
+  }
+  .main {
+    padding: 50px;
+    height: 75%;
+  }
   .btn-orange {
     padding: 15px 30px;
   }
   .home h1 {
-    font-size: 8vw;
+    font-size: 48px;
   }
   .home p {
     font-size: 14px;
