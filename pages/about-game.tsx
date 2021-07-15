@@ -134,7 +134,6 @@ export default function AboutUs() {
               focusable="false" 
               data-prefix="fas" 
               data-icon="trophy" 
-              class="svg-inline--fa fa-trophy fa-w-18" 
               role="img" xmlns="http://www.w3.org/2000/svg" 
               viewBox="0 0 576 512"
               >
