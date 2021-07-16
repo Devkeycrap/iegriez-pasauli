@@ -14,24 +14,24 @@ export default function Home() {
       animate={{ opacity: 1 }}
       className={styles.home}
     >
-      <div className={styles.main}>
-        <div>
+      <div className={styles.content}>
+        <div className={styles.main}>
           <h1>RITenis</h1>
           <p>Aprites ekonomikas spēle jauniešiem</p>
+          <Link href="game">
+            <button className={`${styles.btn}  ${styles["btn-orange"]}`}>
+              Sākt spēli
+            </button>
+          </Link>
         </div>
-        <Link href="game">
-          <button className={`${styles.btn}  ${styles["btn-orange"]}`}>
-            Sākt spēli
-          </button>
-        </Link>
-      </div>
-      <div className={styles.footer}>
-        <img src="/img/ek-logo.jpg" alt="Eiropas Komisija" />
-        <p>
-          Spēle tapusi sadarbībā ar biedrību "Eiropas Kustība Latvijā" un SIA
-          “ZAAO” dabas un tehnoloģiju parku “Urda”. Izstrādātāji: Ronalds
-          Palacis & Kristaps Mihelsons <br /> © Eiropas Savienība 2021
-        </p>
+        <div className={styles.footer}>
+          <img src="/img/ek-logo.jpg" alt="Eiropas Komisija" />
+          <p>
+            Spēle tapusi sadarbībā ar biedrību "Eiropas Kustība Latvijā" un SIA
+            “ZAAO” dabas un tehnoloģiju parku “Urda”. Izstrādātāji: Ronalds
+            Palacis & Kristaps Mihelsons <br /> © Eiropas Savienība 2021
+          </p>
+        </div>
       </div>
       <div className={styles["animation-container"]}>
         <div className={styles["globe-container"]}>
