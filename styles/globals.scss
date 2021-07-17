@@ -2,9 +2,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,700&display=swap%27");
 @import "./variables.scss";
 
+* {
+  scrollbar-color: $green white;
+  scrollbar-width: thin;
+}
+
 html,
 body {
   font-family: "Open Sans", sans-serif;
+  overflow: hidden;
 }
 
 a {
@@ -24,4 +30,22 @@ a {
   display: grid;
   overflow: auto;
   grid-template-rows: auto 1fr;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(255, 255, 255);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $green;
+  border: 3px solid white;
+  border-radius: 10px;
+  &:hover {
+    background: #8eb938;
+  }
 }
