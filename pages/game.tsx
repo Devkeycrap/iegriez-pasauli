@@ -61,7 +61,7 @@ export function Game({
       color: "#F5F9EC",
       image: longboardPath,
       name: "Skateboard",
-      displayName: "Skeitbords",
+      displayName: "Skrituļdēlis",
     },
     {
       color: "#FCFDF9",

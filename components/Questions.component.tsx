@@ -163,14 +163,14 @@ export function Questions({
                     onClick={() => submitAnswer(item.id, true)}
                     className={`${styles.btn} ${styles["btn-orange"]}`}
                   >
-                    Patiesība
+                    Tā ir!
                   </button>
                   <button
                     disabled={questions.find((question) => question.isLoading)}
                     onClick={() => submitAnswer(item.id, false)}
                     className={`${styles.btn} ${styles["btn-neutral"]}`}
                   >
-                    Meli
+                    Diezin vai!
                   </button>
                 </div>
               )) || (

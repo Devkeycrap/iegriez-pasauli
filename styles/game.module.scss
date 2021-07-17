@@ -5,7 +5,6 @@
 }
 
 .stage-container {
-  height: 100vh;
   display: grid;
   place-items: center;
 }
@@ -13,7 +12,6 @@
 .game {
   display: grid;
   grid-template-rows: auto 1fr;
-  height: 100vh;
   background: $dark-green;
 }
 
