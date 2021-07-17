@@ -42,8 +42,8 @@ export function Game({
     {
       color: "#B8D97A",
       image: bananasPath,
-      name: "Bananas",
-      displayName: "Banāni",
+      name: "Banana",
+      displayName: "Banāns",
     },
     {
       color: "#CCE49F",

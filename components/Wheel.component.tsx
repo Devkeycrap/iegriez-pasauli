@@ -84,7 +84,7 @@ export function Wheel({
     ctx.translate(250, -60);
 
     // Set the scale of particular icons
-    if (sector.name == "Bananas") ctx.scale(0.13, 0.13);
+    if (sector.name == "Banana") ctx.scale(0.13, 0.13);
     else if (sector.name == "Skateboard") ctx.scale(0.3, 0.3);
     else if (sector.name == "Hamburger") ctx.scale(0.3, 0.3);
     else {

@@ -24,6 +24,10 @@ function MyApp({ Component, pageProps }) {
         <Head>
           <title>Iegriez pasauli</title>
           <link rel="shortcut icon" href="/favicon.ico" />
+          <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no"
+          ></meta>
         </Head>
         <TransitionScene />
         {!isActive && <Navbar />}

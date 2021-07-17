@@ -5,6 +5,8 @@
 }
 
 .stage-container {
+  height: 100vh;
+  overflow: auto;
   display: grid;
   place-items: center;
 }
