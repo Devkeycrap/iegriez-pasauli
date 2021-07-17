@@ -26,6 +26,26 @@
       -webkit-user-select: none;
       user-select: none;
     }
+    .bullet {
+      
+      font-size: 200%;
+      color: #9ACA3C;
+      user-select: none;
+      font-weight: bold;
+
+      &:hover {
+        transition: 0.15s;
+        color: rgb(219, 208, 208);
+      }
+
+      &::before {
+        content: "*";
+        color: #686767;
+      }
+    }
+    h3 {
+      font-weight: normal;
+    }
   }
   
   .page-wrapper {
@@ -33,7 +53,7 @@
     .instructions {
       text-align: center;
       flex-direction: column;
-      padding-bottom: 9%;
+      padding-bottom: 6%;
       div {
         display: flex;
         justify-content: center;
@@ -64,8 +84,8 @@
     }
 
     .project {
-      padding-top: 16%;
-      padding-bottom: 14%;
+      padding-top: 6%;
+      //padding-bottom: 14%;
       & > h1 {
         font-size: 60px;
       }
@@ -79,8 +99,8 @@
     }
   
     .creators {
-      padding-top: 8%;
-      padding-bottom: 5%;
+      padding-top: 5%;
+      padding-bottom: 0%;
       & > h1 {
         text-align: center;
         font-size: 60px;
@@ -98,7 +118,7 @@
       & > .wrapper {
         display: flex;
         justify-content: center;
-        padding-bottom: 14%;
+        padding-bottom: 8%;
         padding-top: 1%;
         .sm {
           display: flex;
