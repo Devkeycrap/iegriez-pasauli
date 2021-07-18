@@ -1,6 +1,7 @@
 @import "./variables.scss";
 
 .container {
+  font-size: 24px;
   padding: 0 10%;
   display: grid;
   gap: 20px;
@@ -10,10 +11,10 @@
 
   h2 {
     text-align: center;
-    font-size: 64px;
+    font-size: 1.5em;
     margin: 50px 0;
     margin-top: 100px;
-    color: white;
+    color: black;
     font-family: "Montserrat", sans-serif;
     font-weight: bold;
   }
@@ -21,8 +22,8 @@
   h1 {
     margin: 50px 0;
     text-align: center;
-    font-size: 64px;
-    color: white;
+    font-size: 2em;
+    color: black;
     font-family: "Montserrat", sans-serif;
     font-weight: normal;
     span {
@@ -32,9 +33,9 @@
   }
 
   h5 {
-    font-size: 18px;
+    font-size: 0.9em;
     margin-top: 50px;
-    color: white;
+    color: black;
     text-align: center;
     font-family: "Montserrat", sans-serif;
     font-weight: bold;
@@ -48,25 +49,25 @@
     gap: 10px;
     h3 {
       margin: auto 0;
-      font-size: 24px;
+      font-size: 1em;
       letter-spacing: 2px;
       font-weight: normal;
-      color: white;
+      color: black;
       font-family: "Montserrat", sans-serif;
       text-transform: uppercase;
     }
 
     h4 {
       margin: 0;
-      font-size: 50px;
+      font-size: 2.5em;
       color: $green;
       text-align: right;
       font-family: "Montserrat", sans-serif;
       font-weight: bold;
 
       span {
-        font-size: 24px;
-        color: white;
+        font-size: 0.5em;
+        color: black;
         font-weight: normal;
       }
     }
@@ -126,15 +127,14 @@ $colors: (#e72e44, #ffbf00, #12b8fa, #58d647);
 
 @media only screen and (max-width: 1280px) {
   .container {
+    font-size: 16px;
     h2 {
-      font-size: 32px;
       margin: 25px 0;
       margin-top: 50px;
     }
 
     h1 {
       margin: 25px 0;
-      font-size: 32px;
       span {
         font-weight: bold;
       }
@@ -146,25 +146,22 @@ $colors: (#e72e44, #ffbf00, #12b8fa, #58d647);
 
       h3 {
         margin: auto 0;
-        font-size: 18px;
         letter-spacing: 2px;
         font-weight: normal;
-        color: white;
+        color: black;
         font-family: "Montserrat", sans-serif;
         text-transform: uppercase;
       }
 
       h4 {
         margin: 0;
-        font-size: 36px;
         color: $green;
         text-align: right;
         font-family: "Montserrat", sans-serif;
         font-weight: bold;
 
         span {
-          font-size: 16px;
-          color: white;
+          color: black;
           font-weight: normal;
         }
       }
@@ -174,14 +171,13 @@ $colors: (#e72e44, #ffbf00, #12b8fa, #58d647);
 
 @media only screen and (max-width: 624px) {
   .container {
+    font-size: 12px;
     h2 {
-      font-size: 20px;
       margin: 25px 0;
       margin-top: 50px;
     }
 
     h1 {
-      font-size: 24px;
       margin: 0;
       span {
         font-weight: bold;
@@ -189,20 +185,9 @@ $colors: (#e72e44, #ffbf00, #12b8fa, #58d647);
     }
 
     h5 {
-      font-size: 14px;
       margin-top: 30px;
     }
-    .result-table {
-      h3 {
-        font-size: 16px;
-      }
-      h4 {
-        font-size: 18px;
-        span {
-          font-size: 14px;
-        }
-      }
-    }
+
     .btn-container {
       button {
         padding: 12px 18px;
