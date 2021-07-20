@@ -17,7 +17,7 @@ export default function Home() {
       <div className={styles.content}>
         <div className={styles.main}>
           <h1>RITenis</h1>
-          <p>Aprites ekonomikas spēle jauniešiem</p>
+          <p>Aprites ekonomikas spēle</p>
           <Link href="game">
             <button className={`${styles.btn}  ${styles["btn-orange"]}`}>
               Sākt spēli
@@ -29,7 +29,8 @@ export default function Home() {
           <p>
             Spēle tapusi sadarbībā ar biedrību "Eiropas Kustība Latvijā" un SIA
             “ZAAO” dabas un tehnoloģiju parku “Urda”. Izstrādātāji: Ronalds
-            Palacis & Kristaps Mihelsons <br /> © Eiropas Savienība 2021
+            Palacis & Kristaps Mihelsons no komandas "Failed Nodes" <br /> ©
+            Eiropas Savienība 2021
           </p>
         </div>
       </div>
