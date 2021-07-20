@@ -57,7 +57,10 @@ export function End({
       </div>
       <div className={styles["btn-container"]}>
         <Link href="/">
-          <button onClick={() => endGame()} className="btn btn-neutral">
+          <button
+            onClick={() => endGame()}
+            className={`${styles.btn} ${styles["btn-neutral"]} ${styles["shadow-dark"]}`}
+          >
             Uz sākumu
           </button>
         </Link>
