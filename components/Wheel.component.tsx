@@ -43,8 +43,8 @@ export function Wheel({
 
   useEffect(() => {
     playTransition({
-      title: "Laimes rats",
-      description: "Iegriez ratu un sāc spēli!",
+      title: "Iegriez ratu un sāc spēli!",
+      description: "",
       length: 3000,
     });
 

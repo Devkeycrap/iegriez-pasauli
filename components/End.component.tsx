@@ -29,9 +29,12 @@ export function End({
 
   const getResultLevel = () => {
     const totalPoints: number = getTotalPoints();
-    if (totalPoints >= 75) return "Apritnieks (75-100p)";
-    else if (totalPoints >= 35) return "Vidritnieks (35-74p)";
-    else return "Švakritnieks (1-34p)";
+
+    if (totalPoints >= 80) return "RITenis";
+    else return "PĀRTenis";
+    // if (totalPoints >= 75) return "Apritnieks (75-100p)";
+    // else if (totalPoints >= 35) return "Vidritnieks (35-74p)";
+    // else return "Švakritnieks (1-34p)";
   };
 
   return (
@@ -46,11 +49,11 @@ export function End({
         <h4>
           {points.quiz} <span>punkti</span>
         </h4>
-        <h3>Karte </h3>
+        <h3>Izvēlies pareizo skaidrojumu!</h3>
         <h4>
           {points.map} <span>punkti</span>
         </h4>
-        <h3>Augošie vārdi</h3>
+        <h3>Klikšķini un krāj!</h3>
         <h4>
           {points.words} <span>punkti</span>
         </h4>

@@ -28,7 +28,7 @@ export default function Home() {
           <img src="/img/ek-logo.jpg" alt="Eiropas Komisija" />
           <p>
             Spēle tapusi sadarbībā ar biedrību "Eiropas Kustība Latvijā" un SIA
-            “ZAAO” dabas un tehnoloģiju parku “Urda”. Izstrādātāji: Ronalds
+            “ZAAO” dabas un tehnoloģiju parku “Urda”. Digitalizētāji: Ronalds
             Palacis & Kristaps Mihelsons no komandas "Failed Nodes" <br /> ©
             Eiropas Savienība 2021
           </p>

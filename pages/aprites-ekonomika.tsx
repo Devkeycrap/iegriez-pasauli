@@ -37,10 +37,10 @@ export default function AboutUs() {
           Iesaistoties aprites ekonomikā, arī Tu palīdzi samazināt dabas resursu
           ieguvi un padari planētu zaļāku.
         </p>
-        <h1>Aprites ekonomikas modelis</h1>
+        <h1>Kas ir aprites ekonomika?</h1>
         <img
           className={styles.illustration}
-          src="/img/aprites_ekonomika.svg"
+          src="/img/aprites_ekonomika.jpg"
           alt="Aprites ekonomika"
         />
       </div>
