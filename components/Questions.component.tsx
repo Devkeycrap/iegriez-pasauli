@@ -37,8 +37,8 @@ export function Questions({
   // Get questions for current item
   useEffect(() => {
     playTransition({
-      title: "Viktorīna",
-      description: "Vai esi spējīgs atminēt visus jautājumus?",
+      title: "Izvērtē apgalvojumus!",
+      description: "",
       length: 3000,
     });
     getQuestions(gameObj.object);

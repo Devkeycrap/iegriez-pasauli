@@ -50,8 +50,8 @@ export class Map extends Component<MapProps> {
   componentDidMount() {
     // CSR
     this.props.playTransition({
-      title: "Karte",
-      description: "Spied uz ikonām un atbildi uz apgalvojumiem!",
+      title: "Klikšķini uz ikonām un izvēlies pareizo skaidrojumu!",
+      description: "",
       length: 3000,
     });
     this.props.getQuestions(this.props.gameObj.object);

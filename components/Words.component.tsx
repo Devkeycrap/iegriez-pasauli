@@ -205,8 +205,7 @@ export class Words extends Component<WordProps> {
     this.setState({ inBrowser: true });
 
     this.props.playTransition({
-      title: "Krāj vārdus!",
-      description: "Cik vārdus vari sakrāt tu?",
+      title: "Cik vārdus vari iegūt tu?",
       length: 3000,
     });
 
