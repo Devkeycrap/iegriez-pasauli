@@ -1,67 +1,71 @@
 @import "./variables.scss";
 
 .error {
-
+  display: inline-flex;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  h4 {
+    padding: 10px;
+    width: fit-content;
+    font-size: 20rem;
+    user-select: none;
+    &:hover {
+      transition: 0.15s;
+      color: rgb(75, 98, 74);
+    }
+  }
   div {
-    padding-top: 3%;
-    left: 50%;
-
-    display: grid;
+    padding: 10px;
+    user-select: none;
     text-align: center;
-    place-items: center;
-    font-family: "Montserrat";
-
-    h2 {
-      color: $green;
-      margin: 20px 0;
-      font-weight: normal;
-      letter-spacing: 5px;
-      font-size: 108px;
-      z-index: 1;
-    }
-  
     h1 {
-      font-size: 64px;
-      font-weight: normal;
-      color: white;
-      z-index: 1;
+      font-size: 3rem;
+      &:hover {
+        transition: 0.15s;
+        color: rgb(73, 105, 158);
+      }
     }
-
-    &::after {
-      content: ":(";
-      color: $green;
-      font-size: 9*500%; // <-- dynamic so you dont have to set every size for every resolution ROLANDO
-      font-weight: bold;
-      z-index: 0;
-      position: absolute;
-      opacity: 0.07;
-      pointer-events: none;
-      rotate: 135deg; // <-- optional for that mmm factor
-
-      //overflow: none; // <-- fixx THIS ROLANDO
+    h2 {
+      font-size: 13rem;
+      &:hover {
+        transition: 0.15s;
+        color: rgb(119, 86, 83);
+      }
     }
   }
 }
 
 @media only screen and (max-width: 1280px) {
   .error {
-    h1 {
-      font-size: 32px;
+    h4 {
+      font-size: 17rem;
     }
-    h2 {
-      font-size: 18px;
+    div {
+      h1 {
+        font-size: 2.2rem;
+      }
+      h2 {
+        font-size: 11rem;
+      }
     }
   }
 }
 
 @media only screen and (max-width: 640px) {
   .error {
-    h1 {
-      font-size: 16px;
+    h4 {
+      font-size: 11rem;
     }
-    h2 {
-      font-size: 14px;
-      margin: 20px 0;
+    div {
+      h1 {
+        font-size: 1.3rem;
+      }
+      h2 {
+        font-size: 7rem;
+      }
     }
   }
 }

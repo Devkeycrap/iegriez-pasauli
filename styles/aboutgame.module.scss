@@ -16,63 +16,101 @@
 
   h1 {
     font-family: "Montserrat", sans-serif;
-    color: white;
+    color: #9aca3c;
     text-align: center;
   }
 
-  h4 {
-    position: absolute;
-    font-family: "Montserrat", sans-serif;
-    transform: rotate(90deg) translate(-50%, 250%);
-    font-weight: normal;
-    bottom: 100px;
-    left: 50px;
-    font-size: 24px;
-    color: white;
-    text-transform: uppercase;
-    letter-spacing: 10px;
-    -webkit-user-select: none;
-    user-select: none;
+  .actors {
+    justify-content: center;
+    h5 {
+      color: #686767;
+      font-size: 200%;
+      padding: 0 2%;
+      height: fit-content;
+      margin: auto;
+      user-select: none;
+    }
+    h3 {
+      color: #9aca3c;
+      font-size: 260%;
+      width: fit-content;
+      &::before {
+        content: "*";
+        color: #686767;
+      }
+      & p {
+        visibility: hidden;
+        pointer-events: none;
+        color: #ffffff;
+        background-color: rgb(0, 0, 0);
+        border-radius: 10px;
+        padding: 5px 1%;
+
+        font-size: 10%;
+        width: 100%;
+        font-weight: normal;
+        text-align: center;
+
+        font-size: 50%;
+        width: max-content;
+        max-width: 70%;
+
+        bottom: 2%;
+        left: 50%;
+        transform: translate(-50%);
+      
+        position: absolute;
+        z-index: 1;
+      }
+      &:hover p {
+        visibility: visible;
+      }
+      &:hover {
+        transition: 0.3s;
+        color: #bce26f;
+      }
+    }
   }
+  
 }
 
-.page-wrapper {
   .instructions {
     text-align: center;
     flex-direction: column;
-    padding-bottom: 9%;
-    div {
-      display: flex;
+    padding-top: 8%;
+    padding-bottom: 4%;
+
+    .stages {
+      display: grid;
+      grid-template-columns: 35% 35%;
       justify-content: center;
-      & > div {
-        flex-direction: column;
-        width: fit-content;
-        width: 40%;
-        padding: 1%;
-      }
-      svg {
-        padding-bottom: 10px;
-        margin: auto;
-        width: 8%;
-      }
+      padding-top: 2%;
+    }
+
+    .actors {
+      display: inline-flex; 
+      padding-bottom: 4%;
+    }
+    svg {
+      padding-bottom: 10px;
+      margin: auto;
+      width: 80px;
     }
     h1 {
       color: #9aca3c;
-      font-size: 500%;
+      font-size: 60px;
       margin: auto;
     }
     p {
       color: #686767;
       margin: auto;
       font-size: 135%;
-      padding-top: 20px;
       width: 80%;
     }
   }
 
   .project {
-    padding-top: 16%;
-    padding-bottom: 14%;
+    padding-top: 8%;
     & > h1 {
       font-size: 60px;
     }
@@ -85,78 +123,82 @@
     }
   }
 
-  .creators {
-    padding-top: 8%;
-    padding-bottom: 5%;
-    & > h1 {
-      text-align: center;
-      font-size: 60px;
-    }
+.creators {
+  padding-top: 3%;
+  & > h1 {
+    text-align: center;
+    font-size: 60px;
+  }
 
-    & > p {
-      margin: auto;
-      width: 50%;
-      font-size: 25px;
-      text-align: center;
-      color: #212121;
-      font-weight: bold;
-    }
+  & > p {
+    margin: auto;
+    width: 50%;
+    font-size: 25px;
+    text-align: center;
+    color: #212121;
+    font-weight: bold;
+  }
 
-    & > .wrapper {
+  & > .wrapper {
+    display: flex;
+    justify-content: center;
+    padding-top: 1%;
+    .sm {
       display: flex;
-      justify-content: center;
-      padding-bottom: 14%;
-      padding-top: 1%;
-      .sm {
-        display: flex;
-        flex-direction: column;
-        padding: 2%;
+      flex-direction: column;
+      padding: 2%;
 
-        h2 {
+      h2 {
+        color: #9aca3c;
+        font-style: italic;
+        font-size: 40px;
+      }
+
+      h1 {
+        color: black;
+        font-size: 50px;
+        text-transform: lowercase;
+        width: fit-content;
+        &::before {
           color: #9aca3c;
-          font-style: italic;
-          font-size: 40px;
         }
 
-        h1 {
-          color: black;
-          font-size: 50px;
-          text-transform: lowercase;
-          width: fit-content;
-          &::before {
-            color: #9aca3c;
-          }
+        &:nth-child(odd)::before {
+          content: "@";
+        }
 
-          &:nth-child(odd)::before {
-            content: "@";
-          }
+        &:nth-child(even)::before {
+          content: "#";
+        }
 
-          &:nth-child(even)::before {
-            content: "#";
-          }
-
-          &:hover {
-            transition: 0.15s;
-            color: rgb(219, 208, 208);
-          }
+        &:hover {
+          transition: 0.15s;
+          color: rgb(219, 208, 208);
         }
       }
     }
   }
 }
 
+
 @media only screen and (max-width: 1220px) {
-  .about-game {
-    h4 {
-      font-size: 16px;
-      left: 10px;
-      bottom: 30px;
+
+  .instructions {
+    padding-bottom: 14%;
+    .stages {
+      grid-template-columns: 44% 44%;
+      padding-top: 2%;
+      padding-bottom: 2%;
+    }
+    svg {
+      width: 60px;
     }
   }
+
   .page-wrapper {
     .project {
-      padding-top: 20%;
-      padding-bottom: 25%;
+      padding-top: 6%;
+      padding-bottom: 5%;
       & > h1 {
         margin: auto;
         padding-bottom: 1%;
@@ -171,7 +213,7 @@
     }
 
     .creators {
-      padding-bottom: 20%;
+      padding-bottom: 4%;
       & > h1 {
         text-align: center;
         margin: auto;
@@ -179,7 +221,7 @@
       }
       & > p {
         font-size: 24px;
-        width: 80%;
+        width: 60%;
         margin: auto;
         text-align: center;
         padding-bottom: 2%;
@@ -204,24 +246,40 @@
 }
 
 @media only screen and (max-width: 719px) {
-  .about-game {
-    h4 {
-      font-size: 12px;
-      letter-spacing: 5px;
 
-      left: 20px;
-      bottom: 30px;
+  .instructions {
+    h1 {
+      font-size: 50px;
     }
+    p {
+      padding-bottom: 4%;
+      width: 60%;
+    }
+    .stages {
+      grid-template-columns: 120%;
+      padding-top: 8%;
+      padding-bottom: 10%;
+    }
+    .actors {
+      width: 100%;
+      flex-direction: column;
+      h3 {
+        user-select: none;
+        margin: auto;
+      }
+    }
+    svg {
+      width: 60px;
+    }
+    padding-bottom: 30%;
   }
-
+  
   .project {
-    padding-top: 0%;
-    padding-bottom: 10%;
     & > h1 {
       margin: auto;
       width: min-content;
       padding-bottom: 4%;
-      font-size: 100px;
+      font-size: 60px;
     }
     & > p {
       font-size: 28px;
