@@ -11,7 +11,11 @@ export default function reducer(state = initialState, action) {
     case SET_POINTS:
       return action.payload;
     case RESET_POINTS:
-      return initialState;
+      return {
+        quiz: 0,
+        map: 0,
+        words: 0,
+      };
     default:
       return state;
   }
