@@ -54,6 +54,10 @@ export function End({
         <h4>
           {points.words} <span>punkti</span>
         </h4>
+        <h3>Kopā:</h3>
+        <h4>
+          {getTotalPoints} <span>punkti</span>
+        </h4>
       </div>
       <div className={styles["btn-container"]}>
         <Link href="/">

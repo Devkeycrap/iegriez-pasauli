@@ -6,6 +6,7 @@ import {
   CLEAR_GAME_OBJECT,
   EXIT_GAME,
   CLEAR_QUESTIONS,
+  RESET_POINTS,
 } from "./types";
 
 export const startGame = () => (dispatch) => {
@@ -14,6 +15,10 @@ export const startGame = () => (dispatch) => {
   });
   dispatch({
     type: CLEAR_QUESTIONS,
+  });
+
+  dispatch({
+    type: RESET_POINTS,
   });
 
   dispatch({
