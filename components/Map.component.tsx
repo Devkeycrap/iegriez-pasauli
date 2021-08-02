@@ -122,7 +122,7 @@ export class Map extends Component<MapProps> {
   private validateAnswer = (answer) => {
     console.log(answer);
     if (answer.isCorrect)
-      this.setState({ localPoints: this.state.localPoints + 1 });
+      this.setState({ localPoints: this.state.localPoints + 5 });
 
     // If all questions are answered, then start next stage, else return to start or end game
     let answers: number = 0;

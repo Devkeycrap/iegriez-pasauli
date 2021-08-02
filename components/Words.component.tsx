@@ -170,7 +170,7 @@ export class Words extends Component<WordProps> {
 
       if (correct) {
         this.setState({
-          points: this.state.points + 0.5,
+          points: this.state.points + 2,
         });
 
         this.setState({

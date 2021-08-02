@@ -30,11 +30,8 @@ export function End({
   const getResultLevel = () => {
     const totalPoints: number = getTotalPoints();
 
-    if (totalPoints >= 80) return "RITenis";
+    if (totalPoints >= (80 / 100) * 80) return "RITenis";
     else return "PĀRTenis";
-    // if (totalPoints >= 75) return "Apritnieks (75-100p)";
-    // else if (totalPoints >= 35) return "Vidritnieks (35-74p)";
-    // else return "Švakritnieks (1-34p)";
   };
 
   return (

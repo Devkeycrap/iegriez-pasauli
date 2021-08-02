@@ -73,7 +73,7 @@ export function Questions({
         if (res.data[0].is_correct == answer) {
           setPoints({
             ...points,
-            quiz: points.quiz + 1,
+            quiz: points.quiz + 5,
           });
         }
         setTimeout(() => {
@@ -132,7 +132,7 @@ export function Questions({
             </motion.h2>
             {("isCorrect" in item && item.isCorrect == true && (
               <div className={styles["answer-message"]}>
-                {"Pareizi!".split("").map((char, i) => (
+                {"Tava atbilde ir pareiza!".split("").map((char, i) => (
                   <span
                     className={styles.correct}
                     key={i}
@@ -145,7 +145,7 @@ export function Questions({
             )) ||
               ("isCorrect" in item && !item.isCorrect && (
                 <div className={styles["answer-message"]}>
-                  {"Nepareizi!".split("").map((char, i) => (
+                  {"Tava atbilde ir nepareiza!".split("").map((char, i) => (
                     <span
                       className={styles.incorrect}
                       key={i}
