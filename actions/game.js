@@ -42,6 +42,10 @@ export const restartGame = () => (dispatch) => {
   dispatch({
     type: RESTART_GAME,
   });
+
+  dispatch({
+    type: RESET_POINTS,
+  });
 };
 
 export const switchStage = (stage) => (dispatch) => {
