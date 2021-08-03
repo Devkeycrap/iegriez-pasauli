@@ -22,7 +22,6 @@ export const getQuestions = (item) => (dispatch) => {
 
 // Set current current quiz question state
 export const setQuestions = (newQuestions) => (dispatch) => {
-  console.log(newQuestions);
   dispatch({
     type: SET_QUESTIONS,
     payload: newQuestions,

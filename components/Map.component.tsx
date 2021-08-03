@@ -120,7 +120,6 @@ export class Map extends Component<MapProps> {
   };
 
   private validateAnswer = (answer) => {
-    console.log(answer);
     if (answer.isCorrect)
       this.setState({ localPoints: this.state.localPoints + 5 });
 
