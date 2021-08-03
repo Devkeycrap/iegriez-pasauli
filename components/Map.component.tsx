@@ -233,8 +233,8 @@ export class Map extends Component<MapProps> {
                           >
                             <h2>
                               {this.state.selectedIcon.isCorrect
-                                ? "Pareizi! +5"
-                                : "Nepareizi!"}
+                                ? "Pareizi +5"
+                                : "Nepareizi"}
                             </h2>
                             <p>{this.state.selectedIcon.question}</p>
 
