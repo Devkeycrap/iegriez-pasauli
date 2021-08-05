@@ -6,32 +6,32 @@ import iconNeutral from "../public/icons/dot-neutral.svg";
 export const dotCorrect = new L.Icon({
   iconUrl: iconCorrect,
   iconAnchor: [0, 0],
-  popupAnchor: [15, 15],
+  popupAnchor: [22.5, 22.5],
   shadowUrl: null,
   shadowSize: null,
   shadowAnchor: null,
-  iconSize: new L.Point(30, 30),
+  iconSize: new L.Point(45, 45),
 })
 
 export const dotIncorrect = new L.Icon({
   iconUrl: iconIncorrect,
   iconAnchor: [0, 0],
-  popupAnchor: [15, 15],
+  popupAnchor: [22.5, 22.5],
   shadowUrl: null,
   shadowSize: null,
   shadowAnchor: null,
-  iconSize: new L.Point(30, 30),
+  iconSize: new L.Point(45, 45),
 })
 
 
 export const dotNeutral = new L.Icon({
   iconUrl: iconNeutral,
   iconAnchor: [0, 0],
-  popupAnchor: [15, 15],
+  popupAnchor: [22.5, 22.5],
   shadowUrl: null,
   shadowSize: null,
   shadowAnchor: null,
-  iconSize: new L.Point(30, 30),
+  iconSize: new L.Point(45, 45),
 })
 
 // export const iconTourism = new L.Icon({
