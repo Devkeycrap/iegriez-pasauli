@@ -18,6 +18,6 @@ module.exports = {
     return config;
   },
   env: {
-    HOST: "https://iegriez-pasauli-backend.herokuapp.com",
+    HOST: "https://rit-backend.esmaja.lv",
   },
 };
