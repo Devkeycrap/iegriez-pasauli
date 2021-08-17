@@ -30,7 +30,7 @@ export function End({
   const getResultLevel = () => {
     const totalPoints: number = getTotalPoints();
 
-    if (totalPoints >= (80 / 100) * 80) return "RITenis";
+    if (totalPoints >= (80 / 100) * 80) return "Aprites Guru";
     else return "PĀRTenis";
   };
 
@@ -56,7 +56,7 @@ export function End({
         </h4>
         <h3 style={{ fontWeight: "bold" }}>Kopā</h3>
         <h4>
-          {getTotalPoints()} <span>punkti</span>
+          {getTotalPoints()}/80 <span>punkti</span>
         </h4>
       </div>
       <div className={styles["btn-container"]}>

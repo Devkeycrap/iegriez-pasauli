@@ -124,7 +124,8 @@ export function Game({
                 {Object.keys(points).reduce(
                   (sum, key) => sum + parseInt(points[key] || 0),
                   0
-                ) || 0}
+                ) || 0}{" "}
+                / 80
               </h3>
             </div>
           </div>

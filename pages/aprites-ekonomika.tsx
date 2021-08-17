@@ -12,6 +12,12 @@ export default function AboutUs() {
       animate="animate"
       className={styles["aprites-ekonomika"]}
     >
+      <h1>Kas ir aprites ekonomika?</h1>
+      <img
+        className={styles.illustration}
+        src="/img/aprites_ekonomika.jpg"
+        alt="Aprites ekonomika"
+      />
       <div className={styles.content}>
         <p className={styles.centered}>
           Visu ražojumu pamatā ir dabas resursi. Nemitīga ražošana, lai pārdotu
@@ -37,12 +43,6 @@ export default function AboutUs() {
           Iesaistoties aprites ekonomikā, arī Tu palīdzi samazināt dabas resursu
           ieguvi un padari planētu zaļāku.
         </p>
-        <h1>Kas ir aprites ekonomika?</h1>
-        <img
-          className={styles.illustration}
-          src="/img/aprites_ekonomika.jpg"
-          alt="Aprites ekonomika"
-        />
       </div>
     </motion.div>
   );

@@ -110,24 +110,6 @@ export function Questions({
               style={{ WebkitUserSelect: "none" }}
             >
               <span>{id + 1}.</span> {item.question}
-              {"isCorrect" in item &&
-                (!item.isCorrect != item.answer ? (
-                  <span>
-                    <img
-                      src="icons/check-solid.svg"
-                      alt="Correct"
-                      className={styles.icon}
-                    />
-                  </span>
-                ) : (
-                  <span>
-                    <img
-                      src="icons/close.svg"
-                      alt="Correct"
-                      className={styles.icon}
-                    />
-                  </span>
-                ))}
             </motion.h2>
             {("isCorrect" in item && item.isCorrect == true && (
               <div className={styles["answer-message"]}>

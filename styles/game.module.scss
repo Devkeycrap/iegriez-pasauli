@@ -7,8 +7,10 @@
 .stage-container {
   height: 100vh;
   overflow: auto;
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 700px;
 }
 
 .game {

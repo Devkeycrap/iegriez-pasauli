@@ -97,6 +97,11 @@
       font-size: 48px;
     }
   }
+  .answer-message {
+    span {
+      font-size: 20px;
+    }
+  }
 }
 
 @media only screen and (max-width: 624px) {
@@ -111,7 +116,7 @@
 
   .question {
     h2 {
-      font-size: 12px;
+      font-size: 14px;
     }
     span {
       font-size: 32px;
@@ -129,7 +134,7 @@
 
   .answer-message {
     span {
-      font-size: 12px;
+      font-size: 16px;
     }
   }
 }
