@@ -205,7 +205,7 @@ export class Words extends Component<WordProps> {
     this.setState({ inBrowser: true });
 
     this.props.playTransition({
-      title: "Klikšķini un krāj!",
+      title: "Klikšķini uz vārdiem, kas saistīti ar aprites ekonomiku!",
       length: 3000,
     });
 

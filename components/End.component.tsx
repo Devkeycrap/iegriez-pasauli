@@ -30,8 +30,8 @@ export function End({
   const getResultLevel = () => {
     const totalPoints: number = getTotalPoints();
 
-    if (totalPoints >= (80 / 100) * 80) return "Aprites Guru";
-    else return "PĀRTenis";
+    if (totalPoints >= (80 / 100) * 80) return "Aprites guru";
+    else return "PĀRTĒRenis";
   };
 
   return (
@@ -50,13 +50,14 @@ export function End({
         <h4>
           {points.map} <span>punkti</span>
         </h4>
-        <h3>Klikšķini un krāj!</h3>
+        <h3>Klikšķini uz vārdiem!</h3>
         <h4>
           {points.words} <span>punkti</span>
         </h4>
         <h3 style={{ fontWeight: "bold" }}>Kopā</h3>
         <h4>
-          {getTotalPoints()}/80 <span>punkti</span>
+          {getTotalPoints()}
+          <b style={{ color: "black" }}>/80</b> <span>punkti</span>
         </h4>
       </div>
       <div className={styles["btn-container"]}>

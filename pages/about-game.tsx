@@ -14,14 +14,14 @@ export default function AboutUs() {
     >
       <div className={styles["page-wrapper"]}>
         <motion.div variants={fadeInUp} className={styles.project}>
-          <h1>Spēle "Aprites Guru"</h1>
+          <h1>Spēle "RITenis"</h1>
           <p>
             ir par Tevi pasaulē - par to, kā domāt un dzīvot videi draudzīgāk;
             par to, kas notiek pasaulē un kā Tu vari to ietekmēt; par to, kā
             lietas var izmantot atkārtoti, remontēt, atjaunot, pārstrādāt, lai
             tās kalpotu ilgāk, tādējādi taupot dabas resursus. Šī spēle mainīs
             Tavu skatu uz daudzām lietām. Iesaisties aprites ekonomikā - esi
-            Aprites Guru, nevis PĀRTenis.
+            Aprites guru, nevis PĀRTĒRenis.
           </p>
         </motion.div>
 
@@ -115,7 +115,7 @@ export default function AboutUs() {
 
                 <div className={styles.actors}>
                   <h3>
-                    PĀRTenis
+                    PĀRTĒRenis
                     <p>
                       - cilvēks, kurš pērk visu, ko reklamē, nedomā videi
                       draudzīgi (vispār daudz nedomā) un ar šādu dzīvesveidu
@@ -124,7 +124,7 @@ export default function AboutUs() {
                   </h3>
                   <h5>vai</h5>
                   <h3>
-                    Aprites Guru
+                    Aprites guru
                     <p>
                       - apdomīgs, atbildīgs, gudrs un prasmīgs cilvēks, kurš
                       iesaistās aprites ekonomikā.
@@ -133,7 +133,7 @@ export default function AboutUs() {
                 </div>
               </div>
               <div>
-                <h1 style={{ color: "black" }}>PĀRTenis</h1>
+                <h1>PĀRTĒRenis (-64p)</h1>
                 <p>
                   Cilvēks, kurš pērk visu, ko reklamē, nedomā videi draudzīgi
                   (vispār daudz nedomā) un ar šādu dzīvesveidu sekmē dabas
@@ -142,7 +142,7 @@ export default function AboutUs() {
               </div>
 
               <div>
-                <h1 style={{ color: "black" }}>Aprites Guru</h1>
+                <h1>Aprites guru (64p+)</h1>
                 <p>
                   Apdomīgs, atbildīgs, gudrs un prasmīgs cilvēks, kurš iesaistās
                   aprites ekonomikā.
