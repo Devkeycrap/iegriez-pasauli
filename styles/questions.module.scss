@@ -3,7 +3,7 @@
 .questions {
   text-align: center;
   position: relative;
-  top: 150px;
+  margin-top: 150px;
 
   h1 {
     font-size: 72px;
@@ -106,7 +106,7 @@
 
 @media only screen and (max-width: 624px) {
   .questions {
-    top: 70px;
+    margin-top: 140px;
     width: 80%;
     padding: 20px 0;
     h1 {
