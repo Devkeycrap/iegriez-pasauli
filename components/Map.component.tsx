@@ -2,7 +2,7 @@
 import { Component } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import axios from "axios";
-import { EventEmitter } from "stream";
+import EventEmitter from "events";
 
 // Components
 import Spinner from "./Spinner.component";

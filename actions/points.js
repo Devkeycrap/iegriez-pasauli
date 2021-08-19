@@ -1,5 +1,5 @@
 import { SET_POINTS } from "./types";
-import { EventEmitter } from "stream";
+import EventEmitter from "events";
 
 const emitter = new EventEmitter();
 
