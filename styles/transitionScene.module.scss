@@ -1,6 +1,7 @@
 @import "./variables.scss";
 
 .transitionscene {
+  font-size: 18px;
   position: absolute;
   display: grid;
   place-items: center;
@@ -28,7 +29,7 @@
 }
 
 .title {
-  font-size: 100px;
+  font-size: 4em;
   line-height: 1em;
   font-family: "Montserrat", sans-serif;
   color: white;
@@ -36,7 +37,7 @@
 }
 
 .description {
-  font-size: 24px;
+  font-size: 2em;
   font-style: italic;
   font-weight: normal;
   text-align: center;
@@ -46,19 +47,13 @@
 }
 
 @media only screen and (max-width: 1200px) {
-  .title {
-    font-size: 64px;
-  }
-  .description {
-    font-size: 16px;
+  .transitionscene {
+    font-size: 10px;
   }
 }
 
-@media only screen and (max-width: 648px) {
-  .title {
-    font-size: 32px;
-  }
-  .description {
-    font-size: 14px;
+@media only screen and (max-width: 600px) {
+  .transitionscene {
+    font-size: 6px;
   }
 }
