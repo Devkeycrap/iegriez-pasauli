@@ -2,6 +2,7 @@
 import { Component } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import axios from "axios";
+import { EventEmitter } from "stream";
 
 // Components
 import Spinner from "./Spinner.component";
@@ -25,13 +26,7 @@ interface MapProps {
     object: string;
     translatedName: string;
   };
-  points: {
-    quiz: number;
-    map: number;
-    words: number;
-  };
   switchStage: (stage: number) => void;
-  setPoints: (points: any) => void;
   getQuestions: (item: string) => void;
   setQuestions: (questions: IMapIcon[]) => void;
   questions: IMapIcon[];
@@ -120,8 +115,11 @@ export class Map extends Component<MapProps> {
   };
 
   private validateAnswer = (answer) => {
-    if (answer.isCorrect)
+    if (answer.isCorrect) {
+      const emitter = new EventEmitter();
+      emitter.emit("POINTS_UPDATE", { map: 5 });
       this.setState({ localPoints: this.state.localPoints + 5 });
+    }
 
     // If all questions are answered, then start next stage, else return to start or end game
     let answers: number = 0;
@@ -130,10 +128,10 @@ export class Map extends Component<MapProps> {
 
     if (answers >= this.props.questions.length) {
       setTimeout(() => {
-        this.props.setPoints({
-          ...this.props.points,
-          map: this.props.points.map + this.state.localPoints,
-        });
+        // this.props.setPoints({
+        //   ...this.props.points,
+        //   map: this.props.points.map + this.state.localPoints,
+        // });
         this.props.switchStage(4);
       }, 2000);
     }
@@ -254,12 +252,12 @@ export class Map extends Component<MapProps> {
 
 const mapStateToProps = (state) => ({
   gameObj: state.gameObj,
-  points: state.points,
+  // points: state.points,
   questions: state.map.questions,
 });
 
 export default connect(mapStateToProps, {
-  setPoints,
+  // setPoints,
   switchStage,
   getQuestions,
   setQuestions,
